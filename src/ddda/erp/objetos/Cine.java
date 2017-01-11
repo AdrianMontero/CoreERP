@@ -5,11 +5,20 @@
  */
 package ddda.erp.objetos;
 
+
+import ddda.erp.core.CoreBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author adria
  */
 public class Cine {
+    //Metodos para interactuar con la BD
+    private CoreBD bd = new CoreBD();
+    private String sql = null;
+    private ResultSet rs = null;
 
     //Atributos del cine
     private int idCine;
@@ -91,5 +100,23 @@ public class Cine {
     public int getnSalas() {
         return nSalas;
     }
+
+    //Metodos
+    /**
+     * Creacion de un cine en la BD con id en null, ya que lo gestiona la BD
+     * @param _cine Clase con todos los atributos del cine ya definidos (nombre, cif)
+     * @throws SQLException error al crear el cine
+     */
+    public void crearCine(Cine _cine) throws SQLException {
+        bd.consultarTabla("insert into cine values(null, " + _cine.getNombreCine() + ", " + _cine.getCif() + ", " + _cine.getDireccion() + ", " + _cine.getPoblacion() + ", " + _cine.getCp() + ")");
+    }
+    
+    public Cine mostrarCine(){
+        Cine miCine;
+        
+        return miCine;
+    }
+    
+    
 
 }
