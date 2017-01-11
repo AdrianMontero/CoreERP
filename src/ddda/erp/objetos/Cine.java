@@ -111,10 +111,13 @@ public class Cine {
         bd.consultarTabla("insert into cine values(null, " + _cine.getNombreCine() + ", " + _cine.getCif() + ", " + _cine.getDireccion() + ", " + _cine.getPoblacion() + ", " + _cine.getCp() + ")");
     }
     
-    public Cine mostrarCine(){
+    /**
+     * Muestra toda la informacion asociada a un cine, buscando por su ID
+     */
+    public void mostrarCine(_idCine){
         Cine miCine;
         
-        return miCine;
+        //return miCine;
     }
     
     
