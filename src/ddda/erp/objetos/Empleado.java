@@ -119,6 +119,8 @@ public class Empleado {
     }
 
     // </editor-fold>
+    
+    //Los metodos de consulta tienen contructores que no devuelven nada cuando tienen que hacerlo
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Creamos un nuevo empleado.
@@ -134,7 +136,6 @@ public class Empleado {
     /**
      * Muestra todos los empleados.
      *
-     * @param _empleado
      * @throws SQLException Error al cargar la BD
      */
     public void mostrarEmpleados() throws SQLException {
@@ -144,7 +145,7 @@ public class Empleado {
     /**
      * Muestra empleado segun id.
      *
-     * @param _idEmpleado
+     * @param _idEmpleado Parametro usado para realizar la busqueda de empleados
      * @throws SQLException SQLException Error al cargar la BD
      */
     public void mostrarEmpleadoID(int _idEmpleado) throws SQLException {
@@ -154,7 +155,7 @@ public class Empleado {
     /**
      * Busca empleado segun nombre.
      *
-     * @param _nombreEmp
+     * @param _nombreEmp Nombre usado para la busqueda
      * @throws SQLException Error al cargar la BD
      */
     public void mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
@@ -164,7 +165,7 @@ public class Empleado {
     /**
      * Borra un empleadao segun id.
      *
-     * @param _idEmpleado
+     * @param _idEmpleado Id usado para seleccionar el empleado a borrar
      * @throws SQLException Error al cargar la BD
      */
     public void borrarEmpleadoID(int _idEmpleado) throws SQLException {
@@ -174,7 +175,8 @@ public class Empleado {
     /**
      * Modifica un empleado.
      *
-     * @param _empleado
+     * @param _empleado Parametro con todos los datos nuevos del usuario (tienen
+     * que estar todos para que el metodo funcione)
      * @throws SQLException Error al cargar la BD
      */
     public void modificarEmpleado(Empleado _empleado) throws SQLException {
@@ -184,7 +186,7 @@ public class Empleado {
                 + ",fechaInicio_emp=" + _empleado.getFechaInicio()
                 + ",cargo_emp=" + _empleado.getCargo()
                 + ",usuario_emp=" + _empleado.getUsuario()
-                + ",contrasenia_emp=" + _empleado.getContrasena()
+                + ",contrasena_emp=" + _empleado.getContrasena()
                 + ",idCine=" + _empleado.getIdCine());
     }
     // </editor-fold>

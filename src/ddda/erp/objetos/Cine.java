@@ -116,7 +116,7 @@ public class Cine {
         Cine miCine = null;
         rs = bd.consultarTabla("select * from  cine where Lower(nombre_cin) = Lower(" + _idCine + ")");
         while (rs.next()) {
-            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
+            miCine = new Cine(rs.getInt("idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
         }
         return miCine;
     }
@@ -132,7 +132,7 @@ public class Cine {
         Cine miCine = null;
         rs = bd.consultarTabla("select * from  cine");
         while (rs.next()) {
-            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
+            miCine = new Cine(rs.getInt("idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
             misCines.add(miCine);
         }
         return misCines;
