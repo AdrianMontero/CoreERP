@@ -124,7 +124,8 @@ public class Empleado {
      * @throws SQLException
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("insert into empleados values(null, " + _empleado.getDni() + ", " + _empleado.getNombre() + ", " + _empleado.getApellido() + ", " + _empleado.getFechaInicio() + ", " + _empleado.getCargo() + ", " + _empleado.getUsuario() + ", " + _empleado.getContrasena() + ", " + _empleado.getIdCine() + ")");
+        bd.actualizarTabla("Insert into empleados values(null, " + _empleado.getDni() +
+                                                            ", " + _empleado.getNombre() + ", " + _empleado.getApellido() + ", " + _empleado.getFechaInicio() + ", " + _empleado.getCargo() + ", " + _empleado.getUsuario() + ", " + _empleado.getContrasena() + ", " + _empleado.getIdCine() + ")");
     }
 
     /**
@@ -133,38 +134,37 @@ public class Empleado {
      * @param _empleado
      * @throws SQLException
      */
-    public void mostrarEmpleados(Empleado _empleado) throws SQLException {
+    public void mostrarEmpleados() throws SQLException {
         bd.consultarTabla("Select * from empleado");
     }
 
     /**
      * Muestra empleado segun id.
      *
-     * @param _empleado
+     * @param _idEmpleado
      * @throws SQLException
      */
-    public void mostrarEmpleadoID(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Select * from empleado where idEmpleado =" + _empleado.getIdEmpleado() + "");
+    public void mostrarEmpleadoID(int _idEmpleado) throws SQLException {
+        bd.consultarTabla("Select * from empleado where idEmpleado =" +_idEmpleado + "");
     }
 
     /**
      * Busca empleado segun nombre.
      *
-     * @param _empleado
+     * @param _nombreEmp
      * @throws SQLException
      */
-    public void mostrarEmpleadoNombre(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Select * from empleado where nombre_emp =" + _empleado.getNombre() + "");
+    public void mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
+        bd.consultarTabla("Select * from empleado where nombre_emp =" + _nombreEmp + "");
     }
 
     /**
-     * Borrar empleado segun id.
-     *
-     * @param _empleado
-     * @throws SQLException
+     * Borra un empleadao segun id.
+     * @param _idEmpleado
+     * @throws SQLException 
      */
-    public void borrarEmpleadoID(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Delete * from empleado where idEmpleado =" + _empleado.getIdEmpleado() + "");
+    public void borrarEmpleadoID(int _idEmpleado) throws SQLException {
+        bd.actualizarTabla("Delete * from empleado where idEmpleado =" + _idEmpleado);
     }
 
     /**
@@ -174,7 +174,14 @@ public class Empleado {
      * @throws SQLException
      */
     public void modificarEmpleado(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Update empleado set dni_emp=" + _empleado.getDni() + ",nombre_emp=" + _empleado.getNombre() + ",apellidos_emp=" + _empleado.getApellido() + ",fechaInicio_emp=" + _empleado.getFechaInicio() + ",cargo_emp=" + _empleado.getCargo() + ",usuario_emp=" + _empleado.getUsuario() + ",contrasenia_emp=" + _empleado.getContrasena() + ",idCine=" + _empleado.getIdCine() + "");
+        bd.actualizarTabla("Update empleado set dni_emp=" + _empleado.getDni() + 
+                                            ",nombre_emp=" + _empleado.getNombre() +
+                                            ",apellidos_emp=" + _empleado.getApellido() +
+                                            ",fechaInicio_emp=" + _empleado.getFechaInicio() +
+                                            ",cargo_emp=" + _empleado.getCargo() + 
+                                            ",usuario_emp=" + _empleado.getUsuario() + 
+                                            ",contrasenia_emp=" + _empleado.getContrasena() +
+                                            ",idCine=" + _empleado.getIdCine());
     }
 
 }
