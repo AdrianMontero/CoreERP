@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase de gestion de cines
  */
 package ddda.erp.objetos;
 
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author adria
+ * @author Team CoreERP
  */
 public class Cine {
 
@@ -93,9 +91,9 @@ public class Cine {
         this.poblacion = _poblacion;
         this.cp = _cp;
     }
-    // </editor-fold>
 
-    //Metodos
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Creacion de un cine en la BD con id en null, ya que lo gestiona la BD
      *
@@ -150,9 +148,9 @@ public class Cine {
     public void modificarCine(Cine _cine) throws SQLException {
         bd.actualizarTabla("Update cine set nombre_cin = " + _cine.nombre + ", cif_cin = " + _cine.cif + ", direccion_cin = " + _cine.direccion + ", poblacion_cin = " + _cine.poblacion + ", cp_cin = " + _cine.cp + " where Lower(nombre_cin) = Lower(" + _cine.idCine + ")");
     }
-    
-        public void borrarCineID(int _idCine) throws SQLException {
+
+    public void borrarCineID(int _idCine) throws SQLException {
         bd.actualizarTabla("Delete * from cine where idCine = " + _idCine);
     }
-    
+    // </editor-fold>
 }

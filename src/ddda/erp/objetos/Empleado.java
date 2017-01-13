@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase de gestion de empleados
  */
 package ddda.erp.objetos;
 
@@ -11,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author juanxxiii
+ * @author Team CoreERP
  */
 public class Empleado {
 
@@ -31,6 +29,45 @@ public class Empleado {
     private String contrasena;
     private int idCine;
 
+    // <editor-fold defaultstate="collapsed" desc="Getters">
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public int getIdCine() {
+        return idCine;
+    }
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Construtor del empleado con el idEmpleado que no sera utilizado al crear
      * un nuevo cine puesto que el id es autoincremental.
@@ -81,58 +118,24 @@ public class Empleado {
         this.idCine = idCine;
     }
 
-    public int getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public int getIdCine() {
-        return idCine;
-    }
-
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Creamos un nuevo empleado.
      *
      * @param _empleado
-     * @throws SQLException
+     * @throws SQLException Error al cargar la BD
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("Insert into empleados values(null, " + _empleado.getDni() +
-                                                            ", " + _empleado.getNombre() + ", " + _empleado.getApellido() + ", " + _empleado.getFechaInicio() + ", " + _empleado.getCargo() + ", " + _empleado.getUsuario() + ", " + _empleado.getContrasena() + ", " + _empleado.getIdCine() + ")");
+        bd.actualizarTabla("Insert into empleados values(null, " + _empleado.getDni()
+                + ", " + _empleado.getNombre() + ", " + _empleado.getApellido() + ", " + _empleado.getFechaInicio() + ", " + _empleado.getCargo() + ", " + _empleado.getUsuario() + ", " + _empleado.getContrasena() + ", " + _empleado.getIdCine() + ")");
     }
 
     /**
      * Muestra todos los empleados.
      *
      * @param _empleado
-     * @throws SQLException
+     * @throws SQLException Error al cargar la BD
      */
     public void mostrarEmpleados() throws SQLException {
         bd.consultarTabla("Select * from empleado");
@@ -142,17 +145,17 @@ public class Empleado {
      * Muestra empleado segun id.
      *
      * @param _idEmpleado
-     * @throws SQLException
+     * @throws SQLException SQLException Error al cargar la BD
      */
     public void mostrarEmpleadoID(int _idEmpleado) throws SQLException {
-        bd.consultarTabla("Select * from empleado where idEmpleado =" +_idEmpleado + "");
+        bd.consultarTabla("Select * from empleado where idEmpleado =" + _idEmpleado + "");
     }
 
     /**
      * Busca empleado segun nombre.
      *
      * @param _nombreEmp
-     * @throws SQLException
+     * @throws SQLException Error al cargar la BD
      */
     public void mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
         bd.consultarTabla("Select * from empleado where nombre_emp =" + _nombreEmp + "");
@@ -160,8 +163,9 @@ public class Empleado {
 
     /**
      * Borra un empleadao segun id.
+     *
      * @param _idEmpleado
-     * @throws SQLException 
+     * @throws SQLException Error al cargar la BD
      */
     public void borrarEmpleadoID(int _idEmpleado) throws SQLException {
         bd.actualizarTabla("Delete * from empleado where idEmpleado =" + _idEmpleado);
@@ -171,17 +175,17 @@ public class Empleado {
      * Modifica un empleado.
      *
      * @param _empleado
-     * @throws SQLException
+     * @throws SQLException Error al cargar la BD
      */
     public void modificarEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("Update empleado set dni_emp=" + _empleado.getDni() + 
-                                            ",nombre_emp=" + _empleado.getNombre() +
-                                            ",apellidos_emp=" + _empleado.getApellido() +
-                                            ",fechaInicio_emp=" + _empleado.getFechaInicio() +
-                                            ",cargo_emp=" + _empleado.getCargo() + 
-                                            ",usuario_emp=" + _empleado.getUsuario() + 
-                                            ",contrasenia_emp=" + _empleado.getContrasena() +
-                                            ",idCine=" + _empleado.getIdCine());
+        bd.actualizarTabla("Update empleado set dni_emp=" + _empleado.getDni()
+                + ",nombre_emp=" + _empleado.getNombre()
+                + ",apellidos_emp=" + _empleado.getApellido()
+                + ",fechaInicio_emp=" + _empleado.getFechaInicio()
+                + ",cargo_emp=" + _empleado.getCargo()
+                + ",usuario_emp=" + _empleado.getUsuario()
+                + ",contrasenia_emp=" + _empleado.getContrasena()
+                + ",idCine=" + _empleado.getIdCine());
     }
-
+    // </editor-fold>
 }
