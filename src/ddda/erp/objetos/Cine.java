@@ -5,16 +5,17 @@
  */
 package ddda.erp.objetos;
 
-
 import ddda.erp.core.CoreBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author adria
  */
 public class Cine {
+
     //Metodos para interactuar con la BD
     private CoreBD bd = new CoreBD();
     private String sql = null;
@@ -22,63 +23,19 @@ public class Cine {
 
     //Atributos del cine
     private int idCine;
-    private String nombreCine;
+    private String nombre;
     private String cif;
     private String direccion;
     private String poblacion;
     private int cp;
-    private int nSalas;
 
-    //Constructores
-    /**
-     * Creamos un cine desde 0, pero sin ID del Cine, ya que es autoincremental
-     *
-     * @param nombreCine Nombre del cine
-     * @param cif Cif del cine
-     * @param direccion Direccion del cine
-     * @param poblacion Poblacion del cine
-     * @param cp Codigo Postal del cine
-     * @param nSalas Numero de salas del cine
-     */
-    public Cine(String nombreCine, String cif, String direccion, String poblacion, int cp, int nSalas) {
-        this.nombreCine = nombreCine;
-        this.cif = cif;
-        this.direccion = direccion;
-        this.poblacion = poblacion;
-        this.cp = cp;
-        this.nSalas = nSalas;
-    }
-
-    /**
-     * Creamos un cine desde 0, con un ID asociado, este metodo no es apto para
-     * introducir cines en la BBDD ya que la base de datos asigna un ID
-     * automaticamente, es para recibir datos de la BD
-     *
-     * @param idCine Id del cine
-     * @param nombreCine Nombre del cine
-     * @param cif Cif del cine
-     * @param direccion Direccion del cine
-     * @param poblacion Poblacion del cine
-     * @param cp Codigo Postal del cine
-     * @param nSalas Numero de salas del cine
-     */
-    public Cine(int idCine, String nombreCine, String cif, String direccion, String poblacion, int cp, int nSalas) {
-        this.idCine = idCine;
-        this.nombreCine = nombreCine;
-        this.cif = cif;
-        this.direccion = direccion;
-        this.poblacion = poblacion;
-        this.cp = cp;
-        this.nSalas = nSalas;
-    }
-
-    //Getter
+    // <editor-fold defaultstate="collapsed" desc="Getters">
     public int getIdCine() {
         return idCine;
     }
 
-    public String getNombreCine() {
-        return nombreCine;
+    public String getNombre() {
+        return nombre;
     }
 
     public String getCif() {
@@ -97,29 +54,90 @@ public class Cine {
         return cp;
     }
 
-    public int getnSalas() {
-        return nSalas;
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Constructores">
+    /**
+     * Creamos un cine desde 0, pero sin ID del Cine, ya que es autoincremental
+     *
+     * @param _nombreCine Nombre que se le asigna al cine
+     * @param _cif CIF del cine
+     * @param _direccion Direccion del cine
+     * @param _poblacion Localidad del cine
+     * @param _cp Codigo postal del cine
+     */
+    public Cine(String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
+        this.nombre = _nombreCine;
+        this.cif = _cif;
+        this.direccion = _direccion;
+        this.poblacion = _poblacion;
+        this.cp = _cp;
     }
+
+    /**
+     * Creamos un cine desde 0, con un ID asociado, este metodo no es apto para
+     * introducir cines en la BBDD ya que la base de datos asigna un ID
+     * automaticamente, es para recibir datos de la BD
+     *
+     * @param _idCine Id del cine
+     * @param _nombreCine Nombre del cine
+     * @param _cif Cif del cine
+     * @param _direccion Direccion del cine
+     * @param _poblacion Poblacion del cine
+     * @param _cp Codigo Postal del cine
+     */
+    public Cine(int _idCine, String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
+        this.idCine = _idCine;
+        this.nombre = _nombreCine;
+        this.cif = _cif;
+        this.direccion = _direccion;
+        this.poblacion = _poblacion;
+        this.cp = _cp;
+    }
+    // </editor-fold>
 
     //Metodos
     /**
      * Creacion de un cine en la BD con id en null, ya que lo gestiona la BD
-     * @param _cine Clase con todos los atributos del cine ya definidos (nombre, cif)
+     *
+     * @param _cine Clase con todos los atributos del cine ya definidos (nombre,
+     * cif)
      * @throws SQLException error al crear el cine
      */
     public void crearCine(Cine _cine) throws SQLException {
-        bd.consultarTabla("insert into cine values(null, " + _cine.getNombreCine() + ", " + _cine.getCif() + ", " + _cine.getDireccion() + ", " + _cine.getPoblacion() + ", " + _cine.getCp() + ")");
+        bd.actualizarTabla("insert into cine values(null, " + _cine.getNombre() + ", " + _cine.getCif() + ", " + _cine.getDireccion() + ", " + _cine.getPoblacion() + ", " + _cine.getCp() + ")");
     }
-    
+
     /**
      * Muestra toda la informacion asociada a un cine, buscando por su ID
+     *
+     * @param _idCine Id por el que se buscaran los cines
+     * @return Objeto de tipo cine con todos los atributos
+     * @throws SQLException Error al encontrar el objeto en la base de datos
      */
-    public void mostrarCine(_idCine){
-        Cine miCine;
-        
-        //return miCine;
+    public Cine mostrarCinePorId(int _idCine) throws SQLException {
+        Cine miCine = null;
+        rs = bd.consultarTabla("select * from  cine where Lower(nombre_cine) = Lower(" + _idCine + ")");
+        while (rs.next()) {
+            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cine"), rs.getString("cif_cine"), rs.getString("direccion"), rs.getString("poblacion"), rs.getInt("cp"));
+        }
+        return miCine;
     }
-    
-    
+
+    /**
+     * Muestra todos los cines de la base de datos
+     *
+     * @return devuelve un array del tipo cine
+     * @throws SQLException Error alencontrar el objeto en la base de datos
+     */
+    public ArrayList mostrarCines() throws SQLException {
+        ArrayList<Cine> misCines = new ArrayList();
+        Cine miCine = null;
+        rs = bd.consultarTabla("select * from  cine");
+        while (rs.next()) {
+            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cine"), rs.getString("cif_cine"), rs.getString("direccion"), rs.getString("poblacion"), rs.getInt("cp"));
+            misCines.add(miCine);
+        }
+        return misCines;
+    }
 
 }
