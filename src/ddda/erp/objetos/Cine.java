@@ -114,11 +114,11 @@ public class Cine {
      * @return Objeto de tipo cine con todos los atributos
      * @throws SQLException Error al encontrar el objeto en la base de datos
      */
-    public Cine mostrarCinePorId(int _idCine) throws SQLException {
+    public Cine mostrarCineId(int _idCine) throws SQLException {
         Cine miCine = null;
-        rs = bd.consultarTabla("select * from  cine where Lower(nombre_cine) = Lower(" + _idCine + ")");
+        rs = bd.consultarTabla("select * from  cine where Lower(nombre_cin) = Lower(" + _idCine + ")");
         while (rs.next()) {
-            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cine"), rs.getString("cif_cine"), rs.getString("direccion"), rs.getString("poblacion"), rs.getInt("cp"));
+            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
         }
         return miCine;
     }
@@ -134,10 +134,21 @@ public class Cine {
         Cine miCine = null;
         rs = bd.consultarTabla("select * from  cine");
         while (rs.next()) {
-            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cine"), rs.getString("cif_cine"), rs.getString("direccion"), rs.getString("poblacion"), rs.getInt("cp"));
+            miCine = new Cine(rs.getInt("_idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
             misCines.add(miCine);
         }
         return misCines;
     }
 
+    /**
+     * Metodo el cual pasando todos los parametros de un cine los actualiza.
+     *
+     * @param _idCine Id usado para buscar el cine el cual se va a actualizar.
+     * @param _cine Datos nuevos del cine.
+     * @throws SQLException Error al intentar ctualizar los datos de la BD.
+     */
+    public void modificarCine(int _idCine, Cine _cine) throws SQLException {
+        bd.actualizarTabla("Update cine set nombre_cin = " + _cine.nombre + ", cif_cin = " + _cine.cif + ", direccion_cin = " + _cine.direccion + ", poblacion_cin = " + _cine.poblacion + ", cp_cin = " + _cine.cp + " where Lower(nombre_cin) = Lower(" + _idCine + ")");
+    }
+    
 }
