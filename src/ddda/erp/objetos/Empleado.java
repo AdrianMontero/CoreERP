@@ -14,12 +14,12 @@ import java.sql.SQLException;
  * @author juanxxiii
  */
 public class Empleado {
-    
+
     //Metodos para interactuar con la BD.
     private CoreBD bd = new CoreBD();
     private String sql = null;
     private ResultSet rs = null;
-    
+
     //Atributos del empleado.
     private int idEmpleado;
     private String dni;
@@ -32,8 +32,9 @@ public class Empleado {
     private int idCine;
 
     /**
-     * Construtor del empleado con el idEmpleado que no sera utilizado al crear 
-     * un nuevo cine puesto que el id es autoincremental. 
+     * Construtor del empleado con el idEmpleado que no sera utilizado al crear
+     * un nuevo cine puesto que el id es autoincremental.
+     *
      * @param idEmpleado id del empleado.
      * @param dni dni del empleado.
      * @param nombre nombre del empleado.
@@ -44,7 +45,7 @@ public class Empleado {
      * @param contrasena contraseña de sesión.
      * @param idCine id del cine al que esta asociado.
      */
-    public Empleado(int idEmpleado, String dni, String nombre, String apellido, String fechaInicio, String cargo, String usuario, String contrasena, int idCine) {   
+    public Empleado(int idEmpleado, String dni, String nombre, String apellido, String fechaInicio, String cargo, String usuario, String contrasena, int idCine) {
         this.idEmpleado = idEmpleado;
         this.dni = dni;
         this.nombre = nombre;
@@ -57,8 +58,9 @@ public class Empleado {
     }
 
     /**
-     * Construtor del empleado con el idEmpleado que no sera utilizado al crear 
+     * Construtor del empleado con el idEmpleado que no sera utilizado al crear
      * un nuevo cine puesto que el id es autoincremental.
+     *
      * @param dni dni del empleado.
      * @param nombre nombre del empleado.
      * @param apellido apellidos del empleado.
@@ -66,7 +68,7 @@ public class Empleado {
      * @param cargo puesto que ocupa el empleado.
      * @param usuario usuario de sesión.
      * @param contrasena contraseña de sesión.
-     * @param idCine id del cine al que esta asociado. 
+     * @param idCine id del cine al que esta asociado.
      */
     public Empleado(String dni, String nombre, String apellido, String fechaInicio, String cargo, String usuario, String contrasena, int idCine) {
         this.dni = dni;
@@ -115,62 +117,64 @@ public class Empleado {
         return idCine;
     }
 
-    
-    
-    
-    
-    
     /**
      * Creamos un nuevo empleado.
+     *
      * @param _empleado
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("insert into empleados values(null, " + _empleado.getDni()+ ", " + _empleado.getNombre()+ ", " + _empleado.getApellido()+ ", " + _empleado.getFechaInicio()+ ", " + _empleado.getCargo() + ", " + _empleado.getUsuario()+ ", " + _empleado.getContrasena()+", " + _empleado.getIdCine()+ ")");
+        bd.actualizarTabla("insert into empleados values(null, " + _empleado.getDni() + ", " + _empleado.getNombre() + ", " + _empleado.getApellido() + ", " + _empleado.getFechaInicio() + ", " + _empleado.getCargo() + ", " + _empleado.getUsuario() + ", " + _empleado.getContrasena() + ", " + _empleado.getIdCine() + ")");
     }
-    
+
     /**
      * Muestra todos los empleados.
+     *
      * @param _empleado
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void mostrarEmpleados(Empleado _empleado) throws SQLException {
         bd.consultarTabla("Select * from empleado");
     }
+
     /**
      * Muestra empleado segun id.
+     *
      * @param _empleado
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void mostrarEmpleadoID(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Select * from empleado where idEmpleado ="+_empleado.getIdEmpleado()+"");
+        bd.consultarTabla("Select * from empleado where idEmpleado =" + _empleado.getIdEmpleado() + "");
     }
+
     /**
      * Busca empleado segun nombre.
+     *
      * @param _empleado
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void mostrarEmpleadoNombre(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Select * from empleado where nombre_emp ="+_empleado.getNombre()+"");
+        bd.consultarTabla("Select * from empleado where nombre_emp =" + _empleado.getNombre() + "");
     }
-    
-    
+
     /**
      * Borrar empleado segun id.
+     *
      * @param _empleado
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void borrarEmpleadoID(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Delete * from empleado where idEmpleado ="+_empleado.getIdEmpleado()+"");
+        bd.consultarTabla("Delete * from empleado where idEmpleado =" + _empleado.getIdEmpleado() + "");
     }
-   /**
-    * Modiica un empleado.
-    * @param _empleado
-    * @throws SQLException 
-    */
+
+    /**
+     * Modifica un empleado.
+     *
+     * @param _empleado
+     * @throws SQLException
+     */
     public void modificarEmpleado(Empleado _empleado) throws SQLException {
-        bd.consultarTabla("Update empleado set dni_emp="+_empleado.getDni()+",nombre_emp="+_empleado.getNombre()+",apellidos_emp="+_empleado.getApellido()+",fechaInicio_emp="+_empleado.getFechaInicio()+",cargo_emp="+_empleado.getCargo()+",usuario_emp="+_empleado.getUsuario()+",contrasenia_emp="+_empleado.getContrasena()+",idCine="+_empleado.getIdCine()+"");
+        bd.consultarTabla("Update empleado set dni_emp=" + _empleado.getDni() + ",nombre_emp=" + _empleado.getNombre() + ",apellidos_emp=" + _empleado.getApellido() + ",fechaInicio_emp=" + _empleado.getFechaInicio() + ",cargo_emp=" + _empleado.getCargo() + ",usuario_emp=" + _empleado.getUsuario() + ",contrasenia_emp=" + _empleado.getContrasena() + ",idCine=" + _empleado.getIdCine() + "");
     }
-    
-    
+
 }
