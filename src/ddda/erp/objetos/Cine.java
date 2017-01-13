@@ -147,8 +147,12 @@ public class Cine {
      * @param _cine Datos nuevos del cine.
      * @throws SQLException Error al intentar ctualizar los datos de la BD.
      */
-    public void modificarCine(int _idCine, Cine _cine) throws SQLException {
-        bd.actualizarTabla("Update cine set nombre_cin = " + _cine.nombre + ", cif_cin = " + _cine.cif + ", direccion_cin = " + _cine.direccion + ", poblacion_cin = " + _cine.poblacion + ", cp_cin = " + _cine.cp + " where Lower(nombre_cin) = Lower(" + _idCine + ")");
+    public void modificarCine(Cine _cine) throws SQLException {
+        bd.actualizarTabla("Update cine set nombre_cin = " + _cine.nombre + ", cif_cin = " + _cine.cif + ", direccion_cin = " + _cine.direccion + ", poblacion_cin = " + _cine.poblacion + ", cp_cin = " + _cine.cp + " where Lower(nombre_cin) = Lower(" + _cine.idCine + ")");
+    }
+    
+        public void borrarCineID(int _idCine) throws SQLException {
+        bd.actualizarTabla("Delete * from cine where idCine = " + _idCine);
     }
     
 }
