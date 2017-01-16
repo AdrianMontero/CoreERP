@@ -125,8 +125,8 @@ public class Empleado {
     /**
      * Creamos un nuevo empleado.
      *
-     * @param _empleado
-     * @throws SQLException Error al cargar la BD
+     * @param _empleado Datos del empleado.
+     * @throws SQLException Error al cargar la BD.
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
         bd.actualizarTabla("Insert into empleados values(null, "
@@ -142,7 +142,8 @@ public class Empleado {
 
     /**
      * Muestra todos los empleados.
-     *
+     * 
+     * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD
      */
     public ArrayList<Empleado> mostrarEmpleados() throws SQLException {
@@ -166,9 +167,10 @@ public class Empleado {
 
     /**
      * Muestra empleado segun id.
-     *
-     * @param _idEmpleado Parametro usado para realizar la busqueda de empleados
-     * @throws SQLException SQLException Error al cargar la BD
+     * 
+     * @param _idEmpleado Id del empleado a mostrar.
+     * @return Resultado de la busqueda.
+     * @throws SQLException Error al cargar la BD
      */
     public Empleado mostrarEmpleadoID(int _idEmpleado) throws SQLException {
         Empleado miEmpleado = null;
@@ -191,8 +193,9 @@ public class Empleado {
     /**
      * Busca empleado segun nombre.
      *
-     * @param _nombreEmp Nombre usado para la busqueda
-     * @throws SQLException Error al cargar la BD
+     * @param _nombreEmp Nombre usado para la busqueda.
+     * @return Resultado de la busqueda.
+     * @throws SQLException Error al cargar la BD.
      */
     public ArrayList<Empleado> mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
         Empleado miEmpleado = null;
