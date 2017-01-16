@@ -170,8 +170,22 @@ public class Empleado {
      * @param _idEmpleado Parametro usado para realizar la busqueda de empleados
      * @throws SQLException SQLException Error al cargar la BD
      */
-    public void mostrarEmpleadoID(int _idEmpleado) throws SQLException {
-        bd.consultarTabla("Select * from empleado where idEmpleado =" + _idEmpleado + "");
+    public Empleado mostrarEmpleadoID(int _idEmpleado) throws SQLException {
+        Empleado miEmpleado = null;
+        rs = bd.consultarTabla("Select * from empleado where idEmpleado =" + _idEmpleado + "");
+        while (rs.next()) {
+            miEmpleado = new Empleado(rs.getInt("idEmpleado"),
+                    rs.getString("dni_emp"),
+                    rs.getString("nombre_emp"),
+                    rs.getString("apellidos_emp"),
+                    rs.getString("fechaInicio_emp"),
+                    rs.getString("cargo_emp"),
+                    rs.getString("usuario_emp"),
+                    rs.getString("contrasena_emp"),
+                    rs.getInt("idCine"));
+        }
+        return miEmpleado;
+        
     }
 
     /**
