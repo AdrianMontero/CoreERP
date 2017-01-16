@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @author adria
  */
 public class Pelicula {
+
     //Metodos para interactuar con la BD.
     private CoreBD bd = new CoreBD();
     private String sql = null;
@@ -76,7 +77,9 @@ public class Pelicula {
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Crea una nueva pelicula
-     * @param _pelicula Objeto pelicula con todos los datos a introducir en la BD (SIN id)
+     *
+     * @param _pelicula Objeto pelicula con todos los datos a introducir en la
+     * BD (SIN id)
      * @throws SQLException Error al introducir los datos en la BD
      */
     public void crearPelicula(Pelicula _pelicula) throws SQLException {
@@ -84,8 +87,6 @@ public class Pelicula {
                 + "', '" + _pelicula.duracion
                 + "', '" + _pelicula.edad + ")");
     }
-    
-    //Sin modificar
 
     /**
      * Muestra todas las peliculas de la BD
@@ -106,57 +107,60 @@ public class Pelicula {
     }
 
     /**
-     * Muestra el cliente correspondiente al id introducido
+     * Muestra la pelicula correspondiente al id introducido
      *
-     * @param _idCliente Id usado para la busqueda en la BD
+     * @param _idPelicula Id usado para la busqueda en la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
     public Pelicula mostrarPeliculaId(int _idPelicula) throws SQLException {
         Pelicula miPelicula = null;
-        bd.consultarTabla("Select * from pelicula where idPelicula = " + _idPelicula + "");
+        bd.consultarTabla("Select * from pelicula where idPelicula = " + _idPelicula);
         while (rs.next()) {
             miPelicula = new Pelicula(rs.getInt("idPelicula"), rs.getString("nombre_pel"), rs.getInt("duracion_pel"), rs.getInt("edad_pel"));
         }
         return miPelicula;
     }
 
-    public ArrayList<Cliente> mostrarClientesNombre(String _nombre) throws SQLException {
-        ArrayList<Cliente> misClientes = new ArrayList();
-        Cliente miCliente = null;
-        bd.consultarTabla("Select * from cliente where Lower(nombre_cli) = Lower(" + _nombre + ")");
+    /**
+     * Muestra las peliculas que aparecen por un nombre X
+     *
+     * @param _nombre Parametro usado para hacer la busqueda en la BD
+     * @return ArrayList de tipo Pelicula que contiene la lista de peliculas de la BD
+     * @throws SQLException Error al intentar recuperar el objeto
+     */
+    public ArrayList<Pelicula> mostrarPeliculasNombre(String _nombre) throws SQLException {
+        ArrayList<Pelicula> misPeliculas = new ArrayList();
+        Pelicula miPelicula = null;
+        bd.consultarTabla("Select * from pelicula where Lower(nombre_pel) = Lower('" + _nombre + "')");
         while (rs.next()) {
-            miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_clie"), rs.getString("contrasena"));
-            misClientes.add(miCliente);
+            miPelicula = new Pelicula(rs.getInt("idPelicula"), rs.getString("nombre_pel"), rs.getInt("duracion_pel"), rs.getInt("edad_pel"));
+            misPeliculas.add(miPelicula);
         }
-        return misClientes;
+        return misPeliculas;
     }
 
     /**
-     * Borra un cliente segun id.
+     * Borra una pelicula segun el id.
      *
-     * @param _idCliente
-     * @throws SQLException Error al cargar la BD
+     * @param _idPelicula Id usado para realizar el borrado
+     * @throws SQLException Borrar el objeto
      */
-    public void borrarClienteID(int _idCliente) throws SQLException {
-        bd.actualizarTabla("Delete * from cliente where idCliente = " + _idCliente);
+    public void borrarPeliculaID(int _idPelicula) throws SQLException {
+        bd.actualizarTabla("Delete * from pelicula where idPelicula = " + _idPelicula);
     }
-
+    
     /**
      * Modifica un cliente antoguo con sus datos nuevos
      *
-     * @param _cliente Objeto cliente con todos los datos necesarios para el
+     * @param _pelicula  Objeto pelicula con todos los datos necesarios para el
      * update, incluido el ID.
-     * @throws SQLException
+     * @throws SQLException Error al modificar el objeto
      */
-    public void modificarCliente(Cliente _cliente) throws SQLException {
-        bd.actualizarTabla("Update cliente set dni_cli = " + _cliente.dni
-                + ", nombre_cli = " + _cliente.nombre
-                + ", apellidos_cli = " + _cliente.apellidos
-                + ", cp_cli = " + _cliente.cp
-                + ", puntos_cli = " + _cliente.puntos
-                + ", usuario_cli = " + _cliente.usuario
-                + ", contrasena_cli = " + _cliente.contrasena
-                + " where Lower(idCliente) = " + _cliente.idCliente);
+    public void modificarPelicula(Pelicula _pelicula) throws SQLException {
+        bd.actualizarTabla("Update pelicula set nombre_pel = '" + _pelicula.nombre
+                + "', duracion_pel = '" + _pelicula.duracion
+                + "', edad_pel = '" + _pelicula.edad
+                + "' where Lower(idPelicula) = " + _pelicula.idPelicula);
     }
     // </editor-fold>
 }
