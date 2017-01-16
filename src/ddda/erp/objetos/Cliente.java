@@ -146,7 +146,7 @@ public class Cliente {
      * clientes de la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
-    public ArrayList mostrarClientes() throws SQLException {
+    public ArrayList<Cliente> mostrarClientes() throws SQLException {
         ArrayList<Cliente> misClientes = new ArrayList();
         Cliente miCliente = null;
         rs = bd.consultarTabla("select * from  cliente");
@@ -172,13 +172,15 @@ public class Cliente {
         return miCliente;
     }
 
-    public Cliente mostrarClientesNombre(String _nombre) throws SQLException {
+    public ArrayList<Cliente> mostrarClientesNombre(String _nombre) throws SQLException {
+        ArrayList<Cliente> misClientes = new ArrayList();
         Cliente miCliente = null;
         bd.consultarTabla("Select * from cliente where Lower(nombre_cli) = Lower(" + _nombre + ")");
         while (rs.next()) {
             miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_clie"), rs.getString("contrasena"));
+            misClientes.add(miCliente);
         }
-        return miCliente;
+        return misClientes;
     }
 
     /**
