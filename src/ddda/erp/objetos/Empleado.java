@@ -138,8 +138,13 @@ public class Empleado {
      *
      * @throws SQLException Error al cargar la BD
      */
-    public void mostrarEmpleados() throws SQLException {
-        bd.consultarTabla("Select * from empleado");
+    public Empleado mostrarEmpleados() throws SQLException {
+        Empleado miEmpleado = null;
+        rs = bd.consultarTabla("Select * from empleado");
+        while (rs.next()) {
+            miEmpleado = new Empleado(rs.getInt("idEmpleado"), rs.getString("dni_emp"), rs.getString("nombre_emp"), rs.getString("apellidos_emp"), rs.getString("fechaInicio_emp"), rs.getString("cargo_emp"), rs.getString("usuario_emp"), rs.getString("contrasena_emp"), rs.getInt("idCine"));
+        }
+        return miEmpleado;
     }
 
     /**

@@ -30,7 +30,6 @@ public class Cliente {
     private String contrasena;
 
     // <editor-fold defaultstate="collapsed" desc="Getters">
-
     public CoreBD getBd() {
         return bd;
     }
@@ -75,15 +74,12 @@ public class Cliente {
         return contrasena;
     }
 
-    public int getIdCine() {
-        return idCine;
-    }
-
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Constructores">
-
     /**
-     * Constructor usado para devolver datos a la interfaz, ya que lleva idCliente
+     * Constructor usado para devolver datos a la interfaz, ya que lleva
+     * idCliente
+     *
      * @param idCliente Id del cliente
      * @param dni dni del cliente
      * @param nombre Nombre del cliente
@@ -106,6 +102,7 @@ public class Cliente {
 
     /**
      * Constructor usado para recibir datos de la interfaz, no usa ID
+     *
      * @param dni dni del cliente
      * @param nombre Nombre del cliente
      * @param apellidos Apellidos del cliente
@@ -125,26 +122,28 @@ public class Cliente {
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodos">
-    
+
     /**
      * Metodo para crear un cliente nuevo en la BD
+     *
      * @param _cliente Objeto cliente con todos los datos menos el ID
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
     public void crearCliente(Cliente _cliente) throws SQLException {
-        bd.actualizarTabla("Insert into cliente values(null, " + _cliente.dni +
-                ", " + _cliente.nombre +
-                ", " + _cliente.apellidos +
-                ", " + _cliente.cp +
-                ", " + _cliente.puntos +
-                ", " + _cliente.usuario +
-                ", " + _cliente.contrasena + ")");
+        bd.actualizarTabla("Insert into cliente values(null, " + _cliente.dni
+                + ", " + _cliente.nombre
+                + ", " + _cliente.apellidos
+                + ", " + _cliente.cp
+                + ", " + _cliente.puntos
+                + ", " + _cliente.usuario
+                + ", " + _cliente.contrasena + ")");
     }
 
     /**
      * Muestra todos los clientes de la BD
-     * 
-     * @return ArrayList del tipo Cliente con toda la informacion de todos los clientes de la BD
+     *
+     * @return ArrayList del tipo Cliente con toda la informacion de todos los
+     * clientes de la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
     public ArrayList mostrarClientes() throws SQLException {
@@ -158,9 +157,9 @@ public class Cliente {
         return misClientes;
     }
 
-
     /**
      * Muestra el cliente correspondiente al id introducido
+     *
      * @param _idCliente Id usado para la busqueda en la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
@@ -168,55 +167,46 @@ public class Cliente {
         Cliente miCliente = null;
         bd.consultarTabla("Select * from cliente where idCliente =" + _idCliente + "");
         while (rs.next()) {
-            miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_clie"), rs.getString("contrasena"));
+            miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_cli"), rs.getString("contrasena"));
         }
         return miCliente;
     }
 
-    
     public Cliente mostrarClientesNombre(String _nombre) throws SQLException {
         Cliente miCliente = null;
         bd.consultarTabla("Select * from cliente where Lower(nombre_cli) = Lower(" + _nombre + ")");
         while (rs.next()) {
             miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_clie"), rs.getString("contrasena"));
         }
-        return miCliente;    
-    }
-
-    
-    
-    
-    //Sin modificar
-    
-    
-    
-    
-    
-    /**
-     * Borra un empleadao segun id.
-     *
-     * @param _idEmpleado
-     * @throws SQLException Error al cargar la BD
-     */
-    public void borrarEmpleadoID(int _idEmpleado) throws SQLException {
-        bd.actualizarTabla("Delete * from empleado where idEmpleado =" + _idEmpleado);
+        return miCliente;
     }
 
     /**
-     * Modifica un empleado.
+     * Borra un cliente segun id.
      *
-     * @param _empleado
+     * @param _idCliente
      * @throws SQLException Error al cargar la BD
      */
-    public void modificarEmpleado(Cliente _empleado) throws SQLException {
-        bd.actualizarTabla("Update empleado set dni_emp=" + _empleado.getDni()
-                + ",nombre_emp=" + _empleado.getNombre()
-                + ",apellidos_emp=" + _empleado.getApellido()
-                + ",fechaInicio_emp=" + _empleado.getFechaInicio()
-                + ",cargo_emp=" + _empleado.getCargo()
-                + ",usuario_emp=" + _empleado.getUsuario()
-                + ",contrasenia_emp=" + _empleado.getContrasena()
-                + ",idCine=" + _empleado.getIdCine());
+    public void borrarClienteID(int _idCliente) throws SQLException {
+        bd.actualizarTabla("Delete * from cliente where idCliente = " + _idCliente);
+    }
+
+    /**
+     * Modifica un cliente antoguo con sus datos nuevos
+     *
+     * @param _cliente Objeto cliente con todos los datos necesarios para el
+     * update, incluido el ID.
+     * @throws SQLException
+     */
+    public void modificarCliente(Cliente _cliente) throws SQLException {
+        bd.actualizarTabla("Update cliente set dni_cli = " + _cliente.dni
+                + ", nombre_cli = " + _cliente.nombre
+                + ", apellidos_cli = " + _cliente.apellidos
+                + ", cp_cli = " + _cliente.cp
+                + ", puntos_cli = " + _cliente.puntos
+                + ", usuario_cli = " + _cliente.usuario
+                + ", contrasena_cli = " + _cliente.contrasena
+                + " where Lower(idCliente) = " + _cliente.idCliente);
     }
     // </editor-fold>
 }
