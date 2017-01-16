@@ -114,7 +114,7 @@ public class Cine {
      */
     public Cine mostrarCineId(int _idCine) throws SQLException {
         Cine miCine = null;
-        rs = bd.consultarTabla("select * from  cine where Lower(nombre_cin) = Lower(" + _idCine + ")");
+        rs = bd.consultarTabla("select * from  cine where Lower('idCine') = Lower(" + _idCine + ")");
         while (rs.next()) {
             miCine = new Cine(rs.getInt("idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
         }
