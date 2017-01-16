@@ -6,6 +6,7 @@ package ddda.erp.objetos;
 import ddda.erp.core.CoreBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -119,7 +120,6 @@ public class Empleado {
     }
 
     // </editor-fold>
-    
     //Los metodos de consulta tienen contructores que no devuelven nada cuando tienen que hacerlo
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
@@ -129,8 +129,15 @@ public class Empleado {
      * @throws SQLException Error al cargar la BD
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("Insert into empleados values(null, " + _empleado.getDni()
-                + ", " + _empleado.getNombre() + ", " + _empleado.getApellido() + ", " + _empleado.getFechaInicio() + ", " + _empleado.getCargo() + ", " + _empleado.getUsuario() + ", " + _empleado.getContrasena() + ", " + _empleado.getIdCine() + ")");
+        bd.actualizarTabla("Insert into empleados values(null, "
+                + _empleado.getDni() + ", '"
+                + _empleado.getNombre() + "', '"
+                + _empleado.getApellido() + "', '"
+                + _empleado.getFechaInicio() + "', '"
+                + _empleado.getCargo() + "', '"
+                + _empleado.getUsuario() + "', '"
+                + _empleado.getContrasena() + "', "
+                + _empleado.getIdCine() + ")");
     }
 
     /**
@@ -138,13 +145,23 @@ public class Empleado {
      *
      * @throws SQLException Error al cargar la BD
      */
-    public Empleado mostrarEmpleados() throws SQLException {
+    public ArrayList<Empleado> mostrarEmpleados() throws SQLException {
         Empleado miEmpleado = null;
+        ArrayList<Empleado> misEmpleados = new ArrayList();
         rs = bd.consultarTabla("Select * from empleado");
         while (rs.next()) {
-            miEmpleado = new Empleado(rs.getInt("idEmpleado"), rs.getString("dni_emp"), rs.getString("nombre_emp"), rs.getString("apellidos_emp"), rs.getString("fechaInicio_emp"), rs.getString("cargo_emp"), rs.getString("usuario_emp"), rs.getString("contrasena_emp"), rs.getInt("idCine"));
+            miEmpleado = new Empleado(rs.getInt("idEmpleado"),
+                    rs.getString("dni_emp"),
+                    rs.getString("nombre_emp"),
+                    rs.getString("apellidos_emp"),
+                    rs.getString("fechaInicio_emp"),
+                    rs.getString("cargo_emp"),
+                    rs.getString("usuario_emp"),
+                    rs.getString("contrasena_emp"),
+                    rs.getInt("idCine"));
+            misEmpleados.add(miEmpleado);
         }
-        return miEmpleado;
+        return misEmpleados;
     }
 
     /**
@@ -163,8 +180,24 @@ public class Empleado {
      * @param _nombreEmp Nombre usado para la busqueda
      * @throws SQLException Error al cargar la BD
      */
-    public void mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
-        bd.consultarTabla("Select * from empleado where nombre_emp =" + _nombreEmp + "");
+    public ArrayList<Empleado> mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
+        Empleado miEmpleado = null;
+        ArrayList<Empleado> misEmpleados = new ArrayList();
+        rs = bd.consultarTabla("Select * from empleado where nombre_emp =" + _nombreEmp + "");
+
+        while (rs.next()) {
+            miEmpleado = new Empleado(rs.getInt("idEmpleado"),
+                    rs.getString("dni_emp"),
+                    rs.getString("nombre_emp"),
+                    rs.getString("apellidos_emp"),
+                    rs.getString("fechaInicio_emp"),
+                    rs.getString("cargo_emp"),
+                    rs.getString("usuario_emp"),
+                    rs.getString("contrasena_emp"),
+                    rs.getInt("idCine"));
+            misEmpleados.add(miEmpleado);
+        }
+        return misEmpleados;
     }
 
     /**
@@ -185,14 +218,16 @@ public class Empleado {
      * @throws SQLException Error al cargar la BD
      */
     public void modificarEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("Update empleado set dni_emp=" + _empleado.getDni()
-                + ",nombre_emp=" + _empleado.getNombre()
-                + ",apellidos_emp=" + _empleado.getApellido()
-                + ",fechaInicio_emp=" + _empleado.getFechaInicio()
-                + ",cargo_emp=" + _empleado.getCargo()
-                + ",usuario_emp=" + _empleado.getUsuario()
-                + ",contrasena_emp=" + _empleado.getContrasena()
-                + ",idCine=" + _empleado.getIdCine());
+        bd.actualizarTabla("Update empleado set "
+                + "dni_emp=" + _empleado.dni
+                + ",nombre_emp='" + _empleado.nombre
+                + "',apellidos_emp='" + _empleado.apellido
+                + "',fechaInicio_emp='" + _empleado.fechaInicio
+                + "',cargo_emp='" + _empleado.cargo
+                + "',usuario_emp='" + _empleado.usuario
+                + "',contrasena_emp='" + _empleado.contrasena
+                + "',idCine=" + _empleado.getIdCine()
+                + "where dni_emp =" + _empleado.dni);
     }
     // </editor-fold>
 }
