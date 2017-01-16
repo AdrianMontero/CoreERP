@@ -130,14 +130,14 @@ public class Empleado {
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
         bd.actualizarTabla("Insert into empleados values(null, "
-                + _empleado.getDni() + ", '"
-                + _empleado.getNombre() + "', '"
-                + _empleado.getApellido() + "', '"
-                + _empleado.getFechaInicio() + "', '"
-                + _empleado.getCargo() + "', '"
-                + _empleado.getUsuario() + "', '"
-                + _empleado.getContrasena() + "', "
-                + _empleado.getIdCine() + ")");
+                + _empleado.dni + ", '"
+                + _empleado.nombre+ "', '"
+                + _empleado.apellido + "', '"
+                + _empleado.fechaInicio + "', '"
+                + _empleado.cargo + "', '"
+                + _empleado.usuario + "', '"
+                + _empleado.contrasena + "', "
+                + _empleado.idCine + ")");
     }
 
     /**
