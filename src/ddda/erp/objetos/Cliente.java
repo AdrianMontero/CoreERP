@@ -130,13 +130,13 @@ public class Cliente {
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
     public void crearCliente(Cliente _cliente) throws SQLException {
-        bd.actualizarTabla("Insert into cliente values(null, " + _cliente.dni
-                + ", " + _cliente.nombre
-                + ", " + _cliente.apellidos
-                + ", " + _cliente.cp
+        bd.actualizarTabla("Insert into cliente values(null, '" + _cliente.dni
+                + "', '" + _cliente.nombre
+                + "', '" + _cliente.apellidos
+                + "', " + _cliente.cp
                 + ", " + _cliente.puntos
-                + ", " + _cliente.usuario
-                + ", " + _cliente.contrasena + ")");
+                + ", '" + _cliente.usuario
+                + "', '" + _cliente.contrasena + "')");
     }
 
     /**
@@ -148,10 +148,18 @@ public class Cliente {
      */
     public ArrayList<Cliente> mostrarClientes() throws SQLException {
         ArrayList<Cliente> misClientes = new ArrayList();
-        Cliente miCliente = null;
+        Cliente miCliente;
         rs = bd.consultarTabla("select * from  cliente");
         while (rs.next()) {
-            miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_cli"), rs.getString("contrasena_cli"));
+            miCliente = new Cliente(
+                    rs.getInt("idCliente"),
+                    rs.getString("dni_cli"),
+                    rs.getString("nombre_cli"),
+                    rs.getString("apellidos_cli"),
+                    rs.getInt("cp_cli"),
+                    rs.getInt("puntos_cli"),
+                    rs.getString("usuario_cli"),
+                    rs.getString("contrasena_cli"));
             misClientes.add(miCliente);
         }
         return misClientes;
@@ -161,23 +169,40 @@ public class Cliente {
      * Muestra el cliente correspondiente al id introducido
      *
      * @param _idCliente Id usado para la busqueda en la BD
+     * @return Objeto de tipo cliente con toda la informacion de la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
     public Cliente mostrarClienteId(int _idCliente) throws SQLException {
         Cliente miCliente = null;
-        bd.consultarTabla("Select * from cliente where idCliente =" + _idCliente + "");
+        bd.consultarTabla("Select * from cliente where idCliente =" + _idCliente);
         while (rs.next()) {
-            miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_cli"), rs.getString("contrasena"));
+            miCliente = new Cliente(
+                    rs.getInt("idCliente"),
+                    rs.getString("dni_cli"),
+                    rs.getString("nombre_cli"),
+                    rs.getString("apellidos_cli"),
+                    rs.getInt("cp_cli"),
+                    rs.getInt("puntos_cli"),
+                    rs.getString("usuario_cli"),
+                    rs.getString("contrasena"));
         }
         return miCliente;
     }
 
     public ArrayList<Cliente> mostrarClientesNombre(String _nombre) throws SQLException {
         ArrayList<Cliente> misClientes = new ArrayList();
-        Cliente miCliente = null;
-        bd.consultarTabla("Select * from cliente where Lower(nombre_cli) = Lower(" + _nombre + ")");
+        Cliente miCliente;
+        bd.consultarTabla("Select * from cliente where Lower(nombre_cli) = Lower('" + _nombre + "')");
         while (rs.next()) {
-            miCliente = new Cliente(rs.getInt("idCliente"), rs.getString("dni_cli"), rs.getString("nombre_cli"), rs.getString("apellidos_cli"), rs.getInt("cp_cli"), rs.getInt("puntos_cli"), rs.getString("usuario_clie"), rs.getString("contrasena"));
+            miCliente = new Cliente(
+                    rs.getInt("idCliente"),
+                    rs.getString("dni_cli"),
+                    rs.getString("nombre_cli"),
+                    rs.getString("apellidos_cli"),
+                    rs.getInt("cp_cli"),
+                    rs.getInt("puntos_cli"),
+                    rs.getString("usuario_clie"),
+                    rs.getString("contrasena"));
             misClientes.add(miCliente);
         }
         return misClientes;
@@ -201,14 +226,14 @@ public class Cliente {
      * @throws SQLException
      */
     public void modificarCliente(Cliente _cliente) throws SQLException {
-        bd.actualizarTabla("Update cliente set dni_cli = " + _cliente.dni
-                + ", nombre_cli = " + _cliente.nombre
-                + ", apellidos_cli = " + _cliente.apellidos
-                + ", cp_cli = " + _cliente.cp
+        bd.actualizarTabla("Update cliente set dni_cli = '" + _cliente.dni
+                + "', nombre_cli = '" + _cliente.nombre
+                + "', apellidos_cli = '" + _cliente.apellidos
+                + "', cp_cli = " + _cliente.cp
                 + ", puntos_cli = " + _cliente.puntos
-                + ", usuario_cli = " + _cliente.usuario
-                + ", contrasena_cli = " + _cliente.contrasena
-                + " where Lower(idCliente) = " + _cliente.idCliente);
+                + ", usuario_cli = '" + _cliente.usuario
+                + "', contrasena_cli = '" + _cliente.contrasena
+                + "' where idCliente = " + _cliente.idCliente);
     }
     // </editor-fold>
 }

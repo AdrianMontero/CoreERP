@@ -32,11 +32,11 @@ public class Producto {
     /**
      * Constructor de producto con idProducto para añadir y borrar productos.
      *
-     * @param idProducto
-     * @param descripcion
-     * @param precio
-     * @param nombre
-     * @param stock
+     * @param idProducto Id del producto.
+     * @param descripcion Descripción del produto.
+     * @param precio Precio del produto.
+     * @param nombre Nombre del poducto.
+     * @param stock Numero de unidades en almacen.
      */
     public Producto(int idProducto, String descripcion, int precio, String nombre, int stock) {
         this.idProducto = idProducto;
@@ -60,8 +60,8 @@ public class Producto {
         this.nombre = nombre;
         this.stock = stock;
     }
-    // </editor-fold>
 
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getters">
     public int getIdProducto() {
         return idProducto;
@@ -88,87 +88,87 @@ public class Producto {
     /**
      * Crear un nuevo producto.
      *
-     * @param _poducto Datos del producto a crear.
+     * @param _producto Datos del producto a crear.
      * @throws SQLException Error al cargar la BD.
      */
-    public void crearProducto(Producto _poducto) throws SQLException {
+    public void crearProducto(Producto _producto) throws SQLException {
         bd.actualizarTabla("Insert into empleado values(null, "
-                + _poducto.idProducto + ", '"
-                + _poducto.descripcion+ "', '"
-                + _poducto.precio+ "', '"
-                + _poducto.nombre+ "', '"
-                + _poducto.stock+ ")");
+                + _producto.idProducto + ", '"
+                + _producto.descripcion + "', "
+                + _producto.precio + ", '"
+                + _producto.nombre + "', "
+                + _producto.stock + ")");
     }
 
     /**
      * Mostrar todos los productos.
-     * 
+     *
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD.
      */
     public ArrayList<Producto> mostrarProductos() throws SQLException {
-        Producto miProducto = null;
+        Producto miProducto;
         ArrayList<Producto> misProductos = new ArrayList();
-        rs = bd.consultarTabla("Select * from empleado");
+        rs = bd.consultarTabla("Select * from producto");
         while (rs.next()) {
             miProducto = new Producto(
                     rs.getInt("idProducto"),
-                    rs.getString("descipcion_pod"),
-                    rs.getInt("precio_prod"),
-                    rs.getString("nombre_prod"),
-                    rs.getInt("Stock_prod"));
+                    rs.getString("descipcion_pro"),
+                    rs.getInt("precio_pro"),
+                    rs.getString("nombre_pro"),
+                    rs.getInt("Stock_pro"));
             misProductos.add(miProducto);
         }
         return misProductos;
     }
 
     /**
-     *Muestra los productos segun id.
-     * 
+     * Muestra los productos segun id.
+     *
      * @param _idProducto Id del producto que vamos a buscar.
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD.
      */
     public Producto mostrarPoductoID(int _idProducto) throws SQLException {
         Producto miProducto = null;
-        rs = bd.consultarTabla("Select * from producto where idProducto =" + _idProducto + "");
+        rs = bd.consultarTabla("Select * from producto where idProducto =" + _idProducto);
         while (rs.next()) {
             miProducto = new Producto(
                     rs.getInt("idProducto"),
-                    rs.getString("descipcion_pod"),
-                    rs.getInt("precio_prod"),
-                    rs.getString("nombre_prod"),
-                    rs.getInt("Stock_prod"));
+                    rs.getString("descipcion_pro"),
+                    rs.getInt("precio_pro"),
+                    rs.getString("nombre_pro"),
+                    rs.getInt("Stock_pro"));
         }
         return miProducto;
-
     }
 
     /**
      *
-     * @param _nombreProd Nombre del producto ue se va a buscar.
+     * @param _nombre Nombre del producto ue se va a buscar.
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD.
      */
-    public ArrayList<Producto> mostrarProductoNombre(String _nombreProd) throws SQLException {
-        Producto miProducto = null;
+    public ArrayList<Producto> mostrarProductoNombre(String _nombre) throws SQLException {
+        Producto miProducto;
         ArrayList<Producto> misProductos = new ArrayList();
-        rs = bd.consultarTabla("Select * from producto where nombre_prod =" + _nombreProd + "");
+        rs = bd.consultarTabla("Select * from producto where nombre_pro =" + _nombre + "");
 
         while (rs.next()) {
             miProducto = new Producto(
                     rs.getInt("idProducto"),
-                    rs.getString("descipcion_pod"),
-                    rs.getInt("precio_prod"),
-                    rs.getString("nombre_prod"),
-                    rs.getInt("Stock_prod"));
+                    rs.getString("descipcion_pro"),
+                    rs.getInt("precio_pro"),
+                    rs.getString("nombre_pro"),
+                    rs.getInt("Stock_pro"));
             misProductos.add(miProducto);
         }
         return misProductos;
     }
+
     /**
      * Borrar un producto segun id.
-     * 
+     *
      * @param _idProducto Id del producto que se va a borrar.
      * @throws SQLException Error al cargar la BD.
      */
@@ -178,17 +178,17 @@ public class Producto {
 
     /**
      * Modificar un producto.
-     * 
+     *
      * @param _producto Datos a modificar en el poducto.
      * @throws SQLException Error al cargar la BD.
      */
     public void modificarProducto(Producto _producto) throws SQLException {
         bd.actualizarTabla("Update producto set "
                 + "idProducto=" + _producto.idProducto
-                + ",nombre_emp='" + _producto.descripcion
-                + "',apellidos_emp='" + _producto.precio
-                + "',fechaInicio_emp='" + _producto.nombre
-                + "',cargo_emp='" + _producto.stock);
+                + ",descipcion_pro='" + _producto.descripcion
+                + "',precio_pro=" + _producto.precio
+                + ",nombre_pro='" + _producto.nombre
+                + "',Stock_pro=" + _producto.stock);
     }
 
     // </editor-fold>

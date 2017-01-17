@@ -102,7 +102,12 @@ public class Cine {
      * @throws SQLException error al crear el cine
      */
     public void crearCine(Cine _cine) throws SQLException {
-        bd.actualizarTabla("insert into cine values(null, " + _cine.getNombre() + ", " + _cine.getCif() + ", " + _cine.getDireccion() + ", " + _cine.getPoblacion() + ", " + _cine.getCp() + ")");
+        bd.actualizarTabla("insert into cine values(null, '"
+                + _cine.getNombre() + "', '"
+                + _cine.getCif() + "', '"
+                + _cine.getDireccion() + "', '"
+                + _cine.getPoblacion() + "', "
+                + _cine.getCp() + ")");
     }
 
     /**
@@ -114,9 +119,15 @@ public class Cine {
      */
     public Cine mostrarCineId(int _idCine) throws SQLException {
         Cine miCine = null;
-        rs = bd.consultarTabla("select * from  cine where Lower('idCine') = Lower(" + _idCine + ")");
+        rs = bd.consultarTabla("select * from  cine where Lower('idCine') = Lower('" + _idCine + "')");
         while (rs.next()) {
-            miCine = new Cine(rs.getInt("idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
+            miCine = new Cine(
+                    rs.getInt("idCine"),
+                    rs.getString("nombre_cin"),
+                    rs.getString("cif_cin"),
+                    rs.getString("direccion_cin"),
+                    rs.getString("poblacion_cin"),
+                    rs.getInt("cp_cin"));
         }
         return miCine;
     }
@@ -129,10 +140,16 @@ public class Cine {
      */
     public ArrayList mostrarCines() throws SQLException {
         ArrayList<Cine> misCines = new ArrayList();
-        Cine miCine = null;
+        Cine miCine;
         rs = bd.consultarTabla("select * from  cine");
         while (rs.next()) {
-            miCine = new Cine(rs.getInt("idCine"), rs.getString("nombre_cin"), rs.getString("cif_cin"), rs.getString("direccion_cin"), rs.getString("poblacion_cin"), rs.getInt("cp_cin"));
+            miCine = new Cine(
+                    rs.getInt("idCine"),
+                    rs.getString("nombre_cin"),
+                    rs.getString("cif_cin"),
+                    rs.getString("direccion_cin"),
+                    rs.getString("poblacion_cin"),
+                    rs.getInt("cp_cin"));
             misCines.add(miCine);
         }
         return misCines;
@@ -141,12 +158,16 @@ public class Cine {
     /**
      * Metodo el cual pasando todos los parametros de un cine los actualiza.
      *
-     * @param _idCine Id usado para buscar el cine el cual se va a actualizar.
      * @param _cine Datos nuevos del cine.
      * @throws SQLException Error al intentar ctualizar los datos de la BD.
      */
     public void modificarCine(Cine _cine) throws SQLException {
-        bd.actualizarTabla("Update cine set nombre_cin = " + _cine.nombre + ", cif_cin = " + _cine.cif + ", direccion_cin = " + _cine.direccion + ", poblacion_cin = " + _cine.poblacion + ", cp_cin = " + _cine.cp + " where Lower(nombre_cin) = Lower(" + _cine.idCine + ")");
+        bd.actualizarTabla("Update cine set nombre_cin = '"
+                + _cine.nombre + "', cif_cin = '"
+                + _cine.cif + "', direccion_cin = '"
+                + _cine.direccion + "', poblacion_cin = '"
+                + _cine.poblacion + "', cp_cin = "
+                + _cine.cp + " where Lower(idCine) = Lower(" + _cine.idCine + ")");
     }
 
     public void borrarCineID(int _idCine) throws SQLException {

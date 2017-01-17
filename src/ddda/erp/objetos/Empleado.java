@@ -120,7 +120,6 @@ public class Empleado {
     }
 
     // </editor-fold>
-    //Los metodos de consulta tienen contructores que no devuelven nada cuando tienen que hacerlo
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Creamos un nuevo empleado.
@@ -129,9 +128,9 @@ public class Empleado {
      * @throws SQLException Error al cargar la BD.
      */
     public void crearEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("Insert into empleados values(null, "
-                + _empleado.dni + ", '"
-                + _empleado.nombre+ "', '"
+        bd.actualizarTabla("Insert into empleados values(null, '"
+                + _empleado.dni + "', '"
+                + _empleado.nombre + "', '"
                 + _empleado.apellido + "', '"
                 + _empleado.fechaInicio + "', '"
                 + _empleado.cargo + "', '"
@@ -142,12 +141,12 @@ public class Empleado {
 
     /**
      * Muestra todos los empleados.
-     * 
+     *
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD
      */
     public ArrayList<Empleado> mostrarEmpleados() throws SQLException {
-        Empleado miEmpleado = null;
+        Empleado miEmpleado;
         ArrayList<Empleado> misEmpleados = new ArrayList();
         rs = bd.consultarTabla("Select * from empleado");
         while (rs.next()) {
@@ -167,14 +166,14 @@ public class Empleado {
 
     /**
      * Muestra empleado segun id.
-     * 
+     *
      * @param _idEmpleado Id del empleado a mostrar.
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD
      */
     public Empleado mostrarEmpleadoID(int _idEmpleado) throws SQLException {
         Empleado miEmpleado = null;
-        rs = bd.consultarTabla("Select * from empleado where idEmpleado =" + _idEmpleado + "");
+        rs = bd.consultarTabla("Select * from empleado where idEmpleado =" + _idEmpleado);
         while (rs.next()) {
             miEmpleado = new Empleado(rs.getInt("idEmpleado"),
                     rs.getString("dni_emp"),
@@ -187,7 +186,7 @@ public class Empleado {
                     rs.getInt("idCine"));
         }
         return miEmpleado;
-        
+
     }
 
     /**
@@ -198,9 +197,9 @@ public class Empleado {
      * @throws SQLException Error al cargar la BD.
      */
     public ArrayList<Empleado> mostrarEmpleadoNombre(String _nombreEmp) throws SQLException {
-        Empleado miEmpleado = null;
+        Empleado miEmpleado;
         ArrayList<Empleado> misEmpleados = new ArrayList();
-        rs = bd.consultarTabla("Select * from empleado where nombre_emp =" + _nombreEmp + "");
+        rs = bd.consultarTabla("Select * from empleado where Lower(nombre_emp) = Lower('" + _nombreEmp + "')");
 
         while (rs.next()) {
             miEmpleado = new Empleado(rs.getInt("idEmpleado"),
@@ -228,23 +227,23 @@ public class Empleado {
     }
 
     /**
-     * Modifica un empleado.
+     * Modifica un empleado correspondiente a un id
      *
      * @param _empleado Parametro con todos los datos nuevos del usuario (tienen
-     * que estar todos para que el metodo funcione)
+     * que estar todos para que el metodo funcione, incluido el id)
      * @throws SQLException Error al cargar la BD
      */
     public void modificarEmpleado(Empleado _empleado) throws SQLException {
         bd.actualizarTabla("Update empleado set "
-                + "dni_emp=" + _empleado.dni
-                + ",nombre_emp='" + _empleado.nombre
+                + "dni_emp='" + _empleado.dni
+                + "',nombre_emp='" + _empleado.nombre
                 + "',apellidos_emp='" + _empleado.apellido
                 + "',fechaInicio_emp='" + _empleado.fechaInicio
                 + "',cargo_emp='" + _empleado.cargo
                 + "',usuario_emp='" + _empleado.usuario
                 + "',contrasena_emp='" + _empleado.contrasena
                 + "',idCine=" + _empleado.getIdCine()
-                + "where dni_emp =" + _empleado.dni);
+                + "where idEmpleado =" + _empleado.idEmpleado);
     }
     // </editor-fold>
 }

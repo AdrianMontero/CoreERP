@@ -84,8 +84,8 @@ public class Pelicula {
      */
     public void crearPelicula(Pelicula _pelicula) throws SQLException {
         bd.actualizarTabla("Insert into pelicula values(null, '" + _pelicula.nombre
-                + "', '" + _pelicula.duracion
-                + "', '" + _pelicula.edad + ")");
+                + "', " + _pelicula.duracion
+                + ", " + _pelicula.edad + ")");
     }
 
     /**
@@ -97,10 +97,14 @@ public class Pelicula {
      */
     public ArrayList<Pelicula> mostrarPeliculas() throws SQLException {
         ArrayList<Pelicula> misPeliculas = new ArrayList();
-        Pelicula miPelicula = null;
+        Pelicula miPelicula;
         rs = bd.consultarTabla("select * from  pelicula");
         while (rs.next()) {
-            miPelicula = new Pelicula(rs.getInt("idPelicula"), rs.getString("nombre_pel"), rs.getInt("duracion_pel"), rs.getInt("edad_pel"));
+            miPelicula = new Pelicula(
+                    rs.getInt("idPelicula"),
+                    rs.getString("nombre_pel"),
+                    rs.getInt("duracion_pel"),
+                    rs.getInt("edad_pel"));
             misPeliculas.add(miPelicula);
         }
         return misPeliculas;
@@ -110,13 +114,18 @@ public class Pelicula {
      * Muestra la pelicula correspondiente al id introducido
      *
      * @param _idPelicula Id usado para la busqueda en la BD
+     * @return Objeto del tipo Pelicula con todos los datos completados de la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
     public Pelicula mostrarPeliculaId(int _idPelicula) throws SQLException {
         Pelicula miPelicula = null;
         bd.consultarTabla("Select * from pelicula where idPelicula = " + _idPelicula);
         while (rs.next()) {
-            miPelicula = new Pelicula(rs.getInt("idPelicula"), rs.getString("nombre_pel"), rs.getInt("duracion_pel"), rs.getInt("edad_pel"));
+            miPelicula = new Pelicula(
+                    rs.getInt("idPelicula"),
+                    rs.getString("nombre_pel"),
+                    rs.getInt("duracion_pel"),
+                    rs.getInt("edad_pel"));
         }
         return miPelicula;
     }
@@ -125,15 +134,20 @@ public class Pelicula {
      * Muestra las peliculas que aparecen por un nombre X
      *
      * @param _nombre Parametro usado para hacer la busqueda en la BD
-     * @return ArrayList de tipo Pelicula que contiene la lista de peliculas de la BD
+     * @return ArrayList de tipo Pelicula que contiene la lista de peliculas de
+     * la BD
      * @throws SQLException Error al intentar recuperar el objeto
      */
     public ArrayList<Pelicula> mostrarPeliculasNombre(String _nombre) throws SQLException {
         ArrayList<Pelicula> misPeliculas = new ArrayList();
-        Pelicula miPelicula = null;
+        Pelicula miPelicula;
         bd.consultarTabla("Select * from pelicula where Lower(nombre_pel) = Lower('" + _nombre + "')");
         while (rs.next()) {
-            miPelicula = new Pelicula(rs.getInt("idPelicula"), rs.getString("nombre_pel"), rs.getInt("duracion_pel"), rs.getInt("edad_pel"));
+            miPelicula = new Pelicula(
+                    rs.getInt("idPelicula"),
+                    rs.getString("nombre_pel"),
+                    rs.getInt("duracion_pel"),
+                    rs.getInt("edad_pel"));
             misPeliculas.add(miPelicula);
         }
         return misPeliculas;
@@ -148,19 +162,19 @@ public class Pelicula {
     public void borrarPeliculaID(int _idPelicula) throws SQLException {
         bd.actualizarTabla("Delete * from pelicula where idPelicula = " + _idPelicula);
     }
-    
+
     /**
      * Modifica un cliente antoguo con sus datos nuevos
      *
-     * @param _pelicula  Objeto pelicula con todos los datos necesarios para el
+     * @param _pelicula Objeto pelicula con todos los datos necesarios para el
      * update, incluido el ID.
      * @throws SQLException Error al modificar el objeto
      */
     public void modificarPelicula(Pelicula _pelicula) throws SQLException {
         bd.actualizarTabla("Update pelicula set nombre_pel = '" + _pelicula.nombre
-                + "', duracion_pel = '" + _pelicula.duracion
-                + "', edad_pel = '" + _pelicula.edad
-                + "' where Lower(idPelicula) = " + _pelicula.idPelicula);
+                + "', duracion_pel = " + _pelicula.duracion
+                + ", edad_pel = " + _pelicula.edad
+                + " where idPelicula = " + _pelicula.idPelicula);
     }
     // </editor-fold>
 }
