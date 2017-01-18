@@ -103,11 +103,11 @@ public class Cine {
      */
     public void crearCine(Cine _cine) throws SQLException {
         bd.actualizarTabla("insert into cine values(null, '"
-                + _cine.getNombre() + "', '"
-                + _cine.getCif() + "', '"
-                + _cine.getDireccion() + "', '"
-                + _cine.getPoblacion() + "', "
-                + _cine.getCp() + ")");
+                + _cine.nombre + "', '"
+                + _cine.cif + "', '"
+                + _cine.direccion + "', '"
+                + _cine.poblacion + "', "
+                + _cine.cp + ")");
     }
 
     /**
