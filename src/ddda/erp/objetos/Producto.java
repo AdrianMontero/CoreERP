@@ -23,64 +23,66 @@ public class Producto {
 
     //Atributos del empleado.
     private int idProducto;
-    private String descripcion;
-    private int precio;
-    private String nombre;
-    private int stock;
+    private String descripcion_prod;
+    private int precio_prod;
+    private String nombre_prod;
+    private int stock_prod;
 
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Constructor de producto con idProducto para añadir y borrar productos.
      *
      * @param idProducto Id del producto.
-     * @param descripcion Descripción del produto.
-     * @param precio Precio del produto.
-     * @param nombre Nombre del poducto.
-     * @param stock Numero de unidades en almacen.
+     * @param descripcion_prod Descripción del produto.
+     * @param precio_prod Precio del produto.
+     * @param nombre_prod Nombre del poducto.
+     * @param stock_prod Numero de unidades en almacen.
      */
-    public Producto(int idProducto, String descripcion, int precio, String nombre, int stock) {
+    public Producto(int idProducto, String descripcion_prod, int precio_prod, String nombre_prod, int stock_prod) {    
         this.idProducto = idProducto;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.nombre = nombre;
-        this.stock = stock;
+        this.descripcion_prod = descripcion_prod;
+        this.precio_prod = precio_prod;
+        this.nombre_prod = nombre_prod;
+        this.stock_prod = stock_prod;
     }
 
     /**
      * Constructor de producto sin idProducto para mostrar productos.
      *
-     * @param descripcion Descripción del produto.
-     * @param precio Precio del produto.
-     * @param nombre Nombre del poducto.
-     * @param stock Numero de unidades en almacen.
+     * @param descripcion_prod Descripción del produto.
+     * @param precio_prod Precio del produto.
+     * @param nombre_prod Nombre del poducto.
+     * @param stock_prod Numero de unidades en almacen.
      */
-    public Producto(String descripcion, int precio, String nombre, int stock) {
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.nombre = nombre;
-        this.stock = stock;
+    public Producto(String descripcion_prod, int precio_prod, String nombre_prod, int stock_prod) {
+        this.descripcion_prod = descripcion_prod;
+        this.precio_prod = precio_prod;
+        this.nombre_prod = nombre_prod;
+        this.stock_prod = stock_prod;
     }
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getters">
+
     public int getIdProducto() {
         return idProducto;
     }
+    
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcion_prod() {
+        return descripcion_prod;
     }
 
-    public int getPrecio() {
-        return precio;
+    public int getPrecio_prod() {
+        return precio_prod;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombre_prod() {
+        return nombre_prod;
     }
 
-    public int getStock() {
-        return stock;
+    public int getStock_prod() {
+        return stock_prod;
     }
 
     // </editor-fold>
@@ -94,10 +96,10 @@ public class Producto {
     public void crearProducto(Producto _producto) throws SQLException {
         bd.actualizarTabla("Insert into empleado values(null, "
                 + _producto.idProducto + ", '"
-                + _producto.descripcion + "', "
-                + _producto.precio + ", '"
-                + _producto.nombre + "', "
-                + _producto.stock + ")");
+                + _producto.descripcion_prod + "', "
+                + _producto.precio_prod + ", '"
+                + _producto.nombre_prod + "', "
+                + _producto.stock_prod + ")");
     }
 
     /**
@@ -152,7 +154,7 @@ public class Producto {
     public ArrayList<Producto> mostrarProductoNombre(String _nombre) throws SQLException {
         Producto miProducto;
         ArrayList<Producto> misProductos = new ArrayList();
-        rs = bd.consultarTabla("Select * from producto where nombre_pro =" + _nombre + "");
+        rs = bd.consultarTabla("Select * from producto where nombre_pro ='" + _nombre+"'");
 
         while (rs.next()) {
             miProducto = new Producto(
@@ -185,10 +187,10 @@ public class Producto {
     public void modificarProducto(Producto _producto) throws SQLException {
         bd.actualizarTabla("Update producto set "
                 + "idProducto=" + _producto.idProducto
-                + ",descipcion_pro='" + _producto.descripcion
-                + "',precio_pro=" + _producto.precio
-                + ",nombre_pro='" + _producto.nombre
-                + "',Stock_pro=" + _producto.stock);
+                + ",descipcion_pro='" + _producto.descripcion_prod
+                + "',precio_pro=" + _producto.precio_prod
+                + ",nombre_pro='" + _producto.nombre_prod
+                + "',Stock_pro=" + _producto.stock_prod);
     }
 
     // </editor-fold>
