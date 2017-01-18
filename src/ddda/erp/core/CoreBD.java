@@ -87,8 +87,10 @@ public class CoreBD {
      * @throws SQLException Error al intentar hacer la actualizacion
      */
     public void actualizarTabla(String _sql) throws SQLException {
+        conectarSqlite("C:/bbdd/bbddCinesFree.db");
         stmt = conexion.createStatement();
         //Empezamos a trabajar con la BBDD
         stmt.executeUpdate(_sql);
+        desconectarBBDD();
     }
 }

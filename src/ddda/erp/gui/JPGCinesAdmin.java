@@ -5,6 +5,11 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Cine;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Daniel
@@ -89,6 +94,11 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         jLabel4.setText("Población:");
 
         jbCrearCine.setText("Crear Cine");
+        jbCrearCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearCineActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("C.P:");
 
@@ -350,6 +360,22 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCrearCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearCineActionPerformed
+        String nombre = jtfNombreCine.getText();
+        String cif = jtfCif.getText();
+        String direccion = jtfDireccion.getText();
+        String poblacion = jtfPoblacion.getText();
+        int cp = Integer.parseInt(jtfCp.getText());
+        
+        Cine miCine = new Cine(nombre, cif, direccion, poblacion, cp);
+        try {
+            miCine.crearCine(miCine);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jbCrearCineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
