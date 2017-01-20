@@ -183,7 +183,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="jcbBajaCina" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="jcbBajaCine" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="191" max="32767" attributes="0"/>
@@ -196,7 +196,7 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jcbBajaCina" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbBajaCine" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="jbBajaCine" min="-2" max="-2" attributes="0"/>
@@ -215,8 +215,11 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Baja Cine"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBajaCineActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jcbBajaCina">
+            <Component class="javax.swing.JComboBox" name="jcbBajaCine">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">

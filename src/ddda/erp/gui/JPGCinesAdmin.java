@@ -7,6 +7,7 @@ package ddda.erp.gui;
 
 import ddda.erp.objetos.Cine;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,11 +17,35 @@ import java.util.logging.Logger;
  */
 public class JPGCinesAdmin extends javax.swing.JPanel {
 
+    Cine cine;
+
     /**
      * Creates new form JPGCinesAdmin
      */
-    public JPGCinesAdmin() {
+    public JPGCinesAdmin(){
         initComponents();
+        ArrayList<Cine> misCines = new ArrayList();
+        Cine miCine = new Cine();
+        try {
+            for(int i = 0; i < miCine.mostrarCines().size(); i++){
+                misCines.set(i, (Cine) miCine.mostrarCines().get(i));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Puta mierda");
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misCines.size(); i++) {
+            jcbBajaCine.addItem(String.valueOf(misCines.get(i).getIdCine()));
+        }
+
+//        try {
+//            for(int i=0; i < cine.misCines.size(); i++){
+//                jcbBajaCine.addItem(cine.misCines.get(i));
+//            }
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**
@@ -49,7 +74,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jbBajaCine = new javax.swing.JButton();
-        jcbBajaCina = new javax.swing.JComboBox<>();
+        jcbBajaCine = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jcbConsultaCine = new javax.swing.JComboBox<>();
@@ -158,8 +183,13 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         jLabel6.setText("Id Cine:");
 
         jbBajaCine.setText("Baja Cine");
+        jbBajaCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaCineActionPerformed(evt);
+            }
+        });
 
-        jcbBajaCina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbBajaCine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -172,7 +202,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(44, 44, 44)
-                        .addComponent(jcbBajaCina, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jcbBajaCine, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -181,7 +211,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jcbBajaCina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbBajaCine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addComponent(jbBajaCine)
                 .addContainerGap(248, Short.MAX_VALUE))
@@ -367,15 +397,21 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         String direccion = jtfDireccion.getText();
         String poblacion = jtfPoblacion.getText();
         int cp = Integer.parseInt(jtfCp.getText());
-        
+
         Cine miCine = new Cine(nombre, cif, direccion, poblacion, cp);
         try {
             miCine.crearCine(miCine);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jbCrearCineActionPerformed
+
+    private void jbBajaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaCineActionPerformed
+        // TODO add your handling code here:
+        int idCine = jcbBajaCine.getSelectedIndex();
+
+    }//GEN-LAST:event_jbBajaCineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -405,7 +441,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     private javax.swing.JButton jbConsultaCine;
     private javax.swing.JButton jbCrearCine;
     private javax.swing.JButton jbModCine;
-    private javax.swing.JComboBox<String> jcbBajaCina;
+    private javax.swing.JComboBox<String> jcbBajaCine;
     private javax.swing.JComboBox<String> jcbConsultaCine;
     private javax.swing.JComboBox<String> jcbModCine;
     private javax.swing.JTable jtConsultaCine;
