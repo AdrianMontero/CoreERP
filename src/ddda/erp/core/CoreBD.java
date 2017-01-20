@@ -74,9 +74,11 @@ public class CoreBD {
      * @throws SQLException Error al ejecutar la consulta
      */
     public ResultSet consultarTabla(String _sql) throws SQLException {
+        conectarSqlite("C:/bbdd/bbddCinesFree.db");
         stmt = conexion.createStatement();
         //Empezamos a trabajar con la BBDD
         rs = stmt.executeQuery(_sql);
+        desconectarBBDD();
         return rs;
     }
 
@@ -92,5 +94,30 @@ public class CoreBD {
         //Empezamos a trabajar con la BBDD
         stmt.executeUpdate(_sql);
         desconectarBBDD();
+    }
+    
+    /**
+     * Metodo que comprueba los usuarios y contraseñas para permitir el acceso o denegarlo
+     * @param _user Usuario a buscar en la BD
+     * @param _pass Contraseña a buscar en la BD
+     * @return Devuelveun booleano, true si usery pas son correctas y false si no ha encontrado coincidencia
+     * @throws SQLException Error al buscar en la BD
+     */
+    public Boolean login(String _user, String _pass) throws SQLException{
+        Boolean acceso = false;
+        try { //Conseguimos los usuarios y contraseñas de la BD
+            rs = consultarTabla("select usuario_emp, contrasena_emp from empleado");
+        } catch (SQLException ex) {
+            System.out.println("Error al consultar usuarios y contraseñas en la BD");
+            Logger.getLogger(CoreBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while(rs.next()){//Por cada resultado
+            if(_user.equals(rs.getString("usuario_emp"))){ //Si los usuarios coinciden
+                if(_pass.equals(rs.getString("contrasena_emp")) == true){ //Y las contraseñas tambien
+                    acceso = true; //Se puede entrar
+                }
+            }
+        }
+        return acceso;
     }
 }
