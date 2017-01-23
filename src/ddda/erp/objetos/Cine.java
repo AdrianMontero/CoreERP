@@ -4,9 +4,28 @@
 package ddda.erp.objetos;
 
 import ddda.erp.core.CoreBD;
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.Array;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.Date;
+import java.sql.NClob;
+import java.sql.Ref;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.RowId;
 import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.sql.SQLXML;
+import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Map;
 
 /**
  *
@@ -15,12 +34,12 @@ import java.util.ArrayList;
 public class Cine {
 
     //Metodos para interactuar con la BD
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
 
     //Atributos del cine
-    private int idCine;
+    private String idCine;
     private String nombre;
     private String cif;
     private String direccion;
@@ -28,7 +47,7 @@ public class Cine {
     private int cp;
 
     // <editor-fold defaultstate="collapsed" desc="Getters">
-    public int getIdCine() {
+    public String getIdCine() {
         return idCine;
     }
 
@@ -53,7 +72,53 @@ public class Cine {
     }
 
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Setters">
+
+    public static void setBd(CoreBD bd) {
+        Cine.bd = bd;
+    }
+
+    public static void setSql(String sql) {
+        Cine.sql = sql;
+    }
+
+    public static void setRs(ResultSet rs) {
+        Cine.rs = rs;
+    }
+
+    public void setIdCine(String idCine) {
+        this.idCine = idCine;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setPoblacion(String poblacion) {
+        this.poblacion = poblacion;
+    }
+
+    public void setCp(int cp) {
+        this.cp = cp;
+    }
+    
+    
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Constructores">
+    /**
+     * Constructor vacio
+     */
+    public Cine() {
+    }
+
     /**
      * Creamos un cine desde 0, pero sin ID del Cine, ya que es autoincremental
      *
@@ -63,7 +128,7 @@ public class Cine {
      * @param _poblacion Localidad del cine
      * @param _cp Codigo postal del cine
      */
-    public Cine(String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
+    public Cine(String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {   
         this.nombre = _nombreCine;
         this.cif = _cif;
         this.direccion = _direccion;
@@ -83,7 +148,7 @@ public class Cine {
      * @param _poblacion Poblacion del cine
      * @param _cp Codigo Postal del cine
      */
-    public Cine(int _idCine, String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
+    public Cine(String _idCine, String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
         this.idCine = _idCine;
         this.nombre = _nombreCine;
         this.cif = _cif;
@@ -97,17 +162,15 @@ public class Cine {
     /**
      * Creacion de un cine en la BD con id en null, ya que lo gestiona la BD
      *
-     * @param _cine Clase con todos los atributos del cine ya definidos (nombre,
-     * cif)
      * @throws SQLException error al crear el cine
      */
-    public void crearCine(Cine _cine) throws SQLException {
+    public void crearCine() throws SQLException {
         bd.actualizarTabla("insert into cine values(null, '"
-                + _cine.nombre + "', '"
-                + _cine.cif + "', '"
-                + _cine.direccion + "', '"
-                + _cine.poblacion + "', "
-                + _cine.cp + ")");
+                + nombre + "', '"
+                + cif + "', '"
+                + direccion + "', '"
+                + poblacion + "', "
+                + cp + ")");
     }
 
     /**
@@ -118,16 +181,15 @@ public class Cine {
      * @throws SQLException Error al encontrar el objeto en la base de datos
      */
     public Cine mostrarCineId(int _idCine) throws SQLException {
-        Cine miCine = null;
-        rs = bd.consultarTabla("select * from  cine where Lower('idCine') = Lower('" + _idCine + "')");
+        Cine miCine = new Cine();
+        rs = bd.consultarTabla("select * from  cine where idCine = " + _idCine);
         while (rs.next()) {
-            miCine = new Cine(
-                    rs.getInt("idCine"),
-                    rs.getString("nombre_cin"),
-                    rs.getString("cif_cin"),
-                    rs.getString("direccion_cin"),
-                    rs.getString("poblacion_cin"),
-                    rs.getInt("cp_cin"));
+            miCine.setIdCine(rs.getString("idCine"));
+            miCine.setNombre(rs.getString("nombre_cin"));
+            miCine.setCif(rs.getString("cif_cin"));
+            miCine.setDireccion(rs.getString("direccion_cin"));
+            miCine.setPoblacion(rs.getString("poblacion_cin"));
+            miCine.setCp(rs.getInt("cp_cin"));
         }
         return miCine;
     }
@@ -135,24 +197,26 @@ public class Cine {
     /**
      * Muestra todos los cines de la base de datos
      *
+     * @param listaCines
      * @return devuelve un array del tipo cine
      * @throws SQLException Error alencontrar el objeto en la base de datos
      */
-    public ArrayList mostrarCines() throws SQLException {
-        ArrayList<Cine> misCines = new ArrayList();
-        Cine miCine;
-        rs = bd.consultarTabla("select * from  cine");
-        while (rs.next()) {
-            miCine = new Cine(
-                    rs.getInt("idCine"),
-                    rs.getString("nombre_cin"),
-                    rs.getString("cif_cin"),
-                    rs.getString("direccion_cin"),
-                    rs.getString("poblacion_cin"),
-                    rs.getInt("cp_cin"));
-            misCines.add(miCine);
+    public static ArrayList<Cine> mostrarCines(ArrayList listaCines) throws SQLException {
+        ResultSet res;
+        Cine miCine = new Cine();
+        res = bd.consultarTabla("select * from cine");
+        while(res.next()) {
+            miCine = new Cine();
+            miCine.setIdCine(res.getString("idCine"));
+            miCine.setNombre(res.getString("nombre_cin"));
+            miCine.setCif(res.getString("cif_cin"));
+            miCine.setDireccion(res.getString("direccion_cin"));
+            miCine.setPoblacion(res.getString("poblacion_cin"));
+            miCine.setCp(res.getInt("cp_cin"));
+            listaCines.add(miCine);
         }
-        return misCines;
+        System.out.println("hola 6");
+        return listaCines;
     }
 
     /**
@@ -167,7 +231,7 @@ public class Cine {
                 + _cine.cif + "', direccion_cin = '"
                 + _cine.direccion + "', poblacion_cin = '"
                 + _cine.poblacion + "', cp_cin = "
-                + _cine.cp + " where Lower(idCine) = Lower(" + _cine.idCine + ")");
+                + _cine.cp + " where idCine = " + _cine.idCine);
     }
 
     public void borrarCineID(int _idCine) throws SQLException {
