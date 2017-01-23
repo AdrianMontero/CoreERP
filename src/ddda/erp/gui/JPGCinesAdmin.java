@@ -36,6 +36,8 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                 stringId = String.valueOf(miCine.getIdCine());
                 System.out.println(stringId);
                 jcbBajaCine.addItem(stringId);
+                jcbConsultaCine.addItem(stringId);
+                jcbModCine.addItem(stringId);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -220,8 +222,6 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
         jLabel7.setText("Id Cine:");
 
-        jcbConsultaCine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jtConsultaCine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -244,6 +244,11 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtConsultaCine);
 
         jbConsultaCine.setText("Consultar por ID");
+        jbConsultaCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultaCineActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Nombre Cine:");
 
@@ -311,9 +316,18 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
         jLabel14.setText("ID Cine:");
 
-        jcbModCine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbModCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModCineActionPerformed(evt);
+            }
+        });
 
         jbModCine.setText("Modificar Cine");
+        jbModCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModCineActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -414,6 +428,41 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     private void jcbBajaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBajaCineActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbBajaCineActionPerformed
+
+    private void jbConsultaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaCineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbConsultaCineActionPerformed
+
+    private void jcbModCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModCineActionPerformed
+        int cineBuscado;
+        cineBuscado = jcbModCine.getSelectedIndex();
+        miCine = misCines.get(cineBuscado);
+        jtfModNomCine.setText(miCine.getNombre());
+        jtfModCifCine.setText(miCine.getCif());
+        jtfModDirCine.setText(miCine.getDireccion());
+        jtfModPobCine.setText(miCine.getPoblacion());
+        jtfModCPCine.setText(String.valueOf(miCine.getCp()));
+    }//GEN-LAST:event_jcbModCineActionPerformed
+
+    private void jbModCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModCineActionPerformed
+        
+        miCine.setIdCine(Integer.parseInt((String) jcbModCine.getSelectedItem()));
+        miCine.setNombre(jtfModNomCine.getText());
+        miCine.setCif(jtfModCifCine.getText());
+        miCine.setDireccion(jtfModDirCine.getText());
+        miCine.setPoblacion(jtfModPobCine.getText());
+        miCine.setCp(Integer.parseInt(jtfModCPCine.getText()));
+        try {
+            miCine.modificarCine();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        try {
+//            Cine.mostrarCines(misCines);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }//GEN-LAST:event_jbModCineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

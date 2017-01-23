@@ -39,7 +39,7 @@ public class Cine {
     private static ResultSet rs = null;
 
     //Atributos del cine
-    private String idCine;
+    private int idCine;
     private String nombre;
     private String cif;
     private String direccion;
@@ -47,7 +47,7 @@ public class Cine {
     private int cp;
 
     // <editor-fold defaultstate="collapsed" desc="Getters">
-    public String getIdCine() {
+    public int getIdCine() {
         return idCine;
     }
 
@@ -86,7 +86,7 @@ public class Cine {
         Cine.rs = rs;
     }
 
-    public void setIdCine(String idCine) {
+    public void setIdCine(int idCine) {
         this.idCine = idCine;
     }
 
@@ -148,7 +148,7 @@ public class Cine {
      * @param _poblacion Poblacion del cine
      * @param _cp Codigo Postal del cine
      */
-    public Cine(String _idCine, String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
+    public Cine(int _idCine, String _nombreCine, String _cif, String _direccion, String _poblacion, int _cp) {
         this.idCine = _idCine;
         this.nombre = _nombreCine;
         this.cif = _cif;
@@ -184,7 +184,7 @@ public class Cine {
         Cine miCine = new Cine();
         rs = bd.consultarTabla("select * from  cine where idCine = " + _idCine);
         while (rs.next()) {
-            miCine.setIdCine(rs.getString("idCine"));
+            miCine.setIdCine(rs.getInt("idCine"));
             miCine.setNombre(rs.getString("nombre_cin"));
             miCine.setCif(rs.getString("cif_cin"));
             miCine.setDireccion(rs.getString("direccion_cin"));
@@ -205,9 +205,10 @@ public class Cine {
         ResultSet res;
         Cine miCine = new Cine();
         res = bd.consultarTabla("select * from cine");
+        listaCines.clear();
         while(res.next()) {
             miCine = new Cine();
-            miCine.setIdCine(res.getString("idCine"));
+            miCine.setIdCine(res.getInt("idCine"));
             miCine.setNombre(res.getString("nombre_cin"));
             miCine.setCif(res.getString("cif_cin"));
             miCine.setDireccion(res.getString("direccion_cin"));
@@ -222,16 +223,15 @@ public class Cine {
     /**
      * Metodo el cual pasando todos los parametros de un cine los actualiza.
      *
-     * @param _cine Datos nuevos del cine.
      * @throws SQLException Error al intentar ctualizar los datos de la BD.
      */
-    public void modificarCine(Cine _cine) throws SQLException {
+    public void modificarCine() throws SQLException {
         bd.actualizarTabla("Update cine set nombre_cin = '"
-                + _cine.nombre + "', cif_cin = '"
-                + _cine.cif + "', direccion_cin = '"
-                + _cine.direccion + "', poblacion_cin = '"
-                + _cine.poblacion + "', cp_cin = "
-                + _cine.cp + " where idCine = " + _cine.idCine);
+                + nombre + "', cif_cin = '"
+                + cif + "', direccion_cin = '"
+                + direccion + "', poblacion_cin = '"
+                + poblacion + "', cp_cin = "
+                + cp + " where idCine = " + idCine);
     }
 
     public void borrarCineID(int _idCine) throws SQLException {
