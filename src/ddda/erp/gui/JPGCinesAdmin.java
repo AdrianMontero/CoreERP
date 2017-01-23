@@ -184,6 +184,12 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             }
         });
 
+        jcbBajaCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbBajaCineActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -404,6 +410,10 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jbBajaCineActionPerformed
+
+    private void jcbBajaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBajaCineActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbBajaCineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

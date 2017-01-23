@@ -5,6 +5,11 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Pelicula;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Daniel
@@ -33,9 +38,9 @@ public class JPGPeliculas extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtfNombrePelicula = new javax.swing.JTextField();
-        jtfDuracionPelicula = new javax.swing.JTextField();
         jspEdadCine = new javax.swing.JSpinner();
         jbAltaPelicula = new javax.swing.JButton();
+        jspDuracionPelicula = new javax.swing.JSpinner();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -70,6 +75,11 @@ public class JPGPeliculas extends javax.swing.JPanel {
         jLabel3.setText("Edad:");
 
         jbAltaPelicula.setText("Alta Pelicula");
+        jbAltaPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaPeliculaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,11 +92,12 @@ public class JPGPeliculas extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfNombrePelicula)
-                    .addComponent(jtfDuracionPelicula)
-                    .addComponent(jspEdadCine, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbAltaPelicula, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jtfNombrePelicula)
+                        .addComponent(jspEdadCine, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbAltaPelicula, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                    .addComponent(jspDuracionPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(180, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,7 +110,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtfDuracionPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspDuracionPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -301,7 +312,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,6 +323,19 @@ public class JPGPeliculas extends javax.swing.JPanel {
     private void jtfConsNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfConsNomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfConsNomActionPerformed
+
+    private void jbAltaPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaPeliculaActionPerformed
+        String nombre = jtfNombrePelicula.getText();
+        int duracion = (int) jspDuracionPelicula.getValue();
+        int edad = (int) jspEdadCine.getValue();
+        
+        Pelicula miPelicula = new Pelicula(nombre, duracion, edad);
+        try {
+            miPelicula.crearPelicula(miPelicula);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbAltaPeliculaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -342,11 +366,11 @@ public class JPGPeliculas extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbBajaPeliNom;
     private javax.swing.JComboBox<String> jcbConsId;
     private javax.swing.JComboBox<String> jcbModIdPeli;
+    private javax.swing.JSpinner jspDuracionPelicula;
     private javax.swing.JSpinner jspEdadCine;
     private javax.swing.JSpinner jspModEdad;
     private javax.swing.JTable jtaConsPeli;
     private javax.swing.JTextField jtfConsNom;
-    private javax.swing.JTextField jtfDuracionPelicula;
     private javax.swing.JTextField jtfModDuracionPeli;
     private javax.swing.JTextField jtfModNomPeli;
     private javax.swing.JTextField jtfNombrePelicula;
