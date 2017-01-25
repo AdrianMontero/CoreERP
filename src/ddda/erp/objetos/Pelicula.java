@@ -43,6 +43,9 @@ public class Pelicula {
         return edad;
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Setter">
     public void setBd(CoreBD bd) {
         this.bd = bd;
     }
@@ -72,6 +75,7 @@ public class Pelicula {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Constructor para recibir peliculas en la interfaz.
@@ -101,10 +105,14 @@ public class Pelicula {
         this.edad = edad;
     }
 
+    /**
+     * Constructor vacio.
+     */
     private Pelicula() {
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Crea una nueva pelicula
