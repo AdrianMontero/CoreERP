@@ -145,11 +145,22 @@ public class JPGPeliculas extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre Pelicula:");
 
+        jcbModIdPeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModIdPeliActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Duracion:");
 
         jLabel7.setText("Edad:");
 
         jbModPeli.setText("Modificar pelicula");
+        jbModPeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModPeliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -349,6 +360,27 @@ public class JPGPeliculas extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbAltaPeliculaActionPerformed
+
+    private void jcbModIdPeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModIdPeliActionPerformed
+        int peliculaBuscada;
+        peliculaBuscada = jcbModIdPeli.getSelectedIndex();
+        miPelicula = misPeliculas.get(peliculaBuscada);
+        jtfModNomPeli.setText(miPelicula.getNombre());
+        jtfModDuracionPeli.setText(String.valueOf(miPelicula.getDuracion()));
+        jspModEdad.setValue(miPelicula.getEdad());
+    }//GEN-LAST:event_jcbModIdPeliActionPerformed
+
+    private void jbModPeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModPeliActionPerformed
+        miPelicula.setIdPelicula(Integer.parseInt((String) jcbModIdPeli.getSelectedItem()));
+        miPelicula.setNombre(jtfModNomPeli.getText());
+        miPelicula.setDuracion(Integer.parseInt(jtfModDuracionPeli.getText()));
+        miPelicula.setEdad((int) jspModEdad.getValue());
+        try {
+            miPelicula.modificarPelicula();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbModPeliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

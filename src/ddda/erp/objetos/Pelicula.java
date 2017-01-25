@@ -201,11 +201,11 @@ public class Pelicula {
      * update, incluido el ID.
      * @throws SQLException Error al modificar el objeto
      */
-    public void modificarPelicula(Pelicula _pelicula) throws SQLException {
-        bd.actualizarTabla("Update pelicula set nombre_pel = '" + _pelicula.nombre
-                + "', duracion_pel = " + _pelicula.duracion
-                + ", edad_pel = " + _pelicula.edad
-                + " where idPelicula = " + _pelicula.idPelicula);
+    public void modificarPelicula() throws SQLException {
+        bd.actualizarTabla("Update pelicula set nombre_pel = '" + nombre
+                + "', duracion_pel = " + duracion
+                + ", edad_pel = " + edad
+                + " where idPelicula = " + idPelicula);
     }
     // </editor-fold>
 }
