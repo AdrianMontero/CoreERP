@@ -7,6 +7,7 @@ package ddda.erp.gui;
 
 import ddda.erp.objetos.Pelicula;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,12 +16,30 @@ import java.util.logging.Logger;
  * @author Daniel
  */
 public class JPGPeliculas extends javax.swing.JPanel {
-
+    ArrayList<Pelicula> misPeliculas = new ArrayList();
+    Pelicula miPelicula;
     /**
      * Creates new form JPGPeliculas
      */
     public JPGPeliculas() {
         initComponents();
+        
+        String stringId;
+
+        try {
+            
+            Pelicula.mostrarPeliculas(misPeliculas);
+            for (int i = 0; i < misPeliculas.size(); i++) {
+                miPelicula = (Pelicula) misPeliculas.get(i);
+                stringId = String.valueOf(miPelicula.getIdPelicula());
+                System.out.println(stringId);
+                jcbModIdPeli.addItem(stringId);
+                jcbConsId.addItem(stringId);
+                jcbBajaPeliID.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -126,8 +145,6 @@ public class JPGPeliculas extends javax.swing.JPanel {
 
         jLabel5.setText("Nombre Pelicula:");
 
-        jcbModIdPeli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Duracion:");
 
         jLabel7.setText("Edad:");
@@ -183,8 +200,6 @@ public class JPGPeliculas extends javax.swing.JPanel {
         jLabel8.setText("Id Pelicula:");
 
         jLabel9.setText("Nombre Pelicula:");
-
-        jcbConsId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbConsId.setText("Consultar ID");
 
@@ -262,8 +277,6 @@ public class JPGPeliculas extends javax.swing.JPanel {
         jLabel10.setText("Id Pelicula:");
 
         jLabel11.setText("Id Nombre:");
-
-        jcbBajaPeliID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jcbBajaPeliNom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 

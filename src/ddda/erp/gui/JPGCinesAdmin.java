@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -77,7 +78,6 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         jcbConsultaCine = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtConsultaCine = new javax.swing.JTable();
-        jbConsultaCine = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jtfconsNomCine = new javax.swing.JTextField();
         jbConsNomCine = new javax.swing.JButton();
@@ -222,12 +222,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
         jLabel7.setText("Id Cine:");
 
+        jcbConsultaCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbConsultaCineActionPerformed(evt);
+            }
+        });
+
         jtConsultaCine.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "CIF", "Direccion", "C.P"
@@ -243,26 +246,21 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jtConsultaCine);
 
-        jbConsultaCine.setText("Consultar por ID");
-        jbConsultaCine.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbConsultaCineActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText("Nombre Cine:");
 
         jbConsNomCine.setText("Consulta por Nombre");
+        jbConsNomCine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsNomCineActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,13 +268,13 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                             .addComponent(jLabel8))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbConsultaCine, 0, 98, Short.MAX_VALUE)
-                            .addComponent(jtfconsNomCine))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbConsultaCine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbConsNomCine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(20, 20, 20)))
+                            .addComponent(jcbConsultaCine, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfconsNomCine, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jbConsNomCine))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -284,10 +282,9 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jcbConsultaCine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbConsultaCine))
+                    .addComponent(jcbConsultaCine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
+                .addGap(2, 2, 2)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -297,9 +294,9 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jbConsNomCine)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Cine", jPanel4);
@@ -429,10 +426,6 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbBajaCineActionPerformed
 
-    private void jbConsultaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaCineActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbConsultaCineActionPerformed
-
     private void jcbModCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModCineActionPerformed
         int cineBuscado;
         cineBuscado = jcbModCine.getSelectedIndex();
@@ -445,7 +438,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbModCineActionPerformed
 
     private void jbModCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModCineActionPerformed
-        
+
         miCine.setIdCine(Integer.parseInt((String) jcbModCine.getSelectedItem()));
         miCine.setNombre(jtfModNomCine.getText());
         miCine.setCif(jtfModCifCine.getText());
@@ -457,12 +450,40 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-//            Cine.mostrarCines(misCines);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }//GEN-LAST:event_jbModCineActionPerformed
+
+    private void jcbConsultaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaCineActionPerformed
+        int cineBuscado;
+        cineBuscado = jcbConsultaCine.getSelectedIndex();
+        miCine = misCines.get(cineBuscado);
+        jtfconsNomCine.setText(miCine.getNombre());
+    }//GEN-LAST:event_jcbConsultaCineActionPerformed
+
+    private void jbConsNomCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsNomCineActionPerformed
+        String nombre = null;
+        String cif = null;
+        String direccion = null;
+        int cp = 0;
+        try {
+            Cine.mostrarCines(misCines);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misCines.size(); i++) {
+            miCine = misCines.get(i);
+            if (miCine.getNombre().equals(jtfconsNomCine.getText()) == true) {
+                nombre = miCine.getNombre();
+                cif = miCine.getCif();
+                direccion = miCine.getDireccion();
+                cp = miCine.getCp();
+            }
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jtConsultaCine.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) nombre, (String) cif, (String) direccion, (Integer) cp});
+
+    }//GEN-LAST:event_jbConsNomCineActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -489,7 +510,6 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbBajaCine;
     private javax.swing.JButton jbConsNomCine;
-    private javax.swing.JButton jbConsultaCine;
     private javax.swing.JButton jbCrearCine;
     private javax.swing.JButton jbModCine;
     private javax.swing.JComboBox<String> jcbBajaCine;

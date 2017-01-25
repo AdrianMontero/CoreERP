@@ -5,17 +5,41 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Cine;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Daniel
  */
 public class JPGCinesEmp extends javax.swing.JPanel {
 
+    ArrayList<Cine> misCines = new ArrayList();
+    Cine miCine;
+
     /**
      * Creates new form JPGCinesEmp
      */
     public JPGCinesEmp() {
         initComponents();
+        
+        String stringId;
+
+        try {
+            Cine.mostrarCines(misCines);
+            for (int i = 0; i < misCines.size(); i++) {
+                miCine = (Cine) misCines.get(i);
+                stringId = String.valueOf(miCine.getIdCine());
+                System.out.println(stringId);
+                jcbCinesEmp.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -28,26 +52,35 @@ public class JPGCinesEmp extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jcbCines = new javax.swing.JComboBox<>();
+        jcbCinesEmp = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMostrarCines = new javax.swing.JTable();
+        jbMostrarCinesEmp = new javax.swing.JButton();
 
         jLabel1.setText("Cines:");
 
-        jcbCines.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCinesEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbCinesEmpActionPerformed(evt);
+            }
+        });
 
         jtMostrarCines.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Direccion", "Población", "C.P"
             }
         ));
         jScrollPane1.setViewportView(jtMostrarCines);
+
+        jbMostrarCinesEmp.setText("Mostrar");
+        jbMostrarCinesEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMostrarCinesEmpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,8 +93,10 @@ public class JPGCinesEmp extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jcbCines, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                        .addComponent(jcbCinesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbMostrarCinesEmp)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,18 +104,44 @@ public class JPGCinesEmp extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbCines, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCinesEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbMostrarCinesEmp))
                 .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbCinesEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCinesEmpActionPerformed
+        int cineBuscado;
+        cineBuscado = jcbCinesEmp.getSelectedIndex();
+        miCine = misCines.get(cineBuscado);
+
+    }//GEN-LAST:event_jcbCinesEmpActionPerformed
+
+    private void jbMostrarCinesEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostrarCinesEmpActionPerformed
+        int cineBuscado;
+        String direccion = null;
+        int cp = 0;
+        String poblacion = null;
+        cineBuscado = jcbCinesEmp.getSelectedIndex();
+        miCine = misCines.get(cineBuscado);
+
+        direccion = miCine.getDireccion();
+        poblacion = miCine.getPoblacion();
+        cp = miCine.getCp();
+
+        DefaultTableModel model = (DefaultTableModel) jtMostrarCines.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) direccion, (String) poblacion, (Integer) cp});
+    }//GEN-LAST:event_jbMostrarCinesEmpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> jcbCines;
+    private javax.swing.JButton jbMostrarCinesEmp;
+    private javax.swing.JComboBox<String> jcbCinesEmp;
     private javax.swing.JTable jtMostrarCines;
     // End of variables declaration//GEN-END:variables
 }

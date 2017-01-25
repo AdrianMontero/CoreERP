@@ -12,13 +12,15 @@ package ddda.erp.gui;
 public class JFInterfaz extends javax.swing.JFrame {
 JPGCinesAdmin jpca = new JPGCinesAdmin();
 JPGPeliculas jpcp = new JPGPeliculas();
+JPGCinesEmp jpce = new JPGCinesEmp();
     /**
      * Creates new form JFInterfaz
      */
     public JFInterfaz() {
         initComponents();
-        this.getContentPane().add(jpca);
-//        this.getContentPane().add(jpcp);
+//        this.getContentPane().add(jpce);
+//        this.getContentPane().add(jpca);
+        this.getContentPane().add(jpcp);
         this.setVisible(true);
     }
 

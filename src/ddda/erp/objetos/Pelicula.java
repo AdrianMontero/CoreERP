@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class Pelicula {
 
     //Metodos para interactuar con la BD.
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
 
     private int idPelicula;
     private String nombre;
@@ -41,6 +41,34 @@ public class Pelicula {
 
     public int getEdad() {
         return edad;
+    }
+
+    public void setBd(CoreBD bd) {
+        this.bd = bd;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     // </editor-fold>
@@ -73,6 +101,9 @@ public class Pelicula {
         this.edad = edad;
     }
 
+    private Pelicula() {
+    }
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
@@ -95,19 +126,19 @@ public class Pelicula {
      * peliculas de la BD
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
-    public ArrayList<Pelicula> mostrarPeliculas() throws SQLException {
-        ArrayList<Pelicula> misPeliculas = new ArrayList();
+    public static ArrayList<Pelicula> mostrarPeliculas(ArrayList listaPeliculas) throws SQLException {
         Pelicula miPelicula;
         rs = bd.consultarTabla("select * from  pelicula");
+        listaPeliculas.clear();
         while (rs.next()) {
-            miPelicula = new Pelicula(
-                    rs.getInt("idPelicula"),
-                    rs.getString("nombre_pel"),
-                    rs.getInt("duracion_pel"),
-                    rs.getInt("edad_pel"));
-            misPeliculas.add(miPelicula);
+            miPelicula = new Pelicula();
+            miPelicula.setIdPelicula(rs.getInt("idPelicula"));
+            miPelicula.setNombre(rs.getString("nombre_pel"));
+            miPelicula.setDuracion(rs.getInt("duracion_pel"));
+            miPelicula.setEdad(rs.getInt("edad_pel"));
+            listaPeliculas.add(miPelicula);
         }
-        return misPeliculas;
+        return listaPeliculas;
     }
 
     /**
