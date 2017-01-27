@@ -240,7 +240,7 @@ public class Cine {
      * @throws SQLException 
      */
     public void borrarCineID(int _idCine) throws SQLException {
-        bd.actualizarTabla("Delete * from cine where idCine = " + _idCine);
+        bd.actualizarTabla("Delete from cine where idCine = " + _idCine);
     }
     // </editor-fold>
 }

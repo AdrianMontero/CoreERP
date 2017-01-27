@@ -199,7 +199,17 @@ public class Pelicula {
      * @throws SQLException Borrar el objeto
      */
     public void borrarPeliculaID(int _idPelicula) throws SQLException {
-        bd.actualizarTabla("Delete * from pelicula where idPelicula = " + _idPelicula);
+        bd.actualizarTabla("Delete from pelicula where idPelicula = " + _idPelicula);
+    }
+    
+    /**
+     * Borra una pelicula segun el nombre.
+     *
+     * @param _nombre Nombre usado para realizar el borrado
+     * @throws SQLException Borrar el objeto
+     */
+    public void borrarPeliculaNombre(String _nombre) throws SQLException {
+        bd.actualizarTabla("Delete from pelicula where nombre_pel = " + _nombre);
     }
 
     /**

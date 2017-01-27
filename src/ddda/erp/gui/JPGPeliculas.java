@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +26,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
         initComponents();
         
         String stringId;
+        String nomPel;
 
         try {
             
@@ -32,10 +34,12 @@ public class JPGPeliculas extends javax.swing.JPanel {
             for (int i = 0; i < misPeliculas.size(); i++) {
                 miPelicula = (Pelicula) misPeliculas.get(i);
                 stringId = String.valueOf(miPelicula.getIdPelicula());
+                nomPel = String.valueOf(miPelicula.getNombre());
                 System.out.println(stringId);
                 jcbModIdPeli.addItem(stringId);
                 jcbConsId.addItem(stringId);
                 jcbBajaPeliID.addItem(stringId);
+                jcbBajaPeliNom.addItem(nomPel);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +78,6 @@ public class JPGPeliculas extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jcbConsId = new javax.swing.JComboBox<>();
-        jbConsId = new javax.swing.JButton();
         jtfConsNom = new javax.swing.JTextField();
         jbConsNom = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -212,7 +215,11 @@ public class JPGPeliculas extends javax.swing.JPanel {
 
         jLabel9.setText("Nombre Pelicula:");
 
-        jbConsId.setText("Consultar ID");
+        jcbConsId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbConsIdActionPerformed(evt);
+            }
+        });
 
         jtfConsNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,14 +227,16 @@ public class JPGPeliculas extends javax.swing.JPanel {
             }
         });
 
-        jbConsNom.setText("Consultar Nombre");
+        jbConsNom.setText("Consultar por Nombre");
+        jbConsNom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsNomActionPerformed(evt);
+            }
+        });
 
         jtaConsPeli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "ID", "Duracion", "Edad"
@@ -259,28 +268,25 @@ public class JPGPeliculas extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jcbConsId, 0, 100, Short.MAX_VALUE)
                             .addComponent(jtfConsNom))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbConsId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbConsNom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jbConsNom)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jcbConsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsId))
-                .addGap(18, 18, 18)
+                    .addComponent(jcbConsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jtfConsNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbConsNom))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consultar Pelicula", jPanel3);
@@ -289,9 +295,18 @@ public class JPGPeliculas extends javax.swing.JPanel {
 
         jLabel11.setText("Id Nombre:");
 
-        jcbBajaPeliNom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbBajaPeliID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbBajaPeliIDActionPerformed(evt);
+            }
+        });
 
         jbBajaID.setText("Baja por ID");
+        jbBajaID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaIDActionPerformed(evt);
+            }
+        });
 
         jbBajaNombre.setText("Baja por Nombre");
 
@@ -382,6 +397,46 @@ public class JPGPeliculas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbModPeliActionPerformed
 
+    private void jcbConsIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsIdActionPerformed
+        int peliculaBuscada;
+        peliculaBuscada = jcbConsId.getSelectedIndex();
+        miPelicula = misPeliculas.get(peliculaBuscada);
+        jtfConsNom.setText(miPelicula.getNombre());
+    }//GEN-LAST:event_jcbConsIdActionPerformed
+
+    private void jbConsNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsNomActionPerformed
+        String nombre = null;
+        int duracion = 0;
+        int edad = 0;
+        int id = 0;
+        try {
+            Pelicula.mostrarPeliculas(misPeliculas);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPeliculas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misPeliculas.size(); i++) {
+            miPelicula = misPeliculas.get(i);
+            if (miPelicula.getNombre().equals(jtfConsNom.getText()) == true) {
+                nombre = miPelicula.getNombre();
+                id = miPelicula.getIdPelicula();
+                duracion = miPelicula.getDuracion();
+                edad = miPelicula.getEdad();
+            }
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jtaConsPeli.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) nombre, (Integer) id, (Integer) duracion, (Integer) edad});
+    }//GEN-LAST:event_jbConsNomActionPerformed
+
+    private void jcbBajaPeliIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBajaPeliIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbBajaPeliIDActionPerformed
+
+    private void jbBajaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbBajaIDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -404,7 +459,6 @@ public class JPGPeliculas extends javax.swing.JPanel {
     private javax.swing.JButton jbAltaPelicula;
     private javax.swing.JButton jbBajaID;
     private javax.swing.JButton jbBajaNombre;
-    private javax.swing.JButton jbConsId;
     private javax.swing.JButton jbConsNom;
     private javax.swing.JButton jbModPeli;
     private javax.swing.JComboBox<String> jcbBajaPeliID;

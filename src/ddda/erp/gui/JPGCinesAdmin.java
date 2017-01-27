@@ -418,8 +418,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jbCrearCineActionPerformed
 
     private void jbBajaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaCineActionPerformed
-        // TODO add your handling code here:
-
+        int idCine;
+        String comodin;
+        comodin = jcbBajaCine.getSelectedItem().toString();
+        idCine = Integer.parseInt(comodin);
+        try {
+            miCine.borrarCineID(idCine);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbBajaCineActionPerformed
 
     private void jcbBajaCineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBajaCineActionPerformed

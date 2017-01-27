@@ -19,8 +19,8 @@ JPGCinesEmp jpce = new JPGCinesEmp();
     public JFInterfaz() {
         initComponents();
 //        this.getContentPane().add(jpce);
-//        this.getContentPane().add(jpca);
-        this.getContentPane().add(jpcp);
+        this.getContentPane().add(jpca);
+//        this.getContentPane().add(jpcp);
         this.setVisible(true);
     }
 
