@@ -233,7 +233,12 @@ public class Cine {
                 + poblacion + "', cp_cin = "
                 + cp + " where idCine = " + idCine);
     }
-
+    
+    /**
+     * Borra un cine al pasarle el id del cine.
+     * @param _idCine
+     * @throws SQLException 
+     */
     public void borrarCineID(int _idCine) throws SQLException {
         bd.actualizarTabla("Delete * from cine where idCine = " + _idCine);
     }
