@@ -70,8 +70,9 @@ public class Empleado {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
-     * Construtor del empleado con el idEmpleado que no sera utilizado al crear
-     * un nuevo cine puesto que el id es autoincremental.
+     * Creamos un empleado desde 0, con un ID asociado, este metodo no es apto para
+     * introducir empleado en la BBDD ya que la base de datos asigna un ID
+     * automaticamente, es para recibir datos de la BD
      *
      * @param idEmpleado id del empleado.
      * @param dni dni del empleado.
@@ -96,8 +97,7 @@ public class Empleado {
     }
 
     /**
-     * Construtor del empleado con el idEmpleado que no sera utilizado al crear
-     * un nuevo cine puesto que el id es autoincremental.
+     * Creamos un empleado desde 0, pero sin ID del empleado, ya que es autoincremental
      *
      * @param dni dni del empleado.
      * @param nombre nombre del empleado.
