@@ -68,6 +68,44 @@ public class Empleado {
     }
 
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Setters">
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public void setIdCine(int idCine) {
+        this.idCine = idCine;
+    }
+    
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
      * Creamos un empleado desde 0, con un ID asociado, este metodo no es apto para
