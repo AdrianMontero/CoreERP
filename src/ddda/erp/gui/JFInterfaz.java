@@ -10,17 +10,21 @@ package ddda.erp.gui;
  * @author Daniel
  */
 public class JFInterfaz extends javax.swing.JFrame {
-JPGCinesAdmin jpca = new JPGCinesAdmin();
-JPGPeliculas jpcp = new JPGPeliculas();
-JPGCinesEmp jpce = new JPGCinesEmp();
+
+    JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
+    JPGPeliculas jpgp = new JPGPeliculas();//Peliculas
+    JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
+    JPGEmpAdmin jpgea = new JPGEmpAdmin(); //Empleado Administrador
+
     /**
      * Creates new form JFInterfaz
      */
     public JFInterfaz() {
         initComponents();
-//        this.getContentPane().add(jpce);
-//        this.getContentPane().add(jpca);
-        this.getContentPane().add(jpcp);
+//        this.getContentPane().add(jpgce);//Cines Empleado
+//        this.getContentPane().add(jpgca);//Cines Administrador
+//        this.getContentPane().add(jpgp);//Peliculas
+        this.getContentPane().add(jpgea);//Empleado Administrador
         this.setVisible(true);
     }
 

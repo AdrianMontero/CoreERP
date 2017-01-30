@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class Empleado {
 
     //Metodos para interactuar con la BD.
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
 
     //Atributos del empleado.
     private int idEmpleado;
@@ -104,12 +104,12 @@ public class Empleado {
     public void setIdCine(int idCine) {
         this.idCine = idCine;
     }
-    
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Constructores">
     /**
-     * Creamos un empleado desde 0, con un ID asociado, este metodo no es apto para
-     * introducir empleado en la BBDD ya que la base de datos asigna un ID
+     * Creamos un empleado desde 0, con un ID asociado, este metodo no es apto
+     * para introducir empleado en la BBDD ya que la base de datos asigna un ID
      * automaticamente, es para recibir datos de la BD
      *
      * @param idEmpleado id del empleado.
@@ -134,8 +134,12 @@ public class Empleado {
         this.idCine = idCine;
     }
 
+    public Empleado() {
+    }
+
     /**
-     * Creamos un empleado desde 0, pero sin ID del empleado, ya que es autoincremental
+     * Creamos un empleado desde 0, pero sin ID del empleado, ya que es
+     * autoincremental
      *
      * @param dni dni del empleado.
      * @param nombre nombre del empleado.
@@ -165,16 +169,16 @@ public class Empleado {
      * @param _empleado Datos del empleado.
      * @throws SQLException Error al cargar la BD.
      */
-    public void crearEmpleado(Empleado _empleado) throws SQLException {
-        bd.actualizarTabla("Insert into empleados values(null, '"
-                + _empleado.dni + "', '"
-                + _empleado.nombre + "', '"
-                + _empleado.apellido + "', '"
-                + _empleado.fechaInicio + "', '"
-                + _empleado.cargo + "', '"
-                + _empleado.usuario + "', '"
-                + _empleado.contrasena + "', "
-                + _empleado.idCine + ")");
+    public void crearEmpleado() throws SQLException {
+        bd.actualizarTabla("insert into empleado values(null, '"
+                + dni + "', '"
+                + nombre + "', '"
+                + apellido + "', '"
+                + fechaInicio + "', '"
+                + cargo + "', '"
+                + usuario + "', '"
+                + contrasena + "', "
+                + idCine + ")");
     }
 
     /**
@@ -183,20 +187,21 @@ public class Empleado {
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD
      */
-    public ArrayList<Empleado> mostrarEmpleados() throws SQLException {
+    public static ArrayList<Empleado> mostrarEmpleados(ArrayList ListaEmpleado) throws SQLException {
         Empleado miEmpleado;
         ArrayList<Empleado> misEmpleados = new ArrayList();
         rs = bd.consultarTabla("Select * from empleado");
         while (rs.next()) {
-            miEmpleado = new Empleado(rs.getInt("idEmpleado"),
-                    rs.getString("dni_emp"),
-                    rs.getString("nombre_emp"),
-                    rs.getString("apellidos_emp"),
-                    rs.getString("fechaInicio_emp"),
-                    rs.getString("cargo_emp"),
-                    rs.getString("usuario_emp"),
-                    rs.getString("contrasena_emp"),
-                    rs.getInt("idCine"));
+            miEmpleado = new Empleado();
+            miEmpleado.setIdEmpleado(rs.getInt("idEmpleado"));
+            miEmpleado.setDni(rs.getString("dni_emp"));
+            miEmpleado.setNombre(rs.getString("nombre_emp"));
+            miEmpleado.setApellido(rs.getString("apellidos_emp"));
+            miEmpleado.setFechaInicio(rs.getString("fechaInicio_emp"));
+            miEmpleado.setCargo(rs.getString("cargo_emp"));
+            miEmpleado.setUsuario(rs.getString("usuario_emp"));
+            miEmpleado.setContrasena(rs.getString("contrasena_emp"));
+            miEmpleado.setIdCine(rs.getInt("idCine"));
             misEmpleados.add(miEmpleado);
         }
         return misEmpleados;
@@ -210,18 +215,18 @@ public class Empleado {
      * @throws SQLException Error al cargar la BD
      */
     public Empleado mostrarEmpleadoID(int _idEmpleado) throws SQLException {
-        Empleado miEmpleado = null;
+        Empleado miEmpleado = new Empleado();
         rs = bd.consultarTabla("Select * from empleado where idEmpleado =" + _idEmpleado);
         while (rs.next()) {
-            miEmpleado = new Empleado(rs.getInt("idEmpleado"),
-                    rs.getString("dni_emp"),
-                    rs.getString("nombre_emp"),
-                    rs.getString("apellidos_emp"),
-                    rs.getString("fechaInicio_emp"),
-                    rs.getString("cargo_emp"),
-                    rs.getString("usuario_emp"),
-                    rs.getString("contrasena_emp"),
-                    rs.getInt("idCine"));
+            miEmpleado.setIdEmpleado(rs.getInt("idEmpleado"));
+            miEmpleado.setDni(rs.getString("dni_emp"));
+            miEmpleado.setNombre(rs.getString("nombre_emp"));
+            miEmpleado.setApellido(rs.getString("apellidos_emp"));
+            miEmpleado.setFechaInicio(rs.getString("fechaInicio_emp"));
+            miEmpleado.setCargo(rs.getString("cargo_emp"));
+            miEmpleado.setUsuario(rs.getString("usuario_emp"));
+            miEmpleado.setContrasena(rs.getString("contrasena_emp"));
+            miEmpleado.setIdCine(rs.getInt("idCine"));
         }
         return miEmpleado;
 
