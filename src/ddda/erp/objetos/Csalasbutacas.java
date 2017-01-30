@@ -51,5 +51,17 @@ public class Csalasbutacas {
 
         }
     }
+    
+    public void borrarSalasButacas(String _idCine) throws SQLException {
+        int idSala = 0;
+        
+        bd.consultarTabla("select idSala from sala where idCine = " + _idCine);
+         rs.next();
+         idSala = rs.getInt("idSala");
+         
+        bd.actualizarTabla("Delete from sala where idCine = " + _idCine );
+        bd.actualizarTabla("Delete from butaca where idSala = " + idSala);
+        
+    }
 
 }
