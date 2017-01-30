@@ -209,7 +209,7 @@ public class Pelicula {
      * @throws SQLException Borrar el objeto
      */
     public void borrarPeliculaNombre(String _nombre) throws SQLException {
-        bd.actualizarTabla("Delete from pelicula where nombre_pel = " + _nombre);
+        bd.actualizarTabla("Delete from pelicula where nombre_pel = '" + _nombre + "'");
     }
 
     /**

@@ -309,6 +309,11 @@ public class JPGPeliculas extends javax.swing.JPanel {
         });
 
         jbBajaNombre.setText("Baja por Nombre");
+        jbBajaNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaNombreActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -434,8 +439,26 @@ public class JPGPeliculas extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbBajaPeliIDActionPerformed
 
     private void jbBajaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaIDActionPerformed
-        // TODO add your handling code here:
+        int idPelicula;
+        String comodin;
+        comodin = jcbBajaPeliID.getSelectedItem().toString();
+        idPelicula = Integer.parseInt(comodin);
+        try {
+            miPelicula.borrarPeliculaID(idPelicula);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbBajaIDActionPerformed
+
+    private void jbBajaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaNombreActionPerformed
+        String nombrePelicula;
+        nombrePelicula = (String) jcbBajaPeliNom.getSelectedItem();
+        try {
+            miPelicula.borrarPeliculaNombre(nombrePelicula);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbBajaNombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
