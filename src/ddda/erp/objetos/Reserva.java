@@ -101,6 +101,7 @@ public class Reserva {
     }
 
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Para crear la reserva hay que pasarle el idPelicula, idSesion y el
      * idButaca.
@@ -111,9 +112,9 @@ public class Reserva {
      * @throws SQLException
      */
     public void crearReserva(int _idPelicula, int _idSesion, int _idButaca) throws SQLException {
-        bd.actualizarTabla("insert into reserva values(null, '"
-                + idPelicula + "', '"
-                + idSesion + "', '"
+        bd.actualizarTabla("insert into reserva values(null, "
+                + idPelicula + ", "
+                + idSesion + ", "
                 + idButaca + ")");
     }
 
@@ -139,6 +140,7 @@ public class Reserva {
 
     /**
      * Muestra todas las reservas que hay en la base de datos.
+     *
      * @param listaReservas
      * @return
      * @throws SQLException
@@ -162,16 +164,27 @@ public class Reserva {
         return listaReservas;
     }
 
-    
+    /**
+     * Modifica las reservas en funcion a un idReserva.
+     *
+     * @throws SQLException
+     */
     public void modificarReserva() throws SQLException {
         bd.actualizarTabla("Update reserva set "
-                + "idPelicula = '"+ idPelicula + "', "
-                + "idSesion = '" + idSesion + "',"
-                + " idButaca = '"+ idButaca +  " "+ "where idReserva = " + idReserva);
+                + "idPelicula = " + idPelicula + ", "
+                + "idSesion = " + idSesion + ","
+                + " idButaca = " + idButaca
+                + "where idReserva = " + idReserva);
     }
 
-    public void borrarCineID(int _idCine) throws SQLException {
-        bd.actualizarTabla("Delete from cine where idCine = " + _idCine);
+    /**
+     * Borra una reserva segun idReserva.
+     *
+     * @param _idReserva
+     * @throws SQLException
+     */
+    public void borrarReservaID(int _idReserva) throws SQLException {
+        bd.actualizarTabla("Delete from reserva where idReserva = " + _idReserva);
     }
     // </editor-fold>
 
