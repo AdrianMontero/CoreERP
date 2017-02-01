@@ -71,15 +71,24 @@
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jbCrearCine" min="-2" pref="107" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jtfNombreCine" max="32767" attributes="0"/>
-                              <Component id="jtfCif" max="32767" attributes="0"/>
-                              <Component id="jtfDireccion" max="32767" attributes="0"/>
-                              <Component id="jtfPoblacion" max="32767" attributes="0"/>
-                              <Component id="jtfCp" alignment="0" pref="116" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jtfNombreCine" max="32767" attributes="0"/>
+                                  <Component id="jtfCif" max="32767" attributes="0"/>
+                                  <Component id="jtfDireccion" max="32767" attributes="0"/>
+                                  <Component id="jtfPoblacion" max="32767" attributes="0"/>
+                                  <Component id="jtfCp" alignment="0" pref="116" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbCrearSala" pref="110" max="32767" attributes="0"/>
+                                  <Component id="jcbIdCineCrearSalas" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="187" max="32767" attributes="0"/>
+                      <EmptySpace pref="45" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -90,13 +99,16 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfNombreCine" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbIdCineCrearSalas" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfCif" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbCrearSala" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jtfDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,7 +125,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="jbCrearCine" min="-2" pref="31" max="-2" attributes="0"/>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace pref="76" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -162,6 +174,29 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jtfCp">
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel15">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="IdCine:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jcbIdCineCrearSalas">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbCrearSala">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear Salas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCrearSalaActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -177,16 +212,21 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jbBajaCine" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Component id="jcbBajaCine" min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jbBajaSalas" pref="100" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jbBajaCine" pref="100" max="32767" attributes="0"/>
+                              <Component id="jcbBajaCine" max="32767" attributes="0"/>
+                              <Component id="jcbBajaSalas" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="191" max="32767" attributes="0"/>
+                      <EmptySpace pref="224" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -198,9 +238,16 @@
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jcbBajaCine" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jbBajaCine" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbBajaSalas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jbBajaSalas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="171" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -226,6 +273,29 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Id Cine:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jcbBajaSalas">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbBajaSalas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Baja Salas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBajaSalasActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -385,7 +455,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="159" max="32767" attributes="0"/>
+                      <EmptySpace pref="210" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

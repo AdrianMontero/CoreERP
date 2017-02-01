@@ -52,7 +52,7 @@ public class Csalasbutacas {
         }
     }
     
-    public void borrarSalasButacas(String _idCine) throws SQLException {
+    public void borrarSalasButacas(int _idCine) throws SQLException {
         int idSala = 0;
         
         bd.consultarTabla("select idSala from sala where idCine = " + _idCine);

@@ -7,6 +7,7 @@ package ddda.erp.gui;
 
 import ddda.erp.core.CoreBD;
 import ddda.erp.objetos.Cine;
+import ddda.erp.objetos.Csalasbutacas;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
     ArrayList<Cine> misCines = new ArrayList();
     Cine miCine;
+    Csalasbutacas csb;
 
     /**
      * Creates new form JPGCinesAdmin
@@ -35,6 +37,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                 miCine = (Cine) misCines.get(i);
                 stringId = String.valueOf(miCine.getIdCine());
                 System.out.println(stringId);
+                jcbIdCineCrearSalas.addItem(stringId);
                 jcbBajaCine.addItem(stringId);
                 jcbConsultaCine.addItem(stringId);
                 jcbModCine.addItem(stringId);
@@ -67,10 +70,16 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         jbCrearCine = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jtfCp = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jcbIdCineCrearSalas = new javax.swing.JComboBox<>();
+        jbCrearSala = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jbBajaCine = new javax.swing.JButton();
         jcbBajaCine = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        jcbBajaSalas = new javax.swing.JComboBox<>();
+        jbBajaSalas = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jcbConsultaCine = new javax.swing.JComboBox<>();
@@ -122,6 +131,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
         jLabel5.setText("C.P:");
 
+        jLabel15.setText("IdCine:");
+
+        jbCrearSala.setText("Crear Salas");
+        jbCrearSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearSalaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,13 +155,20 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbCrearCine, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jtfNombreCine)
-                        .addComponent(jtfCif)
-                        .addComponent(jtfDireccion)
-                        .addComponent(jtfPoblacion)
-                        .addComponent(jtfCp, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
-                .addContainerGap(187, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfNombreCine)
+                            .addComponent(jtfCif)
+                            .addComponent(jtfDireccion)
+                            .addComponent(jtfPoblacion)
+                            .addComponent(jtfCp, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbCrearSala, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(jcbIdCineCrearSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,12 +176,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtfNombreCine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfNombreCine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jcbIdCineCrearSalas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtfCif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                    .addComponent(jtfCif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbCrearSala))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -170,7 +198,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                     .addComponent(jtfCp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(jbCrearCine, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alta Cine", jPanel1);
@@ -190,6 +218,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             }
         });
 
+        jLabel16.setText("Id Cine:");
+
+        jbBajaSalas.setText("Baja Salas");
+        jbBajaSalas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaSalasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -197,12 +234,16 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbBajaCine, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(44, 44, 44)
-                        .addComponent(jcbBajaCine, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel16))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbBajaSalas, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jbBajaCine, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(jcbBajaCine, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcbBajaSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,9 +252,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jcbBajaCine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(28, 28, 28)
                 .addComponent(jbBajaCine)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jcbBajaSalas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jbBajaSalas)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Baja Cine", jPanel2);
@@ -346,7 +393,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
                         .addGroup(jPanel5Layout.createSequentialGroup()
                             .addGap(117, 117, 117)
                             .addComponent(jbModCine, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,6 +532,32 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jbConsNomCineActionPerformed
 
+    private void jbCrearSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearSalaActionPerformed
+        // TODO add your handling code here:
+        int idCine;
+        String comodin;
+        comodin = jcbIdCineCrearSalas.getSelectedItem().toString();
+        idCine = Integer.parseInt(comodin);
+        try {
+            csb.crearSalasButacas(idCine);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCrearSalaActionPerformed
+
+    private void jbBajaSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaSalasActionPerformed
+        // TODO add your handling code here:
+        int idCine;
+        String comodin;
+        comodin = jcbBajaSalas.getSelectedItem().toString();
+        idCine = Integer.parseInt(comodin);
+        try {
+            csb.borrarSalasButacas(idCine);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbBajaSalasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -493,6 +566,8 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -509,11 +584,15 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbBajaCine;
+    private javax.swing.JButton jbBajaSalas;
     private javax.swing.JButton jbConsNomCine;
     private javax.swing.JButton jbCrearCine;
+    private javax.swing.JButton jbCrearSala;
     private javax.swing.JButton jbModCine;
     private javax.swing.JComboBox<String> jcbBajaCine;
+    private javax.swing.JComboBox<String> jcbBajaSalas;
     private javax.swing.JComboBox<String> jcbConsultaCine;
+    private javax.swing.JComboBox<String> jcbIdCineCrearSalas;
     private javax.swing.JComboBox<String> jcbModCine;
     private javax.swing.JTable jtConsultaCine;
     private javax.swing.JTextField jtfCif;
