@@ -172,7 +172,7 @@ public class Cliente {
      * @param _cliente Objeto cliente con todos los datos menos el ID
      * @throws SQLException Error al intentar crear el objeto en la BD
      */
-    public void crearCliente(Cliente _cliente) throws SQLException {
+    public void crearCliente() throws SQLException {
         bd.actualizarTabla("Insert into cliente values(null, '"
                 + dni+ "', '" 
                 + nombre + "', '" 
@@ -205,7 +205,7 @@ public class Cliente {
                     miCliente.setCp(res.getInt("cp_cli"));
                     miCliente.setPuntos(res.getInt("puntos_cli"));
                     miCliente.setUsuario(res.getString("usuario_cli"));
-                    miCliente.setContrasena(res.getString("contraseña_cli"));
+                    miCliente.setContrasena(res.getString("contrasena_cli"));
             
             listaClientes.add(miCliente);
             
@@ -267,7 +267,7 @@ public class Cliente {
     }
 
     /**
-     * Modifica un cliente antoguo con sus datos nuevos
+     * Modifica un cliente antiguo con sus datos nuevos
      *
      * @param _cliente Objeto cliente con todos los datos necesarios para el
      * update, incluido el ID.

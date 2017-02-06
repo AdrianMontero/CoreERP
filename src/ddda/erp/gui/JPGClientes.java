@@ -5,17 +5,38 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Cliente;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Daniel
  */
 public class JPGClientes extends javax.swing.JPanel {
-
+    ArrayList<Cliente> misClientes = new ArrayList();
+    Cliente miCliente;
     /**
      * Creates new form JPGClientes
      */
     public JPGClientes() {
         initComponents();
+        String stringId;
+        try {
+            Cliente.mostrarClientes(misClientes);
+            for (int i = 0; i < misClientes.size(); i++) {
+                miCliente = (Cliente) misClientes.get(i);
+                stringId = String.valueOf(miCliente.getIdCliente());
+                System.out.println(stringId);
+                jcbBajaCli.addItem(stringId);
+                jcbConsultaIdCli.addItem(stringId);
+                jcbModCli.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -89,6 +110,11 @@ public class JPGClientes extends javax.swing.JPanel {
         jLabel7.setText("Puntos:");
 
         jbAltaCliente.setText("Crear Cliente");
+        jbAltaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAltaClienteActionPerformed(evt);
+            }
+        });
 
         jtfCPCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,8 +192,6 @@ public class JPGClientes extends javax.swing.JPanel {
 
         jLabel8.setText("ID Cliente:");
 
-        jcbBajaCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbBajaCliente.setText("Baja Cliente");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -198,8 +222,6 @@ public class JPGClientes extends javax.swing.JPanel {
         jTabbedPane1.addTab("Baja Cliente", jPanel2);
 
         jLabel9.setText("ID Cliente:");
-
-        jcbConsultaIdCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbConsCli.setText("Consulta ID");
 
@@ -286,8 +308,6 @@ public class JPGClientes extends javax.swing.JPanel {
 
         jLabel17.setText("Puntos:");
 
-        jcbModCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbModCliente.setText("Modificar Cliente");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -369,6 +389,23 @@ public class JPGClientes extends javax.swing.JPanel {
     private void jtfCPCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCPCliActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCPCliActionPerformed
+
+    private void jbAltaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAltaClienteActionPerformed
+        String nombre = jtfNomCli.getText();
+        String apellido = jtfApeCli.getText();
+        String dni = jtfDniCli.getText();
+        int cp = Integer.parseInt(jtfCPCli.getText());
+        String usuario = jtfUsuarioCli.getText();
+        String contrasena = jtfPassCli.getText();
+        int puntos = (int) jspPuntosCli.getValue();
+        
+        Cliente elCliente = new Cliente(dni, nombre, apellido, cp, puntos, usuario, contrasena);
+        try {
+            elCliente.crearCliente();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbAltaClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
