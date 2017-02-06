@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -97,6 +98,8 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtConsultaEmp = new javax.swing.JTable();
         jcbConsultaEmpleado = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jtfNombreEmpConsultaAdmin = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jcbBajaEmp = new javax.swing.JComboBox<>();
@@ -289,7 +292,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jcbModificarIdCineEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(0, 0, Short.MAX_VALUE))))))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,12 +334,15 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
 
         jLabel15.setText("Id Empleado:");
 
+        jcbConsultaEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbConsultaEmpActionPerformed(evt);
+            }
+        });
+
         jtConsultaEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Apellido", "Cargo", "Id Cine", "DNI", "Nombre Usuario"
@@ -352,12 +358,14 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jtConsultaEmp);
 
-        jcbConsultaEmpleado.setText("Consultar");
+        jcbConsultaEmpleado.setText("Consultar por Nombre");
         jcbConsultaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbConsultaEmpleadoActionPerformed(evt);
             }
         });
+
+        jLabel18.setText("Nombre Empleado:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -367,27 +375,34 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel15))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbConsultaEmp, 0, 143, Short.MAX_VALUE)
+                            .addComponent(jtfNombreEmpConsultaAdmin))
+                        .addGap(47, 47, 47)
+                        .addComponent(jcbConsultaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbConsultaEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbConsultaEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jcbConsultaEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbConsultaEmpleado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jcbConsultaEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbConsultaEmpleado)
+                    .addComponent(jLabel18)
+                    .addComponent(jtfNombreEmpConsultaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Empleado", jPanel3);
@@ -412,7 +427,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jcbEliminarEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(jcbBajaEmp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,8 +513,41 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbEliminarEmpActionPerformed
 
     private void jcbConsultaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaEmpleadoActionPerformed
-        // TODO add your handling code here:
+        String nombre = null;
+        String apellido = null;
+        String cargo = null;
+        int idCine = 0;
+        String dni = null;
+        String nombreUsuario = null;
+        try {
+            Empleado.mostrarEmpleados(misEmpleados);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misEmpleados.size(); i++) {
+            miEmpleado = misEmpleados.get(i);
+            if (miEmpleado.getNombre().equals(jtfNombreEmpConsultaAdmin.getText()) == true) {
+                nombre = miEmpleado.getNombre();
+                apellido = miEmpleado.getApellido();
+                cargo = miEmpleado.getCargo();
+                idCine = miEmpleado.getIdCine();
+                dni = miEmpleado.getDni();
+                nombreUsuario = miEmpleado.getUsuario();
+            }
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jtConsultaEmp.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) nombre, (String) apellido, (String) cargo, (Integer) idCine, (String) dni, (String) nombreUsuario});
+
     }//GEN-LAST:event_jcbConsultaEmpleadoActionPerformed
+
+    private void jcbConsultaEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaEmpActionPerformed
+        int empleadoBuscado;
+        empleadoBuscado = jcbConsultaEmp.getSelectedIndex();
+        miEmpleado = misEmpleados.get(empleadoBuscado);
+        jtfNombreEmpConsultaAdmin.setText(miEmpleado.getNombre());
+    }//GEN-LAST:event_jcbConsultaEmpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -512,6 +560,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -547,6 +596,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
     private javax.swing.JTextField jtfModificarNomEmp;
     private javax.swing.JTextField jtfModificarNomUsuEmp;
     private javax.swing.JTextField jtfNomUsuarioEmpleado;
+    private javax.swing.JTextField jtfNombreEmpConsultaAdmin;
     private javax.swing.JTextField jtfNombreEmpleado;
     // End of variables declaration//GEN-END:variables
 }

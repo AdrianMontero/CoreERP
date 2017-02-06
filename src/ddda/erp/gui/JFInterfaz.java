@@ -18,10 +18,11 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class JFInterfaz extends javax.swing.JFrame {
 
-//    JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
-//    JPGPeliculas jpgp = new JPGPeliculas();//Peliculas
-//    JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
+    JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
+    JPGPeliculas jpgp = new JPGPeliculas();//Peliculas
+    JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
     JPGEmpAdmin jpgea = new JPGEmpAdmin(); //Empleado Administrador
+    JPGEmpleadoEmp jpgee = new JPGEmpleadoEmp();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     /**
@@ -32,7 +33,8 @@ public class JFInterfaz extends javax.swing.JFrame {
 //        this.getContentPane().add(jpgce);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgp);//Peliculas
-        this.getContentPane().add(jpgea);//Empleado Administrador
+//        this.getContentPane().add(jpgea);//Empleado Administrador
+        this.getContentPane().add(jpgee);//Empleado Administrador
         this.setVisible(true);
         this.setBounds(0, 0, screenSize.width, screenSize.height);
         this.setResizable(false);
