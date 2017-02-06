@@ -16,10 +16,10 @@ import java.util.ArrayList;
  */
 public class CuerpoPedido {
     
-    //Metodos para interactuar con la BD.
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+     //Metodos para interactuar con la BD
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
     
     //Atributos.
     private int idPedido;
@@ -65,6 +65,12 @@ public class CuerpoPedido {
     
     // <editor-fold defaultstate="collapsed" desc="Constructor">
     /**
+     * Constructor vacio.
+     */
+    public CuerpoPedido() { 
+    }
+    
+    /**
     * Creamos un cuerpo de pedido desde 0, con un ID asociado, este metodo no es apto para
      * introducir cuerpos de pedido en la BBDD ya que la base de datos asigna un ID
      * automaticamente, es para recibir datos de la BD
@@ -104,12 +110,12 @@ public class CuerpoPedido {
      * @param _cPedido Ojeto de tipo pedido.
      * @throws SQLException 
      */
-    public void crearCuerpoPedido(CuerpoPedido _cPedido) throws SQLException {
-        bd.actualizarTabla("Insert into cuerpo_pedido values(null, '"
-                + _cPedido.idPedido + "', '"
-                + _cPedido.idProducto + "', '"
-                + _cPedido.descripcion_cup + "', '"
-                + _cPedido.cantidad_cup +")");
+    public void crearCuerpoPedido() throws SQLException {
+        bd.actualizarTabla("Insert into cuerpo_pedido values(null, "
+                + idPedido + ","
+                + idProducto + ", '"
+                + descripcion_cup + "',"
+                + cantidad_cup +")");
     }
 
    /**
@@ -118,19 +124,21 @@ public class CuerpoPedido {
     * @return Devuelve todos los pedidos.
     * @throws SQLException error al mostrar el pedido.
     */
-    public ArrayList<CuerpoPedido> mostrarCuerpoPedido() throws SQLException {
-        CuerpoPedido miCuerpoPedido;
-        ArrayList<CuerpoPedido> misCuerposDePedido = new ArrayList();
-        rs = bd.consultarTabla("Select * from empleado");
+    public static ArrayList<CuerpoPedido> mostrarCuerpoPedido(ArrayList listaCuerpos) throws SQLException {
+        ResultSet res;
+        CuerpoPedido miCuerpoPedido = new CuerpoPedido();
+        res = bd.consultarTabla("Select * from cuerpo_pedido");
+        listaCuerpos.clear();
         while (rs.next()) {
-            miCuerpoPedido = new CuerpoPedido(
-                    rs.getInt("idPedido"),
-                    rs.getInt("idProducto"),
-                    rs.getString("descripcion_cup"),
-                    rs.getInt("cantidad_cup"));
-            misCuerposDePedido.add(miCuerpoPedido);
+            miCuerpoPedido = new CuerpoPedido();
+                miCuerpoPedido.setIdPedido(res.getInt("idPedido"));
+                miCuerpoPedido.setIdProducto(res.getInt("idProducto"));
+                miCuerpoPedido.setDescripcion_cup(res.getString("descripcion_cup"));
+                miCuerpoPedido.setCantidad_cup(res.getInt("cantidad_cup"));
+            listaCuerpos.add(miCuerpoPedido);    
+            
         }
-        return misCuerposDePedido;
+        return listaCuerpos;
     }
 
     /**
@@ -140,14 +148,14 @@ public class CuerpoPedido {
      * @throws SQLException 
      */
     public CuerpoPedido mostrarCuerpoPedidoID(int _idCuerpoPedido) throws SQLException {
-        CuerpoPedido miCuerpoPedido = null;
+        CuerpoPedido miCuerpoPedido = new CuerpoPedido();
         rs = bd.consultarTabla("Select * from cuerpo_pedido where idPedido =" + _idCuerpoPedido);
         while (rs.next()) {
             miCuerpoPedido = new CuerpoPedido(
                    rs.getInt("idPedido"),
-                    rs.getInt("idProducto"),
-                    rs.getString("descripcion_cup"),
-                    rs.getInt("cantidad_cup"));
+                   rs.getInt("idProducto"),
+                   rs.getString("descripcion_cup"),
+                   rs.getInt("cantidad_cup"));
         }
         return miCuerpoPedido;
 
