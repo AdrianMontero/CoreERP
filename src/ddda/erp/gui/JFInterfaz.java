@@ -5,16 +5,24 @@
  */
 package ddda.erp.gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author Daniel
  */
 public class JFInterfaz extends javax.swing.JFrame {
 
-    JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
-    JPGPeliculas jpgp = new JPGPeliculas();//Peliculas
-    JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
+//    JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
+//    JPGPeliculas jpgp = new JPGPeliculas();//Peliculas
+//    JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
     JPGEmpAdmin jpgea = new JPGEmpAdmin(); //Empleado Administrador
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     /**
      * Creates new form JFInterfaz
@@ -26,6 +34,9 @@ public class JFInterfaz extends javax.swing.JFrame {
 //        this.getContentPane().add(jpgp);//Peliculas
         this.getContentPane().add(jpgea);//Empleado Administrador
         this.setVisible(true);
+        this.setBounds(0, 0, screenSize.width, screenSize.height);
+        this.setResizable(false);
+
     }
 
     /**
@@ -68,7 +79,16 @@ public class JFInterfaz extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFInterfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+        } catch (ClassNotFoundException ex) {
+        } catch (InstantiationException ex) {
+            Logger.getLogger(JFInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(JFInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(JFInterfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

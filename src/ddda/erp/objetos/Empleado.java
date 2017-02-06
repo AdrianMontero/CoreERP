@@ -189,7 +189,6 @@ public class Empleado {
      */
     public static ArrayList<Empleado> mostrarEmpleados(ArrayList ListaEmpleado) throws SQLException {
         Empleado miEmpleado;
-        ArrayList<Empleado> misEmpleados = new ArrayList();
         rs = bd.consultarTabla("Select * from empleado");
         while (rs.next()) {
             miEmpleado = new Empleado();
@@ -202,9 +201,9 @@ public class Empleado {
             miEmpleado.setUsuario(rs.getString("usuario_emp"));
             miEmpleado.setContrasena(rs.getString("contrasena_emp"));
             miEmpleado.setIdCine(rs.getInt("idCine"));
-            misEmpleados.add(miEmpleado);
+            ListaEmpleado.add(miEmpleado);
         }
-        return misEmpleados;
+        return ListaEmpleado;
     }
 
     /**
@@ -266,7 +265,7 @@ public class Empleado {
      * @throws SQLException Error al cargar la BD
      */
     public void borrarEmpleadoID(int _idEmpleado) throws SQLException {
-        bd.actualizarTabla("Delete * from empleado where idEmpleado =" + _idEmpleado);
+        bd.actualizarTabla("Delete from empleado where idEmpleado =" + _idEmpleado);
     }
 
     /**
@@ -276,17 +275,17 @@ public class Empleado {
      * que estar todos para que el metodo funcione, incluido el id)
      * @throws SQLException Error al cargar la BD
      */
-    public void modificarEmpleado(Empleado _empleado) throws SQLException {
+    public void modificarEmpleado() throws SQLException {
         bd.actualizarTabla("Update empleado set "
-                + "dni_emp='" + _empleado.dni
-                + "',nombre_emp='" + _empleado.nombre
-                + "',apellidos_emp='" + _empleado.apellido
-                + "',fechaInicio_emp='" + _empleado.fechaInicio
-                + "',cargo_emp='" + _empleado.cargo
-                + "',usuario_emp='" + _empleado.usuario
-                + "',contrasena_emp='" + _empleado.contrasena
-                + "',idCine=" + _empleado.getIdCine()
-                + "where idEmpleado =" + _empleado.idEmpleado);
+                + "dni_emp='" + dni
+                + "',nombre_emp='" + nombre
+                + "',apellidos_emp='" + apellido
+                + "',fechaInicio_emp='" + fechaInicio
+                + "',cargo_emp='" + cargo
+                + "',usuario_emp='" + usuario
+                + "',contrasena_emp='" + contrasena
+                + "',idCine=" + getIdCine()
+                + "where idEmpleado =" + idEmpleado);
     }
     // </editor-fold>
 }

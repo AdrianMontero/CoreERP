@@ -28,30 +28,19 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
     public JPGEmpAdmin() {
         initComponents();
         String stringId;
-
+        String stringIdCine;
         try {
             Empleado.mostrarEmpleados(misEmpleados);
             for (int i = 0; i < misEmpleados.size(); i++) {
                 miEmpleado = (Empleado) misEmpleados.get(i);
-                stringId = String.valueOf(miEmpleado.getIdCine());
+                stringId = String.valueOf(miEmpleado.getIdEmpleado());
+                stringIdCine = String.valueOf(miEmpleado.getIdCine());
                 System.out.println(stringId);
                 jcbIdEmpleado.addItem(stringId);
                 jcbConsultaEmp.addItem(stringId);
                 jcbBajaEmp.addItem(stringId);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String stringIdCine;
-
-        try {
-            Cine.mostrarCines(misCines);
-            for (int i = 0; i < misCines.size(); i++) {
-                miCine = (Cine) misCines.get(i);
-                stringId = String.valueOf(miCine.getIdCine());
-                System.out.println(stringId);
-                jcbIdCineAltaEmpleado.addItem(stringId);
-                jcbModificarIdCineEmp.addItem(stringId);
+                jcbIdCineAltaEmpleado.addItem(stringIdCine);
+                jcbModificarIdCineEmp.addItem(stringIdCine);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -231,7 +220,11 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
 
         jLabel8.setText("Id Empleado:");
 
-        jcbIdEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbIdEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbIdEmpleadoActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Nombre:");
 
@@ -247,9 +240,12 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
 
         jLabel14.setText("Nombre de Usuario:");
 
-        jcbModificarIdCineEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbModificarEmp.setText("Modificar");
+        jbModificarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarEmpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -278,9 +274,9 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(78, 78, 78)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbModificarCargoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfModificarDniEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfModificarDniEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(jcbModificarCargoEmp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
@@ -335,8 +331,6 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
 
         jLabel15.setText("Id Empleado:");
 
-        jcbConsultaEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jtConsultaEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -359,6 +353,11 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtConsultaEmp);
 
         jcbConsultaEmpleado.setText("Consultar");
+        jcbConsultaEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbConsultaEmpleadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -395,9 +394,12 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
 
         jLabel16.setText("Id Empleado:");
 
-        jcbBajaEmp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jcbEliminarEmp.setText("Eliminar Empleado");
+        jcbEliminarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEliminarEmpActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -455,6 +457,49 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbCrearEmpleadoActionPerformed
+
+    private void jbModificarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarEmpActionPerformed
+        miEmpleado.setIdEmpleado(Integer.parseInt((String) jcbIdEmpleado.getSelectedItem()));
+        miEmpleado.setNombre(jtfModificarNomEmp.getText());
+        miEmpleado.setDni(jtfModificarDniEmp.getText());
+        miEmpleado.setCargo ((String) jcbModificarCargoEmp.getSelectedItem());
+        miEmpleado.setUsuario(jtfModificarNomUsuEmp.getText());
+        miEmpleado.setIdCine(Integer.parseInt((String) jcbModificarIdCineEmp.getSelectedItem()));
+        try {
+            miEmpleado.modificarEmpleado();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbModificarEmpActionPerformed
+
+    private void jcbIdEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbIdEmpleadoActionPerformed
+        int empleadoBuscado;
+        empleadoBuscado = jcbIdEmpleado.getSelectedIndex();
+        miEmpleado = misEmpleados.get(empleadoBuscado);
+        jtfModificarNomEmp.setText(miEmpleado.getNombre());
+        jtfModificarApeEmp.setText(miEmpleado.getApellido());
+        jtfModificarDniEmp.setText(miEmpleado.getDni());
+        jtfModificarNomUsuEmp.setText(miEmpleado.getUsuario());
+        jcbModificarCargoEmp.setSelectedItem(miEmpleado.getCargo());
+        jcbModificarIdCineEmp.setSelectedItem(String.valueOf(miEmpleado.getIdCine()));
+        
+    }//GEN-LAST:event_jcbIdEmpleadoActionPerformed
+
+    private void jcbEliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEliminarEmpActionPerformed
+        int idEmpleado;
+        String comodin;
+        comodin = jcbBajaEmp.getSelectedItem().toString();
+        idEmpleado = Integer.parseInt(comodin);
+        try {
+            miEmpleado.borrarEmpleadoID(idEmpleado);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbEliminarEmpActionPerformed
+
+    private void jcbConsultaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbConsultaEmpleadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
