@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -72,12 +73,14 @@ public class JPGClientes extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jcbConsultaIdCli = new javax.swing.JComboBox<>();
-        jbConsCli = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jcbConsultaNomCli = new javax.swing.JComboBox<>();
         jbConsultaNomCli = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaConsultaCli = new javax.swing.JTable();
+        jtfNombreClienteConsulta = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jtfDniClienteConsulta = new javax.swing.JTextField();
+        jbConsultaCliDni = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -193,6 +196,11 @@ public class JPGClientes extends javax.swing.JPanel {
         jLabel8.setText("ID Cliente:");
 
         jbBajaCliente.setText("Baja Cliente");
+        jbBajaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBajaClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -223,20 +231,24 @@ public class JPGClientes extends javax.swing.JPanel {
 
         jLabel9.setText("ID Cliente:");
 
-        jbConsCli.setText("Consulta ID");
+        jcbConsultaIdCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbConsultaIdCliActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Nombre Cliente:");
 
-        jcbConsultaNomCli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jbConsultaNomCli.setText("Consulta Nombre");
+        jbConsultaNomCli.setText("Consulta por Nombre");
+        jbConsultaNomCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultaNomCliActionPerformed(evt);
+            }
+        });
 
         jtaConsultaCli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "ID", "Apellidos", "DNI", "Puntos", "Nombre Usuario", "CodigoPostal"
@@ -252,44 +264,61 @@ public class JPGClientes extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jtaConsultaCli);
 
+        jLabel18.setText("DNI:");
+
+        jbConsultaCliDni.setText("Consulta por DNI");
+        jbConsultaCliDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultaCliDniActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel18))
                         .addGap(51, 51, 51)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbConsultaIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbConsultaNomCli, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbConsultaIdCli, 0, 120, Short.MAX_VALUE)
+                            .addComponent(jtfNombreClienteConsulta)
+                            .addComponent(jtfDniClienteConsulta))
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbConsultaNomCli)
-                            .addComponent(jbConsCli, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbConsultaNomCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbConsultaCliDni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jcbConsultaIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsCli))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jcbConsultaIdCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jcbConsultaNomCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultaNomCli))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                    .addComponent(jbConsultaNomCli)
+                    .addComponent(jtfNombreClienteConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jtfDniClienteConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbConsultaCliDni))
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Cliente", jPanel3);
@@ -308,7 +337,18 @@ public class JPGClientes extends javax.swing.JPanel {
 
         jLabel17.setText("Puntos:");
 
+        jcbModCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModCliActionPerformed(evt);
+            }
+        });
+
         jbModCliente.setText("Modificar Cliente");
+        jbModCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -407,6 +447,115 @@ public class JPGClientes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbAltaClienteActionPerformed
 
+    private void jbBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBajaClienteActionPerformed
+        int idCliente;
+        String comodin;
+        comodin = jcbBajaCli.getSelectedItem().toString();
+        idCliente = Integer.parseInt(comodin);
+        try {
+            miCliente.borrarClienteID(idCliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbBajaClienteActionPerformed
+
+    private void jcbConsultaIdCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaIdCliActionPerformed
+        int clienteBuscado;
+        clienteBuscado = jcbConsultaIdCli.getSelectedIndex();
+        miCliente = misClientes.get(clienteBuscado);
+        jtfNombreClienteConsulta.setText(miCliente.getNombre());
+        jtfDniClienteConsulta.setText(miCliente.getDni());
+    }//GEN-LAST:event_jcbConsultaIdCliActionPerformed
+
+    private void jbConsultaNomCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaNomCliActionPerformed
+        String nombre = null;
+        int id = 0;
+        String apellidos = null;
+        String dni = null;
+        int puntos = 0;
+        String nomUsuario = null;
+        int cp = 0;
+        try {
+            Cliente.mostrarClientes(misClientes);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misClientes.size(); i++) {
+            miCliente = misClientes.get(i);
+            if (miCliente.getNombre().equals(jtfNombreClienteConsulta.getText()) == true) {
+                nombre = miCliente.getNombre();
+                id = miCliente.getIdCliente();
+                apellidos = miCliente.getApellidos();
+                dni = miCliente.getDni();
+                puntos = miCliente.getPuntos();
+                nomUsuario = miCliente.getUsuario();
+                cp = miCliente.getCp();
+            }
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jtaConsultaCli.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) nombre, (Integer) id, (String) apellidos, (String) dni, (Integer) puntos, (String) nomUsuario, (Integer) cp});
+    }//GEN-LAST:event_jbConsultaNomCliActionPerformed
+
+    private void jbConsultaCliDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaCliDniActionPerformed
+        String nombre = null;
+        int id = 0;
+        String apellidos = null;
+        String dni = null;
+        int puntos = 0;
+        String nomUsuario = null;
+        int cp = 0;
+        try {
+            Cliente.mostrarClientes(misClientes);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misClientes.size(); i++) {
+            miCliente = misClientes.get(i);
+            if (miCliente.getDni().equals(jtfDniClienteConsulta.getText()) == true) {
+                nombre = miCliente.getNombre();
+                id = miCliente.getIdCliente();
+                apellidos = miCliente.getApellidos();
+                dni = miCliente.getDni();
+                puntos = miCliente.getPuntos();
+                nomUsuario = miCliente.getUsuario();
+                cp = miCliente.getCp();
+            }
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jtaConsultaCli.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) nombre, (Integer) id, (String) apellidos, (String) dni, (Integer) puntos, (String) nomUsuario, (Integer) cp});
+    }//GEN-LAST:event_jbConsultaCliDniActionPerformed
+
+    private void jcbModCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModCliActionPerformed
+        int clienteBuscado;
+        clienteBuscado = jcbModCli.getSelectedIndex();
+        miCliente = misClientes.get(clienteBuscado);
+        jtfModNombre.setText(miCliente.getNombre());
+        jtfModApellidos.setText(miCliente.getApellidos());
+        jtfModDni.setText(miCliente.getDni());
+        jtfModNomUsu.setText(miCliente.getUsuario());
+        jtfModCP.setText(String.valueOf(miCliente.getCp()));
+        jspModPuntos.setValue(miCliente.getPuntos());
+    }//GEN-LAST:event_jcbModCliActionPerformed
+
+    private void jbModClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModClienteActionPerformed
+        miCliente.setIdCliente(Integer.parseInt((String) jcbModCli.getSelectedItem()));
+        miCliente.setNombre(jtfModNombre.getText());
+        miCliente.setApellidos(jtfModApellidos.getText());
+        miCliente.setDni(jtfModDni.getText());
+        miCliente.setUsuario(jtfModNomUsu.getText());
+        miCliente.setCp(Integer.parseInt(jtfModCP.getText()));
+        miCliente.setPuntos((int) jspModPuntos.getValue());
+        try {
+            miCliente.modificarCliente();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbModClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -418,6 +567,7 @@ public class JPGClientes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -434,12 +584,11 @@ public class JPGClientes extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbAltaCliente;
     private javax.swing.JButton jbBajaCliente;
-    private javax.swing.JButton jbConsCli;
+    private javax.swing.JButton jbConsultaCliDni;
     private javax.swing.JButton jbConsultaNomCli;
     private javax.swing.JButton jbModCliente;
     private javax.swing.JComboBox<String> jcbBajaCli;
     private javax.swing.JComboBox<String> jcbConsultaIdCli;
-    private javax.swing.JComboBox<String> jcbConsultaNomCli;
     private javax.swing.JComboBox<String> jcbModCli;
     private javax.swing.JSpinner jspModPuntos;
     private javax.swing.JSpinner jspPuntosCli;
@@ -447,12 +596,14 @@ public class JPGClientes extends javax.swing.JPanel {
     private javax.swing.JTextField jtfApeCli;
     private javax.swing.JTextField jtfCPCli;
     private javax.swing.JTextField jtfDniCli;
+    private javax.swing.JTextField jtfDniClienteConsulta;
     private javax.swing.JTextField jtfModApellidos;
     private javax.swing.JTextField jtfModCP;
     private javax.swing.JTextField jtfModDni;
     private javax.swing.JTextField jtfModNomUsu;
     private javax.swing.JTextField jtfModNombre;
     private javax.swing.JTextField jtfNomCli;
+    private javax.swing.JTextField jtfNombreClienteConsulta;
     private javax.swing.JTextField jtfPassCli;
     private javax.swing.JTextField jtfUsuarioCli;
     // End of variables declaration//GEN-END:variables

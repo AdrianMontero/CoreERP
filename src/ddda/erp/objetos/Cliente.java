@@ -282,7 +282,7 @@ public class Cliente {
                 + "puntos_cli = " + puntos+ ", "
                 + "usuario_cli = '" + usuario+ "', "
                 + "contrasena_cli = '" + contrasena + "' "
-                        + "where idCliente = " + idCliente);
+                + "where idCliente = " + idCliente);
     }
     // </editor-fold>
 }
