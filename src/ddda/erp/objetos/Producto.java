@@ -45,7 +45,8 @@ public class Producto {
         this.nombre_prod = nombre_prod;
         this.stock_prod = stock_prod;
     }
-
+    public Producto(){
+    }
     /**
      * Constructor de producto sin idProducto para mostrar productos.
      *
@@ -63,7 +64,7 @@ public class Producto {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getters">
-
+    
     public int getIdProducto() {
         return idProducto;
     }
@@ -85,6 +86,27 @@ public class Producto {
         return stock_prod;
     }
 
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public void setDescripcion_prod(String descripcion_prod) {
+        this.descripcion_prod = descripcion_prod;
+    }
+
+    public void setPrecio_prod(int precio_prod) {
+        this.precio_prod = precio_prod;
+    }
+
+    public void setNombre_prod(String nombre_prod) {
+        this.nombre_prod = nombre_prod;
+    }
+
+    public void setStock_prod(int stock_prod) {
+        this.stock_prod = stock_prod;
+    }
+    
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
@@ -95,7 +117,6 @@ public class Producto {
      */
     public void crearProducto(Producto _producto) throws SQLException {
         bd.actualizarTabla("Insert into empleado values(null, "
-                + _producto.idProducto + ", '"
                 + _producto.descripcion_prod + "', "
                 + _producto.precio_prod + ", '"
                 + _producto.nombre_prod + "', "
@@ -103,69 +124,25 @@ public class Producto {
     }
 
     /**
-     * Mostrar todos los productos.
      *
+     * @param listaPro Array donde recogeremos los datos.
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD.
      */
-    public ArrayList<Producto> mostrarProductos() throws SQLException {
-        Producto miProducto;
-        ArrayList<Producto> misProductos = new ArrayList();
-        rs = bd.consultarTabla("Select * from producto");
+    public ArrayList<Producto> mostrarProducto(ArrayList listaPro) throws SQLException {
+        ResultSet res;
+        Producto pro;
+        rs = bd.consultarTabla("Select * from producto ");
+        listaPro.clear();
         while (rs.next()) {
-            miProducto = new Producto(
-                    rs.getInt("idProducto"),
-                    rs.getString("descipcion_pro"),
-                    rs.getInt("precio_pro"),
-                    rs.getString("nombre_pro"),
-                    rs.getInt("Stock_pro"));
-            misProductos.add(miProducto);
+            pro = new Producto();
+            pro.setNombre_prod(rs.getString("nombre_prod"));
+            pro.setIdProducto(rs.getInt("idProducto"));
+            pro.setPrecio_prod(rs.getInt("precio_prod"));
+            pro.setStock_prod(rs.getInt("Stock_prod"));
+            listaPro.add(pro);
         }
-        return misProductos;
-    }
-
-    /**
-     * Muestra los productos segun id.
-     *
-     * @param _idProducto Id del producto que vamos a buscar.
-     * @return Resultado de la busqueda.
-     * @throws SQLException Error al cargar la BD.
-     */
-    public Producto mostrarPoductoID(int _idProducto) throws SQLException {
-        Producto miProducto = null;
-        rs = bd.consultarTabla("Select * from producto where idProducto =" + _idProducto);
-        while (rs.next()) {
-            miProducto = new Producto(
-                    rs.getInt("idProducto"),
-                    rs.getString("descipcion_pro"),
-                    rs.getInt("precio_pro"),
-                    rs.getString("nombre_pro"),
-                    rs.getInt("Stock_pro"));
-        }
-        return miProducto;
-    }
-
-    /**
-     *
-     * @param _nombre Nombre del producto ue se va a buscar.
-     * @return Resultado de la busqueda.
-     * @throws SQLException Error al cargar la BD.
-     */
-    public ArrayList<Producto> mostrarProductoNombre(String _nombre) throws SQLException {
-        Producto miProducto;
-        ArrayList<Producto> misProductos = new ArrayList();
-        rs = bd.consultarTabla("Select * from producto where nombre_pro ='" + _nombre+"'");
-
-        while (rs.next()) {
-            miProducto = new Producto(
-                    rs.getInt("idProducto"),
-                    rs.getString("descipcion_pro"),
-                    rs.getInt("precio_pro"),
-                    rs.getString("nombre_pro"),
-                    rs.getInt("Stock_pro"));
-            misProductos.add(miProducto);
-        }
-        return misProductos;
+        return listaPro;
     }
 
     /**
@@ -184,13 +161,13 @@ public class Producto {
      * @param _producto Datos a modificar en el poducto.
      * @throws SQLException Error al cargar la BD.
      */
-    public void modificarProducto(Producto _producto) throws SQLException {
+    public void modificarProducto() throws SQLException {
         bd.actualizarTabla("Update producto set "
-                + "idProducto=" + _producto.idProducto
-                + ",descipcion_pro='" + _producto.descripcion_prod
-                + "',precio_pro=" + _producto.precio_prod
-                + ",nombre_pro='" + _producto.nombre_prod
-                + "',Stock_pro=" + _producto.stock_prod);
+                + "idProducto=" + idProducto
+                + ",descipcion_pro='" + descripcion_prod
+                + "',precio_pro=" + precio_prod
+                + ",nombre_pro='" + nombre_prod
+                + "',Stock_pro=" + stock_prod);
     }
 
     // </editor-fold>

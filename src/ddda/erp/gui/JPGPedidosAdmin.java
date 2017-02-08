@@ -72,6 +72,11 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         jbAddPedido.setText("Añadir Pedido");
 
         jbAddProducto.setText("Añadir Producto");
+        jbAddProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAddProductoActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -278,6 +283,11 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddProductoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jbAddProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
