@@ -19,11 +19,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class JFInterfaz extends javax.swing.JFrame {
 
     JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
-    JPGPeliculas jpgp = new JPGPeliculas();//Peliculas
+    JPGPeliculas jpgpeli = new JPGPeliculas();//Peliculas
     JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
     JPGEmpAdmin jpgea = new JPGEmpAdmin(); //Empleado Administrador
-    JPGEmpleadoEmp jpgee = new JPGEmpleadoEmp();
-    JPGClientes jpgc = new JPGClientes();
+    JPGEmpleadoEmp jpgee = new JPGEmpleadoEmp();//Empleado Empleado
+    JPGClientes jpgc = new JPGClientes();//Clientes
+    JPGProveedoresAdmin jpgproadmin = new JPGProveedoresAdmin();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     /**
@@ -33,10 +34,11 @@ public class JFInterfaz extends javax.swing.JFrame {
         initComponents();
 //        this.getContentPane().add(jpgce);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
-//        this.getContentPane().add(jpgp);//Peliculas
+//        this.getContentPane().add(jpgpeli);//Peliculas
 //        this.getContentPane().add(jpgea);//Empleado Administrador
 //        this.getContentPane().add(jpgee);//Empleado Empleado
-        this.getContentPane().add(jpgc);//Cliente
+//        this.getContentPane().add(jpgc);//Cliente
+        this.getContentPane().add(jpgproadmin);//Proveedor Administrador
         this.setVisible(true);
         this.setBounds(0, 0, screenSize.width, screenSize.height);
         this.setResizable(false);

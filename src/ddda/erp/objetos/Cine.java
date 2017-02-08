@@ -216,7 +216,6 @@ public class Cine {
             miCine.setCp(res.getInt("cp_cin"));
             listaCines.add(miCine);
         }
-        System.out.println("hola 6");
         return listaCines;
     }
 

@@ -5,12 +5,19 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Proveedor;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Daniel
  */
 public class JPGProveedoresAdmin extends javax.swing.JPanel {
-
+    ArrayList<Proveedor> misCines = new ArrayList();
+    Proveedor miProveedor;
     /**
      * Creates new form JPGProveedoresAdmin
      */
@@ -76,6 +83,11 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         jLabel5.setText("C.P:");
 
         jbCrearProAdmin.setText("Crear Proveedor");
+        jbCrearProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearProAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -319,6 +331,21 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCrearProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearProAdminActionPerformed
+        String nombre = jtfNombreProAdmin.getText();
+        String apellido = jtfApeProAdmin.getText();
+        String dni = jtfDniProAdmin.getText();
+        String poblacion = jtfPoblProAdmin.getText();
+        int cp = Integer.parseInt(jtfCpProAdmin.getText());
+
+        Proveedor elProveedor = new Proveedor(nombre, apellido, dni, poblacion, cp);
+        try {
+            elProveedor.crearProveedores();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCrearProAdminActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
