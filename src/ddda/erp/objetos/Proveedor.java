@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class Proveedor {
 
     //Metodos para interactuar con la BD.
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
 
     private int idProveedor;
     private String dni_prov;
@@ -152,7 +152,7 @@ public class Proveedor {
      * @return Resultado de la busqueda.
      * @throws SQLException SQLException Error al cargar la BD
      */
-    public ArrayList<Proveedor> mostrarProveedor(ArrayList listaProovedores) throws SQLException {
+    public static ArrayList<Proveedor> mostrarProveedor(ArrayList listaProovedores) throws SQLException {
         Proveedor miProveedor;
         rs = bd.consultarTabla("Select * from proveedor");
         listaProovedores.clear();
@@ -164,6 +164,7 @@ public class Proveedor {
             miProveedor.setApellidos_prov(rs.getString("apellidos_prov"));
             miProveedor.setPoblacion_prov(rs.getString("poblacion_prov"));
             miProveedor.setCp_prov(rs.getInt("cp_prov"));
+            listaProovedores.add(miProveedor);
         }
         return listaProovedores;
     }
@@ -232,13 +233,12 @@ public class Proveedor {
      * @throws SQLException SQLException Error al cargar la BD
      */
     public void modificarProveedor() throws SQLException {
-        bd.actualizarTabla("Update empleado set "
-                + idProveedor + ", '"
-                + dni_prov + "', '"
-                + nombre_prov + "', '"
-                + apellidos_prov + "', '"
-                + poblacion_prov + "',"
-                + cp_prov + ")");
+        bd.actualizarTabla("Update proveedor set nombre_prov = '"
+                + nombre_prov + "', dni_prov = '"
+                + dni_prov + "', apellidos_prov = '"
+                + apellidos_prov + "', poblacion_prov = '"
+                + poblacion_prov + "', cp_prov = "
+                + cp_prov + " where idProveedor = " + idProveedor);
     }
     // </editor-fold>
 

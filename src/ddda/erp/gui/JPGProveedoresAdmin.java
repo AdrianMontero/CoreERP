@@ -16,13 +16,28 @@ import java.util.logging.Logger;
  * @author Daniel
  */
 public class JPGProveedoresAdmin extends javax.swing.JPanel {
-    ArrayList<Proveedor> misCines = new ArrayList();
+    ArrayList<Proveedor> misProveedores = new ArrayList();
     Proveedor miProveedor;
     /**
      * Creates new form JPGProveedoresAdmin
      */
     public JPGProveedoresAdmin() {
         initComponents();
+        String stringId;
+
+        try {
+            Proveedor.mostrarProveedor(misProveedores);
+            for (int i = 0; i < misProveedores.size(); i++) {
+                miProveedor = (Proveedor) misProveedores.get(i);
+                stringId = String.valueOf(miProveedor.getIdProveedor());
+                System.out.println(stringId);
+                jcbModIdProAdmin.addItem(stringId);
+                jcbConsultaProAdmin.addItem(stringId);
+                jcbBajaProAdmin.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -149,7 +164,11 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
 
         jLabel6.setText("Id Proveedor:");
 
-        jcbModIdProAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbModIdProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModIdProAdminActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Nombre:");
 
@@ -162,6 +181,11 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         jLabel11.setText("C.P:");
 
         jbModProAdmin.setText("Modificar");
+        jbModProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModProAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,8 +251,6 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
 
         jLabel12.setText("Id Proveedor:");
 
-        jcbConsultaProAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbConsultarProAdmin.setText("Consultar");
 
         jtConsultaProAdmin.setModel(new javax.swing.table.DefaultTableModel(
@@ -285,8 +307,6 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         jTabbedPane1.addTab("Consulta Proveedor", jPanel3);
 
         jLabel13.setText("Id Proveedor:");
-
-        jcbBajaProAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbEliminarProAdmin.setText("Eliminar");
 
@@ -346,6 +366,31 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbCrearProAdminActionPerformed
+
+    private void jcbModIdProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModIdProAdminActionPerformed
+        int proveedorBuscado;
+        proveedorBuscado = jcbModIdProAdmin.getSelectedIndex();
+        miProveedor = misProveedores.get(proveedorBuscado);
+        jtfModNomProAdmin.setText(miProveedor.getNombre_prov());
+        jtfModApeProAdmin.setText(miProveedor.getApellidos_prov());
+        jtfModDniProAdmin.setText(miProveedor.getDni_prov());
+        jtfModPoblProAdmin.setText(miProveedor.getPoblacion_prov());
+        jtfModCpProAdmin.setText(String.valueOf(miProveedor.getCp_prov()));
+    }//GEN-LAST:event_jcbModIdProAdminActionPerformed
+
+    private void jbModProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModProAdminActionPerformed
+        miProveedor.setIdProveedor(Integer.parseInt((String) jcbModIdProAdmin.getSelectedItem()));
+        miProveedor.setNombre_prov(jtfModNomProAdmin.getText());
+        miProveedor.setApellidos_prov(jtfModApeProAdmin.getText());
+        miProveedor.setDni_prov(jtfModDniProAdmin.getText());
+        miProveedor.setPoblacion_prov(jtfModPoblProAdmin.getText());
+        miProveedor.setCp_prov(Integer.parseInt(jtfModCpProAdmin.getText()));
+        try {
+            miProveedor.modificarProveedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbModProAdminActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
