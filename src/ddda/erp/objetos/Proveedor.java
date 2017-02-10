@@ -102,9 +102,9 @@ public class Proveedor {
      */
     public Proveedor(int idProveedor, String dni_prov, String nombre_prov, String apellidos_prov, String poblacion_prov, int cp_prov) {
         this.idProveedor = idProveedor;
+        this.dni_prov = dni_prov;
         this.nombre_prov = nombre_prov;
         this.apellidos_prov = apellidos_prov;
-        this.dni_prov = dni_prov;
         this.poblacion_prov = poblacion_prov;
         this.cp_prov = cp_prov;
     }
@@ -139,9 +139,9 @@ public class Proveedor {
      */
     public void crearProveedores() throws SQLException {
         bd.actualizarTabla("Insert into proveedor values(null, '"
+                + dni_prov + "', '"
                 + nombre_prov + "', '"
                 + apellidos_prov + "', '"
-                + dni_prov + "', '"
                 + poblacion_prov + "', "
                 + cp_prov + ")");
     }
@@ -159,9 +159,9 @@ public class Proveedor {
         while (rs.next()) {
             miProveedor = new Proveedor();
             miProveedor.setIdProveedor(rs.getInt("idProveedor"));
-            miProveedor.setDni_prov(rs.getString("dni_prov"));
             miProveedor.setNombre_prov(rs.getString("nombre_prov"));
             miProveedor.setApellidos_prov(rs.getString("apellidos_prov"));
+            miProveedor.setDni_prov(rs.getString("dni_prov"));
             miProveedor.setPoblacion_prov(rs.getString("poblacion_prov"));
             miProveedor.setCp_prov(rs.getInt("cp_prov"));
             listaProovedores.add(miProveedor);
@@ -223,7 +223,7 @@ public class Proveedor {
      * @throws SQLException SQLException Error al cargar la BD
      */
     public void borrarProveedorID(int _idProveedor) throws SQLException {
-        bd.actualizarTabla("Delete from proveedor where idProveedror =" + _idProveedor);
+        bd.actualizarTabla("Delete from proveedor where idProveedor =" + _idProveedor);
     }
 
     /**
