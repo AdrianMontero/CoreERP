@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class Producto {
 
     //Metodos para interactuar con la BD.
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
 
     //Atributos del empleado.
     private int idProducto;
@@ -112,15 +112,14 @@ public class Producto {
     /**
      * Crear un nuevo producto.
      *
-     * @param _producto Datos del producto a crear.
      * @throws SQLException Error al cargar la BD.
      */
-    public void crearProducto(Producto _producto) throws SQLException {
-        bd.actualizarTabla("Insert into empleado values(null, "
-                + _producto.descripcion_prod + "', "
-                + _producto.precio_prod + ", '"
-                + _producto.nombre_prod + "', "
-                + _producto.stock_prod + ")");
+    public void crearProducto() throws SQLException {
+        bd.actualizarTabla("insert into producto values(null, '"
+                + descripcion_prod + "', "
+                + precio_prod + ", '"
+                + nombre_prod + "', "
+                + stock_prod + ")");
     }
 
     /**
@@ -129,7 +128,7 @@ public class Producto {
      * @return Resultado de la busqueda.
      * @throws SQLException Error al cargar la BD.
      */
-    public ArrayList<Producto> mostrarProducto(ArrayList listaPro) throws SQLException {
+    public static ArrayList<Producto> mostrarProducto(ArrayList listaPro) throws SQLException {
         ResultSet res;
         Producto pro;
         rs = bd.consultarTabla("Select * from producto ");
@@ -140,6 +139,7 @@ public class Producto {
             pro.setIdProducto(rs.getInt("idProducto"));
             pro.setPrecio_prod(rs.getInt("precio_prod"));
             pro.setStock_prod(rs.getInt("Stock_prod"));
+            pro.setDescripcion_prod(rs.getString("descripcion_prod"));
             listaPro.add(pro);
         }
         return listaPro;
@@ -152,7 +152,7 @@ public class Producto {
      * @throws SQLException Error al cargar la BD.
      */
     public void borrarProductoID(int _idProducto) throws SQLException {
-        bd.actualizarTabla("Delete * from producto where idProducto =" + _idProducto);
+        bd.actualizarTabla("Delete from producto where idProducto =" + _idProducto);
     }
 
     /**
