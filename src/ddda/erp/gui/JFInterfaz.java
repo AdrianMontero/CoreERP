@@ -24,8 +24,10 @@ public class JFInterfaz extends javax.swing.JFrame {
     JPGEmpAdmin jpgea = new JPGEmpAdmin(); //Empleado Administrador
     JPGEmpleadoEmp jpgee = new JPGEmpleadoEmp();//Empleado Empleado
     JPGClientes jpgc = new JPGClientes();//Clientes
-    JPGProveedoresAdmin jpgproadmin = new JPGProveedoresAdmin();
-    JPGProveedoresEmp jpgproemp = new JPGProveedoresEmp();
+    JPGProveedoresAdmin jpgproadmin = new JPGProveedoresAdmin();//Proveedor Administrador
+    JPGProveedoresEmp jpgproemp = new JPGProveedoresEmp();//Proveedor Empleado
+    JPGSesion jpgse = new JPGSesion();//Sesion
+    JPGPedidosAdmin jpgpedadmin = new JPGPedidosAdmin();//Sesion
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     /**
@@ -39,8 +41,10 @@ public class JFInterfaz extends javax.swing.JFrame {
 //        this.getContentPane().add(jpgea);//Empleado Administrador
 //        this.getContentPane().add(jpgee);//Empleado Empleado
 //        this.getContentPane().add(jpgc);//Cliente
-//        this.getContentPane().add(jpgproadmin);//Proveedor Administrador
-        this.getContentPane().add(jpgproemp);//Proveedor Empleado
+//        this.getContentPane().add(jpgproadmin);//Proveedor Administrador 
+//        this.getContentPane().add(jpgproemp);//Proveedor Empleado
+//        this.getContentPane().add(jpgse);//Sesion
+        this.getContentPane().add(jpgpedadmin);//Pedidos Administrador
         this.setVisible(true);
         this.setBounds(0, 0, screenSize.width, screenSize.height);
         this.setResizable(false);

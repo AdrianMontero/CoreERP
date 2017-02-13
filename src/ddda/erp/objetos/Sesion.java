@@ -27,6 +27,10 @@ public class Sesion {
     private int idSala;
     private int hora_ses;
 
+    public Sesion(String idPelicula, String idSala, int hora) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Getters">
     public int getIdSesion() {
         return idSesion;
@@ -88,7 +92,7 @@ public class Sesion {
      * @throws SQLException
      */
     public void crearSesion() throws SQLException {
-        bd.actualizarTabla("insert into sala values(null, '"
+        bd.actualizarTabla("insert into sesion_pelicula values(null, '"
                 + idPelicula + "', '"
                 + idSala + "', '"
                 + hora_ses + ")");
@@ -102,7 +106,7 @@ public class Sesion {
      */
     public Sesion mostrarSesionIdPelicula(int _idPelicula) throws SQLException {
         Sesion miSesion = new Sesion();
-        rs = bd.consultarTabla("select * from sesion where idSesion = " + _idPelicula);
+        rs = bd.consultarTabla("select * from sesion_pelicula where idSesion = " + _idPelicula);
         while (rs.next()) {
             miSesion.setIdSesion(rs.getInt("idSesion"));
             miSesion.setIdPelicula(rs.getInt("idPelicula"));
@@ -121,7 +125,7 @@ public class Sesion {
      */
     public Sesion mostrarSesionIdSesion(int _idSesion) throws SQLException {
         Sesion miSesion = new Sesion();
-        rs = bd.consultarTabla("select * from sesion where idSesion = " + _idSesion);
+        rs = bd.consultarTabla("select * from sesion_pelicula where idSesion = " + _idSesion);
         while (rs.next()) {
             miSesion.setIdSesion(rs.getInt("idSesion"));
             miSesion.setIdPelicula(rs.getInt("idPelicula"));
@@ -140,7 +144,7 @@ public class Sesion {
      */
     public Sesion mostrarSesionIdSala(int _idSala) throws SQLException {
         Sesion miSesion = new Sesion();
-        rs = bd.consultarTabla("select * from sesion where idSesion = " + _idSala);
+        rs = bd.consultarTabla("select * from sesion_pelicula where idSesion = " + _idSala);
         while (rs.next()) {
             miSesion.setIdSesion(rs.getInt("idSesion"));
             miSesion.setIdPelicula(rs.getInt("idPelicula"));
@@ -160,7 +164,7 @@ public class Sesion {
     public static ArrayList<Sesion> mostrarSesiones(ArrayList listaSesiones) throws SQLException {
         ResultSet res;
         Sesion miSesion = new Sesion();
-        res = bd.consultarTabla("select * from sesion");
+        res = bd.consultarTabla("select * from sesion_pelicula");
         listaSesiones.clear();
         while (res.next()) {
             miSesion = new Sesion();
@@ -181,7 +185,7 @@ public class Sesion {
      * @throws SQLException
      */
     public void modificarSesion() throws SQLException {
-        bd.actualizarTabla("Update sesion set "
+        bd.actualizarTabla("Update sesion_pelicula set "
                 + "idPelicula = '" + idPelicula + "', "
                 + "idSala = '" + idSala + "', "
                 + "hora_ses = '" + hora_ses + " "
@@ -195,7 +199,7 @@ public class Sesion {
      * @throws SQLException
      */
     public void borrarSesionID(int _idSala) throws SQLException {
-        bd.actualizarTabla("Delete from sesion where idCine = " + _idSala);
+        bd.actualizarTabla("Delete from sesion_pelicula where idCine = " + _idSala);
     }
     // </editor-fold>
 

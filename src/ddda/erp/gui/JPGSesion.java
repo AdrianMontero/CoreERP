@@ -5,17 +5,59 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Csalasbutacas;
+import ddda.erp.objetos.Pelicula;
+import ddda.erp.objetos.Sesion;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Daniel
  */
 public class JPGSesion extends javax.swing.JPanel {
-
+    ArrayList<Sesion> misSesiones = new ArrayList();
+    Sesion miSesion;
+    ArrayList<Pelicula> misPeliculas = new ArrayList();
+    Pelicula miPelicula;
+    ArrayList<Csalasbutacas> misSalas = new ArrayList();
+    Csalasbutacas miSala;
     /**
      * Creates new form JPGTurnos
      */
     public JPGSesion() {
         initComponents();
+        String stringIdSesion;
+        String stringIdSala;
+        String stringIdPelicula;
+        try {
+            Sesion.mostrarSesiones(misSesiones);
+            Pelicula.mostrarPeliculas(misPeliculas);
+            Csalasbutacas.mostrarSalas(misSalas);
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = (Sesion) misSesiones.get(i);
+                stringIdSesion = String.valueOf(miSesion.getIdSesion());
+                jcbIdSesionConsulta.addItem(stringIdSesion);
+                jcbModificarIdSesion.addItem(stringIdSesion);
+                jcbBajaIdSesion.addItem(stringIdSesion);
+            }
+            for (int i = 0; i < misPeliculas.size(); i++) {
+                miPelicula = (Pelicula) misPeliculas.get(i);
+                stringIdPelicula = String.valueOf(miPelicula.getIdPelicula());
+                jcbIdPeliculaCrearSesion.addItem(stringIdPelicula);
+                jcbIdPeliculaConsultaSesion.addItem(stringIdPelicula);
+            }
+            for (int i = 0; i < misSalas.size(); i++) {
+                miSala = (Csalasbutacas) misSalas.get(i);
+                stringIdSala = String.valueOf(miSala.getIdSala());
+                jcbIdSalaCrearSesion.addItem(stringIdSala);
+                jcbIdSalaSesionAlta.addItem(stringIdSala);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,14 +72,12 @@ public class JPGSesion extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jtfIdPeliculaSesionAlta = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jtfIdSesionAlta = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jtfHoraSesionAlta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtfIdSalaSesionAlta = new javax.swing.JTextField();
         jbCrearSesionAlta = new javax.swing.JButton();
+        jcbIdPeliculaCrearSesion = new javax.swing.JComboBox<>();
+        jcbIdSalaCrearSesion = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jcbIdSesionConsulta = new javax.swing.JComboBox<>();
@@ -67,13 +107,16 @@ public class JPGSesion extends javax.swing.JPanel {
 
         jLabel1.setText("Id Pelicula:");
 
-        jLabel2.setText("Id Sesion:");
-
         jLabel3.setText("Hora:");
 
         jLabel4.setText("Id Sala:");
 
         jbCrearSesionAlta.setText("Crear Sesion");
+        jbCrearSesionAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCrearSesionAltaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,38 +125,28 @@ public class JPGSesion extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(51, 51, 51)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(55, 55, 55)
-                                .addComponent(jtfIdSesionAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfIdPeliculaSesionAlta)
-                                    .addComponent(jtfHoraSesionAlta)
-                                    .addComponent(jtfIdSalaSesionAlta, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)))))
+                            .addComponent(jtfHoraSesionAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbIdPeliculaCrearSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbIdSalaCrearSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(102, 102, 102)
                         .addComponent(jbCrearSesionAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtfIdSesionAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtfIdPeliculaSesionAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbIdPeliculaCrearSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -121,25 +154,19 @@ public class JPGSesion extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jtfIdSalaSesionAlta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(jcbIdSalaCrearSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(jbCrearSesionAlta)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Alta Sesion", jPanel1);
 
         jLabel5.setText("Id Sesión:");
 
-        jcbIdSesionConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Id Película:");
 
-        jcbIdPeliculaConsultaSesion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel7.setText("Id Sala:");
-
-        jcbIdSalaSesionAlta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jbConsultaSesion.setText("Consultar por Sesión");
 
@@ -226,8 +253,6 @@ public class JPGSesion extends javax.swing.JPanel {
 
         jLabel8.setText("Id Sesión:");
 
-        jcbModificarIdSesion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel9.setText("Id Película:");
 
         jLabel10.setText("Id Sala:");
@@ -288,8 +313,6 @@ public class JPGSesion extends javax.swing.JPanel {
 
         jLabel12.setText("Id Sesión:");
 
-        jcbBajaIdSesion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbEliminarSesion.setText("Eliminar");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -334,13 +357,25 @@ public class JPGSesion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbCrearSesionAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearSesionAltaActionPerformed
+        String idPelicula = (String) jcbIdPeliculaCrearSesion.getSelectedItem();
+        String idSala = (String) jcbIdSalaCrearSesion.getSelectedItem();
+        int hora = Integer.parseInt(jtfHoraSesionAlta.getText());
+
+        Sesion laSesion = new Sesion(idPelicula, idSala, hora);
+        try {
+            laSesion.crearSesion();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCrearSesionAltaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -362,14 +397,13 @@ public class JPGSesion extends javax.swing.JPanel {
     private javax.swing.JButton jbModificaSesion;
     private javax.swing.JComboBox<String> jcbBajaIdSesion;
     private javax.swing.JComboBox<String> jcbIdPeliculaConsultaSesion;
+    private javax.swing.JComboBox<String> jcbIdPeliculaCrearSesion;
+    private javax.swing.JComboBox<String> jcbIdSalaCrearSesion;
     private javax.swing.JComboBox<String> jcbIdSalaSesionAlta;
     private javax.swing.JComboBox<String> jcbIdSesionConsulta;
     private javax.swing.JComboBox<String> jcbModificarIdSesion;
     private javax.swing.JTable jtConsultaSesion;
     private javax.swing.JTextField jtfHoraSesionAlta;
-    private javax.swing.JTextField jtfIdPeliculaSesionAlta;
-    private javax.swing.JTextField jtfIdSalaSesionAlta;
-    private javax.swing.JTextField jtfIdSesionAlta;
     private javax.swing.JTextField jtfModificaHoraSesion;
     private javax.swing.JTextField jtfModificaIdPelicula;
     private javax.swing.JTextField jtfModificaIdSala;
