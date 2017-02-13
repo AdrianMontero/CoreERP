@@ -10,19 +10,35 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Daniel
  */
 public class JPGProveedoresAdmin extends javax.swing.JPanel {
-    ArrayList<Proveedor> misCines = new ArrayList();
+    ArrayList<Proveedor> misProveedores = new ArrayList();
     Proveedor miProveedor;
     /**
      * Creates new form JPGProveedoresAdmin
      */
     public JPGProveedoresAdmin() {
         initComponents();
+        String stringId;
+
+        try {
+            Proveedor.mostrarProveedor(misProveedores);
+            for (int i = 0; i < misProveedores.size(); i++) {
+                miProveedor = (Proveedor) misProveedores.get(i);
+                stringId = String.valueOf(miProveedor.getIdProveedor());
+                System.out.println(stringId);
+                jcbModIdProAdmin.addItem(stringId);
+                jcbConsultaProAdmin.addItem(stringId);
+                jcbBajaProAdmin.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -67,6 +83,8 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         jbConsultarProAdmin = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtConsultaProAdmin = new javax.swing.JTable();
+        jLabel14 = new javax.swing.JLabel();
+        jtfNombreProPoAdmin = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jcbBajaProAdmin = new javax.swing.JComboBox<>();
@@ -115,7 +133,7 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jbCrearProAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +167,11 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
 
         jLabel6.setText("Id Proveedor:");
 
-        jcbModIdProAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbModIdProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModIdProAdminActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Nombre:");
 
@@ -162,6 +184,11 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         jLabel11.setText("C.P:");
 
         jbModProAdmin.setText("Modificar");
+        jbModProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModProAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -189,7 +216,7 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(jbModProAdmin)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,16 +254,22 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
 
         jLabel12.setText("Id Proveedor:");
 
-        jcbConsultaProAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbConsultaProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbConsultaProAdminActionPerformed(evt);
+            }
+        });
 
-        jbConsultarProAdmin.setText("Consultar");
+        jbConsultarProAdmin.setText("Consultar por Nombre");
+        jbConsultarProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarProAdminActionPerformed(evt);
+            }
+        });
 
         jtConsultaProAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Apellido", "DNI", "C.P", "Población"
@@ -252,43 +285,57 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jtConsultaProAdmin);
 
+        jLabel14.setText("Nombre Proveedor:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(jcbConsultaProAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jbConsultarProAdmin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel12))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbConsultaProAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jtfNombreProPoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbConsultarProAdmin)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jcbConsultaProAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbConsultaProAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jtfNombreProPoAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbConsultarProAdmin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(165, 165, 165))
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Proveedor", jPanel3);
 
         jLabel13.setText("Id Proveedor:");
 
-        jcbBajaProAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbEliminarProAdmin.setText("Eliminar");
+        jbEliminarProAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarProAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -304,7 +351,7 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jbEliminarProAdmin)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,7 +375,7 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -339,13 +386,85 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         String poblacion = jtfPoblProAdmin.getText();
         int cp = Integer.parseInt(jtfCpProAdmin.getText());
 
-        Proveedor elProveedor = new Proveedor(nombre, apellido, dni, poblacion, cp);
+        Proveedor elProveedor = new Proveedor(dni, nombre, apellido, poblacion, cp);
         try {
             elProveedor.crearProveedores();
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbCrearProAdminActionPerformed
+
+    private void jcbModIdProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModIdProAdminActionPerformed
+        int proveedorBuscado;
+        proveedorBuscado = jcbModIdProAdmin.getSelectedIndex();
+        miProveedor = misProveedores.get(proveedorBuscado);
+        jtfModNomProAdmin.setText(miProveedor.getNombre_prov());
+        jtfModApeProAdmin.setText(miProveedor.getApellidos_prov());
+        jtfModDniProAdmin.setText(miProveedor.getDni_prov());
+        jtfModPoblProAdmin.setText(miProveedor.getPoblacion_prov());
+        jtfModCpProAdmin.setText(String.valueOf(miProveedor.getCp_prov()));
+    }//GEN-LAST:event_jcbModIdProAdminActionPerformed
+
+    private void jbModProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModProAdminActionPerformed
+        miProveedor.setIdProveedor(Integer.parseInt((String) jcbModIdProAdmin.getSelectedItem()));
+        miProveedor.setNombre_prov(jtfModNomProAdmin.getText());
+        miProveedor.setApellidos_prov(jtfModApeProAdmin.getText());
+        miProveedor.setDni_prov(jtfModDniProAdmin.getText());
+        miProveedor.setPoblacion_prov(jtfModPoblProAdmin.getText());
+        miProveedor.setCp_prov(Integer.parseInt(jtfModCpProAdmin.getText()));
+        try {
+            miProveedor.modificarProveedor();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbModProAdminActionPerformed
+
+    private void jcbConsultaProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaProAdminActionPerformed
+        int proveedorBuscado;
+        proveedorBuscado = jcbConsultaProAdmin.getSelectedIndex();
+        miProveedor = misProveedores.get(proveedorBuscado);
+        jtfNombreProPoAdmin.setText(miProveedor.getNombre_prov());
+    }//GEN-LAST:event_jcbConsultaProAdminActionPerformed
+
+    private void jbConsultarProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarProAdminActionPerformed
+        String nombre = null;
+        String apellido = null;
+        String dni = null;
+        int cp = 0;
+        String poblacion = null;
+        try {
+            Proveedor.mostrarProveedor(misProveedores);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < misProveedores.size(); i++) {
+            miProveedor = misProveedores.get(i);
+            if (miProveedor.getNombre_prov().equals(jtfNombreProPoAdmin.getText()) == true) {
+                nombre = miProveedor.getNombre_prov();
+                apellido = miProveedor.getApellidos_prov();
+                dni = miProveedor.getDni_prov();
+                cp = miProveedor.getCp_prov();
+                poblacion = miProveedor.getPoblacion_prov();
+            }
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) jtConsultaProAdmin.getModel();
+        model.setRowCount(0);
+        model.addRow(new Object[]{(String) nombre, (String) apellido, (String) dni, (Integer) cp, (String) poblacion});
+
+    }//GEN-LAST:event_jbConsultarProAdminActionPerformed
+
+    private void jbEliminarProAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarProAdminActionPerformed
+        int idroveedor;
+        String comodin;
+        comodin = jcbBajaProAdmin.getSelectedItem().toString();
+        idroveedor = Integer.parseInt(comodin);
+        try {
+            miProveedor.borrarProveedorID(idroveedor);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbEliminarProAdminActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -354,6 +473,7 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -385,6 +505,7 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
     private javax.swing.JTextField jtfModNomProAdmin;
     private javax.swing.JTextField jtfModPoblProAdmin;
     private javax.swing.JTextField jtfNombreProAdmin;
+    private javax.swing.JTextField jtfNombreProPoAdmin;
     private javax.swing.JTextField jtfPoblProAdmin;
     // End of variables declaration//GEN-END:variables
 }
