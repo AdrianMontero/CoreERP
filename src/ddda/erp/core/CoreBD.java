@@ -31,7 +31,7 @@ public class CoreBD {
      *
      * @param localizacionBBDD Ruta de la ubicacion de la base de datos
      */
-    public void conectarSqlite(String localizacionBBDD) {
+   /* public void conectarSqlite(String localizacionBBDD) {
         try {
             Class.forName("org.sqlite.JDBC");
             conexion = DriverManager.getConnection("jdbc:sqlite:" + localizacionBBDD);
@@ -42,7 +42,23 @@ public class CoreBD {
             Logger.getLogger(CoreBD.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Con la BBDD");
         }
+    }*/
+    
+    public void conectarSqlite() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conexion = DriverManager.getConnection("jdbc:mysql://greenmonster.servehttp.com:3306/bbddCinesFree","cine", "grmtoor");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CoreBD.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Problema para encontar la BBDD");
+        } catch (SQLException ex) {
+            Logger.getLogger(CoreBD.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Con la BBDD");
+        }
     }
+    
+    
+    
 
 //   Codigo de muestra para hacer updates o consultas a la BBDD
 //        String mensaje = jtfSend.getText();
@@ -73,7 +89,7 @@ public class CoreBD {
      * @return ResultSet con la informacion devuelta por la BD
      * @throws SQLException Error al ejecutar la consulta
      */
-    public ResultSet consultarTabla(String _sql) throws SQLException {
+    /*public ResultSet consultarTabla(String _sql) throws SQLException {
         if (conexion == null) {
             conectarSqlite("C:/bbdd/bbddCinesFree.db");
         }
@@ -90,11 +106,40 @@ public class CoreBD {
 //        }
         return rs;
 
+    }*/
+    
+    public ResultSet consultarTabla(String _sql) throws SQLException {
+        if (conexion == null) {
+            conectarSqlite();
+        }
+        stmt = conexion.createStatement();
+        //Empezamos a trabajar con la BBDD
+        rs = stmt.executeQuery(_sql);
+
+        
+        return rs;
+
     }
 
+//    public void prueba() throws SQLException {
+//        if (conexion == null) {
+//            conectarSqlite("C:/bbdd/bbddCinesFree.db");
+//        }
+//        stmt = conexion.createStatement();
+//        //Empezamos a trabajar con la BBDD
+//        rs = stmt.executeQuery("select * from cine");
+//        while (rs.next()) {
+//            System.out.println(rs.getInt("idCine"));
+//            System.out.println(rs.getString("nombre_cin"));
+//            System.out.println(rs.getString("cif_cin"));
+//            System.out.println(rs.getString("direccion_cin"));
+//            System.out.println(rs.getString("poblacion_cin"));
+//            System.out.println(rs.getInt("cp_cin"));
+//        }
+//    }
     public void prueba() throws SQLException {
         if (conexion == null) {
-            conectarSqlite("C:/bbdd/bbddCinesFree.db");
+            conectarSqlite();
         }
         stmt = conexion.createStatement();
         //Empezamos a trabajar con la BBDD
@@ -115,9 +160,17 @@ public class CoreBD {
      * @param _sql Comando para la actualizacion
      * @throws SQLException Error al intentar hacer la actualizacion
      */
-    public void actualizarTabla(String _sql) throws SQLException {
+    /*public void actualizarTabla(String _sql) throws SQLException {
         if (conexion == null) {
             conectarSqlite("C:/bbdd/bbddCinesFree.db");
+        }
+        stmt = conexion.createStatement();
+        //Empezamos a trabajar con la BBDD
+        stmt.executeUpdate(_sql);
+    }*/
+    public void actualizarTabla(String _sql) throws SQLException {
+        if (conexion == null) {
+            conectarSqlite();
         }
         stmt = conexion.createStatement();
         //Empezamos a trabajar con la BBDD
