@@ -105,6 +105,12 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         jcbBajaEmp = new javax.swing.JComboBox<>();
         jcbEliminarEmp = new javax.swing.JButton();
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Apellidos:");
@@ -548,6 +554,10 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         miEmpleado = misEmpleados.get(empleadoBuscado);
         jtfNombreEmpConsultaAdmin.setText(miEmpleado.getNombre());
     }//GEN-LAST:event_jcbConsultaEmpActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

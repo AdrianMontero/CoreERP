@@ -25,9 +25,9 @@ public class Sesion {
     private int idSesion;
     private int idPelicula;
     private int idSala;
-    private int hora_ses;
+    private String hora_ses;
 
-    public Sesion(String idPelicula, String idSala, int hora) {
+    public Sesion(int idPelicula, String idSala, int hora) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -44,7 +44,7 @@ public class Sesion {
         return idSala;
     }
 
-    public int getHora_ses() {
+    public String getHora_ses() {
         return hora_ses;
     }
     // </editor-fold>
@@ -62,7 +62,7 @@ public class Sesion {
         this.idSala = idSala;
     }
 
-    public void setHora_ses(int hora_ses) {
+    public void setHora_ses(String hora_ses) {
         this.hora_ses = hora_ses;
     }
     // </editor-fold>
@@ -72,14 +72,14 @@ public class Sesion {
 
     }
 
-    public Sesion(int idSesion, int idPelicula, int idSala, int hora_ses) {
+    public Sesion(int idSesion, int idPelicula, int idSala, String hora_ses) {
         this.idSesion = idSesion;
         this.idPelicula = idPelicula;
         this.idSala = idSala;
         this.hora_ses = hora_ses;
     }
 
-    public Sesion(int idPelicula, int idSala, int hora_ses) {
+    public Sesion(int idPelicula, int idSala, String hora_ses) {
         this.idPelicula = idPelicula;
         this.idSala = idSala;
         this.hora_ses = hora_ses;
@@ -94,7 +94,7 @@ public class Sesion {
     public void crearSesion() throws SQLException {
         bd.actualizarTabla("insert into sesion_pelicula values(null, '"
                 + idPelicula + "', '"
-                + idSala + "', '"
+                + idSala + "', "
                 + hora_ses + ")");
     }
 
@@ -111,7 +111,7 @@ public class Sesion {
             miSesion.setIdSesion(rs.getInt("idSesion"));
             miSesion.setIdPelicula(rs.getInt("idPelicula"));
             miSesion.setIdSala(rs.getInt("idSala"));
-            miSesion.setHora_ses(rs.getInt("hora_ses"));
+            miSesion.setHora_ses(rs.getString("hora_ses"));
 
         }
         return miSesion;
@@ -130,7 +130,7 @@ public class Sesion {
             miSesion.setIdSesion(rs.getInt("idSesion"));
             miSesion.setIdPelicula(rs.getInt("idPelicula"));
             miSesion.setIdSala(rs.getInt("idSala"));
-            miSesion.setHora_ses(rs.getInt("hora_ses"));
+            miSesion.setHora_ses(rs.getString("hora_ses"));
 
         }
         return miSesion;
@@ -149,7 +149,7 @@ public class Sesion {
             miSesion.setIdSesion(rs.getInt("idSesion"));
             miSesion.setIdPelicula(rs.getInt("idPelicula"));
             miSesion.setIdSala(rs.getInt("idSala"));
-            miSesion.setHora_ses(rs.getInt("hora_ses"));
+            miSesion.setHora_ses(rs.getString("hora_ses"));
 
         }
         return miSesion;
@@ -171,7 +171,7 @@ public class Sesion {
             miSesion.setIdSesion(res.getInt("idSesion"));
             miSesion.setIdPelicula(res.getInt("idPelicula"));
             miSesion.setIdSala(res.getInt("idSala"));
-            miSesion.setHora_ses(res.getInt("hora_ses"));
+            miSesion.setHora_ses(res.getString("hora_ses"));
 
             listaSesiones.add(miSesion);
         }
@@ -188,8 +188,8 @@ public class Sesion {
         bd.actualizarTabla("Update sesion_pelicula set "
                 + "idPelicula = '" + idPelicula + "', "
                 + "idSala = '" + idSala + "', "
-                + "hora_ses = '" + hora_ses + " "
-                + "where idSesion = " + idSesion);
+                + "hora_ses = " + hora_ses + " "
+                + "where idSesion = '" + idSesion + "'");
     }
 
     /**
@@ -198,8 +198,8 @@ public class Sesion {
      * @param _idSala
      * @throws SQLException
      */
-    public void borrarSesionID(int _idSala) throws SQLException {
-        bd.actualizarTabla("Delete from sesion_pelicula where idCine = " + _idSala);
+    public void borrarSesionID(int _idSeseion) throws SQLException {
+        bd.actualizarTabla("Delete from sesion_pelicula where idSesion = " + _idSeseion);
     }
     // </editor-fold>
 

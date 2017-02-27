@@ -22,7 +22,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
 
     ArrayList<Cine> misCines = new ArrayList();
     Cine miCine;
-    Csalasbutacas csb;
+    Csalasbutacas csb = new Csalasbutacas();
 
     /**
      * Creates new form JPGCinesAdmin

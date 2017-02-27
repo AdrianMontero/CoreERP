@@ -8,6 +8,7 @@ package ddda.erp.objetos;
 import ddda.erp.core.CoreBD;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,14 +17,67 @@ import java.sql.SQLException;
 public class Csalasbutacas {
 
     //Metodos para interactuar con la BD.
-    private CoreBD bd = new CoreBD();
-    private String sql = null;
-    private ResultSet rs = null;
+    private static CoreBD bd = new CoreBD();
+    private static String sql = null;
+    private static ResultSet rs = null;
 
     //Contadores
     private int nSalas = 10;
     private int nButacas = 10;
     private int nFila = 6;
+    private int idSala;
+    private String nombreSal;
+    private int idCine;
+
+    public int getnSalas() {
+        return nSalas;
+    }
+
+    public void setnSalas(int nSalas) {
+        this.nSalas = nSalas;
+    }
+
+    public int getnButacas() {
+        return nButacas;
+    }
+
+    public void setnButacas(int nButacas) {
+        this.nButacas = nButacas;
+    }
+
+    public int getnFila() {
+        return nFila;
+    }
+
+    public void setnFila(int nFila) {
+        this.nFila = nFila;
+    }
+
+    public int getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(int idSala) {
+        this.idSala = idSala;
+    }
+
+    public String getNombreSal() {
+        return nombreSal;
+    }
+
+    public void setNombreSal(String nombreSal) {
+        this.nombreSal = nombreSal;
+    }
+
+    public int getIdCine() {
+        return idCine;
+    }
+
+    public void setIdCine(int idCine) {
+        this.idCine = idCine;
+    }
+    
+    
 
     /**
      * Creación de las salas y las butacas de cada cine.
@@ -46,9 +100,7 @@ public class Csalasbutacas {
                     bd.actualizarTabla("insert into butaca values(null," + idSala + "'," + j + ")");
 
                 }
-
             }
-
         }
     }
     
@@ -63,5 +115,19 @@ public class Csalasbutacas {
         bd.actualizarTabla("Delete from butaca where idSala = " + idSala);
         
     }
-
+    
+    public static ArrayList<Csalasbutacas> mostrarSalas(ArrayList listaSalas) throws SQLException {
+        ResultSet res;
+        Csalasbutacas miSala = new Csalasbutacas();
+        res = bd.consultarTabla("select * from sala");
+        listaSalas.clear();
+        while(res.next()) {
+            miSala = new Csalasbutacas();
+            miSala.setIdSala(res.getInt("idSala"));
+            miSala.setNombreSal(res.getString("nombre_sal"));
+            miSala.setIdCine(res.getInt("idCine"));
+            listaSalas.add(miSala);
+        }
+        return listaSalas;
+    }
 }

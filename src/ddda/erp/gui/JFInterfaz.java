@@ -26,8 +26,8 @@ public class JFInterfaz extends javax.swing.JFrame {
     JPGClientes jpgc = new JPGClientes();//Clientes
     JPGProveedoresAdmin jpgproadmin = new JPGProveedoresAdmin();//Proveedor Administrador
     JPGProveedoresEmp jpgproemp = new JPGProveedoresEmp();//Proveedor Empleado
-    JPGSesion jpgse = new JPGSesion();//Sesion
-    JPGPedidosAdmin jpgpedadmin = new JPGPedidosAdmin();//Sesion
+    JPGSesion jpgse = new JPGSesion();//Sesion 
+    JPGPedidosAdmin jpgpedadmin = new JPGPedidosAdmin();//Pedidos Administrador
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     /**
