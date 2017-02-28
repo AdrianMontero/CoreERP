@@ -176,6 +176,14 @@ public class CuerpoPedido {
     public void borrarCuerpoPedidoID(int _idCuerpoPedido) throws SQLException {
         bd.actualizarTabla("Delete from empleado where idEmpleado =" + _idCuerpoPedido);
     }
+    public int recuperarIdPedido() throws SQLException{
+        int idPed = 0;
+        rs = bd.consultarTabla("Select idPedido from cabecera_pedido");
+        while (rs.next()) {
+            rs.getInt("idPedido");
+        }
+        return idPed;
+    }
 
     /**
      * Metodo mdiante el cual, pasando todos los parametros de un cuerpo de pedido lo actualiza.

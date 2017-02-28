@@ -35,13 +35,15 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         model.setRowCount(0);
         String stringId;
         int idProv;
+        int idProd;
         try {
             Producto.mostrarProducto(misPro);
             for (int i = 0; i < misPro.size(); i++) {
                 pro = (Producto) misPro.get(i);
+                idProd = pro.getIdProducto();
                 stringId = pro.getNombre_prod();
                 System.out.println(stringId);
-                jcbAddPedido.addItem(stringId);
+                jcbAddPedido.addItem(String.valueOf(idProd));
                 jcbBajaIdPedido.addItem(stringId);
                 jcbConsIdPedido.addItem(stringId);
             }
@@ -143,11 +145,11 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "idProducto", "idProveedor", "Producto", "Cantidad", "Precio"
+                "idProducto", "idProveedor", "Cantidad", "Precio", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -171,7 +173,6 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -187,8 +188,9 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jbAddProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
-                        .addComponent(jbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                        .addComponent(jbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,16 +366,13 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
 
     private void jbAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddProductoActionPerformed
         // TODO add your handling code here:
-        String producto = jcbAddPedido.getSelectedItem().toString();
+        String idProd = jcbAddPedido.getSelectedItem().toString();
         int cantidad = (int) jsAddPedido.getValue();
         int precio;
-        int idProd = 0;
         String idProv = jcbProvPedidos.getSelectedItem().toString();
         precio = pro.getPrecio_prod() * cantidad;
-        if(pro.getNombre_prod().equals(producto) == true){
-            idProd = pro.getIdProducto();
-        }
-        model.addRow(new Object[]{(int) idProd,(String) idProv, (String) producto, (int) cantidad, (int) precio});
+        String desc = pro.getDescripcion_prod();
+        model.addRow(new Object[]{(String) idProd,(String) idProv, (int) cantidad, (int) precio, (String) desc});
     }//GEN-LAST:event_jbAddProductoActionPerformed
 
     private void jcbAddPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAddPedidoActionPerformed
@@ -389,24 +388,33 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         int cantidad;
         int precio = 0;
         String idProv = null;
+        int idPedido = 0;
         CuerpoPedido cp = new CuerpoPedido();
-        
         for (int i = 0; i < fils; i++) {
-            idProd = (int) jtAddPedido.getValueAt(i, 0);
             idProv = (String) jtAddPedido.getValueAt(i, 1);
-            nombre = (String) jtAddPedido.getValueAt(i, 2);
-            cantidad = (int) jtAddPedido.getValueAt(i, 3);
             precio = precio + (int) jtAddPedido.getValueAt(i, 4);
-            System.out.println(idProd + nombre + cantidad);
             for (int j = 0; j < cols; j++) {
-            
             }
-            
         }
         try {
             cp.crearCabeceraPedido(precio, idProv);
+            idPedido = cp.recuperarIdPedido();
         } catch (SQLException ex) {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < fils; i++) {
+            idProd = (int) jtAddPedido.getValueAt(i, 0);
+            cantidad = (int) jtAddPedido.getValueAt(i, 2);
+            nombre = (String) jtAddPedido.getValueAt(i, 4);
+            cp = new CuerpoPedido(idProd,nombre,cantidad);
+            try {
+                cp.crearCuerpoPedido(idPedido);
+            } catch (SQLException ex) {
+                Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (int j = 0; j < cols; j++) {
+            }
+            
         }
     }//GEN-LAST:event_jbAddPedidoActionPerformed
 
