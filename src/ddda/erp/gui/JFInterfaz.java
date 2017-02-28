@@ -35,7 +35,7 @@ public class JFInterfaz extends javax.swing.JFrame {
      */
     public JFInterfaz() {
         initComponents();
-//        this.getContentPane().add(jpgce);//Cines Empleado
+        this.getContentPane().add(jpgce);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgpeli);//Peliculas
 //        this.getContentPane().add(jpgea);//Empleado Administrador
@@ -44,7 +44,7 @@ public class JFInterfaz extends javax.swing.JFrame {
 //        this.getContentPane().add(jpgproadmin);//Proveedor Administrador 
 //        this.getContentPane().add(jpgproemp);//Proveedor Empleado
 //        this.getContentPane().add(jpgse);//Sesion
-        this.getContentPane().add(jpgpedadmin);//Pedidos Administrador
+//        this.getContentPane().add(jpgpedadmin);//Pedidos Administrador
         this.setVisible(true);
         this.setBounds(0, 0, screenSize.width, screenSize.height);
         this.setResizable(false);
@@ -60,10 +60,209 @@ public class JFInterfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmEmpleados = new javax.swing.JMenu();
+        jmCineEmp = new javax.swing.JMenuItem();
+        jmClienteEmp = new javax.swing.JMenuItem();
+        jmEmpEmp = new javax.swing.JMenuItem();
+        jmPedidosEmp = new javax.swing.JMenuItem();
+        jmPeliculasEmp = new javax.swing.JMenuItem();
+        jmPoductosEmp = new javax.swing.JMenuItem();
+        jmProveEmp = new javax.swing.JMenuItem();
+        jmReservasEmp = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jmEmpleados.setText("Paneles");
+        jmEmpleados.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jmEmpleadosComponentAdded(evt);
+            }
+        });
+
+        jmCineEmp.setText("Cines Empleados");
+        jmCineEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCineEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmCineEmp);
+
+        jmClienteEmp.setText("Clientes");
+        jmClienteEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmClienteEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmClienteEmp);
+
+        jmEmpEmp.setText("Empleados empleado");
+        jmEmpEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEmpEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmEmpEmp);
+
+        jmPedidosEmp.setText("Pedidos Empleados");
+        jmPedidosEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPedidosEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmPedidosEmp);
+
+        jmPeliculasEmp.setText("Peliculas");
+        jmPeliculasEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPeliculasEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmPeliculasEmp);
+
+        jmPoductosEmp.setText("Productos");
+        jmPoductosEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPoductosEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmPoductosEmp);
+
+        jmProveEmp.setText("Proveedores Empleados");
+        jmProveEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProveEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmProveEmp);
+
+        jmReservasEmp.setText("Reservas");
+        jmReservasEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmReservasEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmReservasEmp);
+
+        jMenuBar1.add(jmEmpleados);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmEmpleadosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jmEmpleadosComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmEmpleadosComponentAdded
+
+    private void jmEmpEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEmpEmpActionPerformed
+        this.getContentPane().add(jpgee);//Empleado Empleado
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(true);
+    }//GEN-LAST:event_jmEmpEmpActionPerformed
+
+    private void jmCineEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCineEmpActionPerformed
+        this.getContentPane().add(jpgce);//Cine Empleado
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgee.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(true);
+    }//GEN-LAST:event_jmCineEmpActionPerformed
+
+    private void jmClienteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmClienteEmpActionPerformed
+        this.getContentPane().add(jpgc);//Cliente Empleado
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgee.setVisible(false);
+        jpgce.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgc.setVisible(true);
+    }//GEN-LAST:event_jmClienteEmpActionPerformed
+
+    private void jmPedidosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidosEmpActionPerformed
+//        this.getContentPane().add(jpgc);//Pedidos Empleado
+//        jpgpeli.setVisible(false);
+//        jpgea.setVisible(false);
+//        jpgee.setVisible(false);
+//        jpgca.setVisible(false);
+//        jpgproadmin.setVisible(false);
+//        jpgproemp.setVisible(false);
+//        jpgse.setVisible(false);
+//        jpgpedadmin.setVisible(false);
+//        jpgc.setVisible(true);
+    }//GEN-LAST:event_jmPedidosEmpActionPerformed
+
+    private void jmPeliculasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPeliculasEmpActionPerformed
+        this.getContentPane().add(jpgpeli);//Peliculas Empleado
+        jpgc.setVisible(false);
+        jpgea.setVisible(false);
+        jpgee.setVisible(false);
+        jpgce.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgpeli.setVisible(true);
+    }//GEN-LAST:event_jmPeliculasEmpActionPerformed
+
+    private void jmPoductosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPoductosEmpActionPerformed
+//        this.getContentPane().add(jpgpeli);//Productos Empleado
+//        jpgc.setVisible(false);
+//        jpgea.setVisible(false);
+//        jpgee.setVisible(false);
+//        jpgca.setVisible(false);
+//        jpgproadmin.setVisible(false);
+//        jpgproemp.setVisible(false);
+//        jpgse.setVisible(false);
+//        jpgpedadmin.setVisible(false);
+//        jpgpeli.setVisible(true);
+    }//GEN-LAST:event_jmPoductosEmpActionPerformed
+
+    private void jmProveEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveEmpActionPerformed
+        this.getContentPane().add(jpgproemp);//Proveedores Empleado
+        jpgc.setVisible(false);
+        jpgea.setVisible(false);
+        jpgee.setVisible(false);
+        jpgce.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgpeli.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgproemp.setVisible(true);
+    }//GEN-LAST:event_jmProveEmpActionPerformed
+
+    private void jmReservasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservasEmpActionPerformed
+//        this.getContentPane().add(jpgproemp);//Proveedores Empleado
+//        jpgc.setVisible(false);
+//        jpgea.setVisible(false);
+//        jpgee.setVisible(false);
+//        jpgca.setVisible(false);
+//        jpgproadmin.setVisible(false);
+//        jpgpeli.setVisible(false);
+//        jpgse.setVisible(false);
+//        jpgpedadmin.setVisible(false);
+//        jpgproemp.setVisible(true);
+    }//GEN-LAST:event_jmReservasEmpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,5 +309,16 @@ public class JFInterfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmCineEmp;
+    private javax.swing.JMenuItem jmClienteEmp;
+    private javax.swing.JMenuItem jmEmpEmp;
+    private javax.swing.JMenu jmEmpleados;
+    private javax.swing.JMenuItem jmPedidosEmp;
+    private javax.swing.JMenuItem jmPeliculasEmp;
+    private javax.swing.JMenuItem jmPoductosEmp;
+    private javax.swing.JMenuItem jmProveEmp;
+    private javax.swing.JMenuItem jmReservasEmp;
     // End of variables declaration//GEN-END:variables
 }
