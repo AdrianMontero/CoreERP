@@ -110,12 +110,19 @@ public class CuerpoPedido {
      * @param _cPedido Ojeto de tipo pedido.
      * @throws SQLException 
      */
-    public void crearCuerpoPedido() throws SQLException {
-        bd.actualizarTabla("Insert into cuerpo_pedido values(null, "
-                + idPedido + ","
+    public void crearCuerpoPedido(int idCabecera) throws SQLException {
+        bd.actualizarTabla("Insert into cuerpo_pedido values("
+                + idCabecera + ","
                 + idProducto + ", '"
                 + descripcion_cup + "',"
                 + cantidad_cup +")");
+    }
+    
+    public void crearCabeceraPedido(int totalDinero, String idProv) throws SQLException {
+        bd.actualizarTabla("Insert into cabecera_pedido values(null, "
+                + 2017 + ","
+                + totalDinero + ", "
+                + idProv + ")");
     }
 
    /**

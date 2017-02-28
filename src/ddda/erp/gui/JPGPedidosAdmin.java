@@ -7,6 +7,7 @@ package ddda.erp.gui;
 
 import ddda.erp.objetos.CuerpoPedido;
 import ddda.erp.objetos.Producto;
+import ddda.erp.objetos.Proveedor;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,16 +19,22 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel
  */
 public class JPGPedidosAdmin extends javax.swing.JPanel {
-
+    CuerpoPedido cp;
     Producto pro;
+    Proveedor prov;
     ArrayList<Producto> misPro = new ArrayList();
+    ArrayList<Proveedor> misProv = new ArrayList();
+    DefaultTableModel model;
 
     /**
      * Creates new form JPGPedidosEmp
      */
     public JPGPedidosAdmin() {
         initComponents();
+        model = (DefaultTableModel) jtAddPedido.getModel();
+        model.setRowCount(0);
         String stringId;
+        int idProv;
         try {
             Producto.mostrarProducto(misPro);
             for (int i = 0; i < misPro.size(); i++) {
@@ -37,6 +44,12 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                 jcbAddPedido.addItem(stringId);
                 jcbBajaIdPedido.addItem(stringId);
                 jcbConsIdPedido.addItem(stringId);
+            }
+            Proveedor.mostrarProveedor(misProv);
+            for (int i = 0; i < misProv.size(); i++) {
+                prov = (Proveedor) misProv.get(i);
+                idProv = prov.getIdProveedor();
+                jcbProvPedidos.addItem(String.valueOf(idProv));
             }
         } catch (SQLException ex) {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,6 +78,8 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         jsAddPedido = new javax.swing.JSpinner();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtAddPedido = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jcbProvPedidos = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -114,7 +129,6 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             }
         });
 
-        jcbAddPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbAddPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbAddPedidoActionPerformed(evt);
@@ -123,17 +137,17 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
 
         jtAddPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "idProducto", "Producto", "Cantidad", "Precio"
+                "idProducto", "idProveedor", "Producto", "Cantidad", "Precio"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -142,6 +156,14 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jtAddPedido);
 
+        jLabel8.setText("Proveedores:");
+
+        jcbProvPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProvPedidosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -149,39 +171,45 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jcbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbAddProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(31, 31, 31)
-                                .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addGap(32, 32, 32)
+                        .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jcbProvPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jbAddProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jcbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jcbProvPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAddProducto)
                     .addComponent(jbAddPedido))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
+                .addGap(107, 107, 107))
         );
 
         jTabbedPane1.addTab("Alta Pedido", jPanel2);
@@ -192,11 +220,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
 
         jbModificar.setText("Modificar Pedido");
 
-        jcbModPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("ID Pedido:");
-
-        jcbModIdPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,7 +238,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                     .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbModPedido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbModIdPedido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,8 +287,6 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jcbConsIdPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -299,8 +321,6 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
 
         jLabel5.setText("Id Pedido:");
 
-        jcbBajaIdPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jbEliminarPedido.setText("Eliminar Pedido");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -314,7 +334,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbEliminarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbBajaIdPedido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,13 +368,12 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         int cantidad = (int) jsAddPedido.getValue();
         int precio;
         int idProd = 0;
+        String idProv = jcbProvPedidos.getSelectedItem().toString();
         precio = pro.getPrecio_prod() * cantidad;
         if(pro.getNombre_prod().equals(producto) == true){
             idProd = pro.getIdProducto();
         }
-        DefaultTableModel model = (DefaultTableModel) jtAddPedido.getModel();
-        model.setRowCount(0);
-        model.addRow(new Object[]{(int) idProd, (String) producto, (int) cantidad, (int) precio});
+        model.addRow(new Object[]{(int) idProd,(String) idProv, (String) producto, (int) cantidad, (int) precio});
     }//GEN-LAST:event_jbAddProductoActionPerformed
 
     private void jcbAddPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAddPedidoActionPerformed
@@ -365,17 +384,39 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
         int cols = jtAddPedido.getColumnCount();
         int fils = jtAddPedido.getRowCount();
-        CuerpoPedido cp;
+        String nombre;
+        int idProd;
+        int cantidad;
+        int precio = 0;
+        String idProv = null;
+        CuerpoPedido cp = new CuerpoPedido();
+        
         for (int i = 0; i < fils; i++) {
+            idProd = (int) jtAddPedido.getValueAt(i, 0);
+            idProv = (String) jtAddPedido.getValueAt(i, 1);
+            nombre = (String) jtAddPedido.getValueAt(i, 2);
+            cantidad = (int) jtAddPedido.getValueAt(i, 3);
+            precio = precio + (int) jtAddPedido.getValueAt(i, 4);
+            System.out.println(idProd + nombre + cantidad);
             for (int j = 0; j < cols; j++) {
-                System.out.print(jtAddPedido.getValueAt(i, j));
+            
             }
+            
+        }
+        try {
+            cp.crearCabeceraPedido(precio, idProv);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbAddPedidoActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jcbProvPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProvPedidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbProvPedidosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -386,6 +427,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -407,6 +449,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbConsIdPedido;
     private javax.swing.JComboBox<String> jcbModIdPedido;
     private javax.swing.JComboBox<String> jcbModPedido;
+    private javax.swing.JComboBox<String> jcbProvPedidos;
     private javax.swing.JSpinner jsAddPedido;
     private javax.swing.JSpinner jspModPedido;
     private javax.swing.JTable jtAddPedido;
