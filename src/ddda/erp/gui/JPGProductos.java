@@ -415,8 +415,9 @@ public class JPGProductos extends javax.swing.JPanel {
         miPro.setDescripcion_prod(jtfModProd.getText());
         miPro.setStock_prod((int) jsModificarCantidad.getValue());
         miPro.setPrecio_prod((int) jsModificarPrecioProducto.getValue());
+        String idProducto = jcbModificarIdProducto.getSelectedItem().toString();
         try {
-            miPro.modificarProducto();
+            miPro.modificarProducto(idProducto);
         } catch (SQLException ex) {
             Logger.getLogger(JPGProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
