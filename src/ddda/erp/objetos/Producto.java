@@ -161,13 +161,12 @@ public class Producto {
      * @param _producto Datos a modificar en el poducto.
      * @throws SQLException Error al cargar la BD.
      */
-    public void modificarProducto() throws SQLException {
+    public void modificarProducto(String _idProducto) throws SQLException {
         bd.actualizarTabla("Update producto set "
-                + "idProducto=" + idProducto
-                + ",descipcion_pro='" + descripcion_prod
-                + "',precio_pro=" + precio_prod
-                + ",nombre_pro='" + nombre_prod
-                + "',Stock_pro=" + stock_prod);
+                + "descripcion_prod='" + descripcion_prod
+                + "',precio_prod=" + precio_prod
+                + ",nombre_prod='" + nombre_prod
+                + "',Stock_prod=" + stock_prod+ " where  idProducto=" + _idProducto);
     }
 
     // </editor-fold>

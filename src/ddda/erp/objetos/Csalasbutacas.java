@@ -88,19 +88,19 @@ public class Csalasbutacas {
         int idSala = 0;
         for (int i = 0; i < nSalas; i++) {//Creamos la sala.
 
-            bd.actualizarTabla("insert into sala values(null,'sala" + i + "'," + _idCine + ")");
-            rs = bd.consultarTabla("select idSala from sala where idCine = " + _idCine + " and nombre_sal = sala" + i);
-            rs.next();
-            idSala = rs.getInt("idSala");
+            bd.actualizarTabla("insert into sala values(null,'sala " + i + "'," + _idCine + ")");
+            //rs = bd.consultarTabla("select idSala from sala where idCine = " + _idCine + " and nombre_sal = sala" + i);
+            //rs.next();
+            //idSala = rs.getInt("idSala");
 
-            for (int j = 0; j < nFila; j++) {//Creamos la fila.
+            /*for (int j = 0; j < nFila; j++) {//Creamos la fila.
 
                 for (int k = 0; k < nButacas; k++) {//Asignamos las butacas a la fila.
 
                     bd.actualizarTabla("insert into butaca values(null," + idSala + "'," + j + ")");
 
                 }
-            }
+            }*/
         }
     }
     

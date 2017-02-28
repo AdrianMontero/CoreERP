@@ -285,7 +285,7 @@ public class Empleado {
                 + "',usuario_emp='" + usuario
                 + "',contrasena_emp='" + contrasena
                 + "',idCine=" + getIdCine()
-                + "where idEmpleado =" + idEmpleado);
+                + " where idEmpleado =" + idEmpleado);
     }
     // </editor-fold>
 }
