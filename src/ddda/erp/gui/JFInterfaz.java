@@ -28,14 +28,18 @@ public class JFInterfaz extends javax.swing.JFrame {
     JPGProveedoresEmp jpgproemp = new JPGProveedoresEmp();//Proveedor Empleado
     JPGSesion jpgse = new JPGSesion();//Sesion 
     JPGPedidosAdmin jpgpedadmin = new JPGPedidosAdmin();//Pedidos Administrador
+    JPGPedidosEmp jpgpedidos = new JPGPedidosEmp();//Pedidos empleado*******************
+    JPGReservas jpgreservas = new JPGReservas();//Reservas********************************************
+    JPGProductos jpgprouctos = new JPGProductos();//Productos****************************************
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    
 
     /**
      * Creates new form JFInterfaz
      */
     public JFInterfaz() {
         initComponents();
-        this.getContentPane().add(jpgpedadmin);//Cines Empleado
+//        this.getContentPane().add(jpgpedadmin);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgpeli);//Peliculas
 //        this.getContentPane().add(jpgea);//Empleado Administrador
@@ -45,6 +49,9 @@ public class JFInterfaz extends javax.swing.JFrame {
 //        this.getContentPane().add(jpgproemp);//Proveedor Empleado
 //        this.getContentPane().add(jpgse);//Sesion
 //        this.getContentPane().add(jpgpedadmin);//Pedidos Administrador
+//        this.getContentPane().add(jpgpedidos);
+//        this.getContentPane().add(jpgprouctos);//Productos
+//        this.getContentPane().add(jpgreservas);//Reservas.
         this.setVisible(true);
         this.setBounds(0, 0, screenSize.width, screenSize.height);
         this.setResizable(false);
@@ -70,18 +77,28 @@ public class JFInterfaz extends javax.swing.JFrame {
         jmPoductosEmp = new javax.swing.JMenuItem();
         jmProveEmp = new javax.swing.JMenuItem();
         jmReservasEmp = new javax.swing.JMenuItem();
+        jmSesionEmp = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jmCineAdmin = new javax.swing.JMenuItem();
+        jmClienteAdmin = new javax.swing.JMenuItem();
+        jmEmpAdmin = new javax.swing.JMenuItem();
+        jmPedidosAdmin = new javax.swing.JMenuItem();
+        jmPeliculasAdmin = new javax.swing.JMenuItem();
+        jmPoductosAdmin = new javax.swing.JMenuItem();
+        jmProveAdmin = new javax.swing.JMenuItem();
+        jmReservasAdmin = new javax.swing.JMenuItem();
+        jmSesionAdmin = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jmEmpleados.setText("Paneles");
+        jmEmpleados.setText("Paneles E");
         jmEmpleados.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jmEmpleadosComponentAdded(evt);
             }
         });
 
-        jmCineEmp.setText("Cines Empleados");
+        jmCineEmp.setText("Cines Emple");
         jmCineEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmCineEmpActionPerformed(evt);
@@ -97,7 +114,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         });
         jmEmpleados.add(jmClienteEmp);
 
-        jmEmpEmp.setText("Empleados empleado");
+        jmEmpEmp.setText("Empleados Emple");
         jmEmpEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmEmpEmpActionPerformed(evt);
@@ -105,7 +122,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         });
         jmEmpleados.add(jmEmpEmp);
 
-        jmPedidosEmp.setText("Pedidos Empleados");
+        jmPedidosEmp.setText("Pedidos Emple");
         jmPedidosEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmPedidosEmpActionPerformed(evt);
@@ -129,7 +146,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         });
         jmEmpleados.add(jmPoductosEmp);
 
-        jmProveEmp.setText("Proveedores Empleados");
+        jmProveEmp.setText("Proveedores Emple");
         jmProveEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmProveEmpActionPerformed(evt);
@@ -145,9 +162,90 @@ public class JFInterfaz extends javax.swing.JFrame {
         });
         jmEmpleados.add(jmReservasEmp);
 
+        jmSesionEmp.setText("Sesion");
+        jmSesionEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSesionEmpActionPerformed(evt);
+            }
+        });
+        jmEmpleados.add(jmSesionEmp);
+
         jMenuBar1.add(jmEmpleados);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Paneles A");
+
+        jmCineAdmin.setText("Cines Admin");
+        jmCineAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCineAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmCineAdmin);
+
+        jmClienteAdmin.setText("Clientes");
+        jmClienteAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmClienteAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmClienteAdmin);
+
+        jmEmpAdmin.setText("Empleados Admin");
+        jmEmpAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEmpAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmEmpAdmin);
+
+        jmPedidosAdmin.setText("Pedidos Admin");
+        jmPedidosAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPedidosAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmPedidosAdmin);
+
+        jmPeliculasAdmin.setText("Peliculas");
+        jmPeliculasAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPeliculasAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmPeliculasAdmin);
+
+        jmPoductosAdmin.setText("Productos");
+        jmPoductosAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPoductosAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmPoductosAdmin);
+
+        jmProveAdmin.setText("Proveedores Admin");
+        jmProveAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmProveAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmProveAdmin);
+
+        jmReservasAdmin.setText("Reservas");
+        jmReservasAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmReservasAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmReservasAdmin);
+
+        jmSesionAdmin.setText("Sesion");
+        jmSesionAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSesionAdminActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmSesionAdmin);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -171,98 +269,310 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgpedadmin.setVisible(false);
         jpgce.setVisible(false);
         jpgee.setVisible(true);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmEmpEmpActionPerformed
 
     private void jmCineEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCineEmpActionPerformed
         this.getContentPane().add(jpgce);//Cine Empleado
         jpgpeli.setVisible(false);
         jpgea.setVisible(false);
-        jpgee.setVisible(false);
+        jpgca.setVisible(false);
         jpgc.setVisible(false);
         jpgproadmin.setVisible(false);
         jpgproemp.setVisible(false);
         jpgse.setVisible(false);
         jpgpedadmin.setVisible(false);
         jpgce.setVisible(true);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmCineEmpActionPerformed
 
     private void jmClienteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmClienteEmpActionPerformed
         this.getContentPane().add(jpgc);//Cliente Empleado
         jpgpeli.setVisible(false);
         jpgea.setVisible(false);
-        jpgee.setVisible(false);
-        jpgce.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(true);
         jpgproadmin.setVisible(false);
         jpgproemp.setVisible(false);
         jpgse.setVisible(false);
         jpgpedadmin.setVisible(false);
-        jpgc.setVisible(true);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmClienteEmpActionPerformed
 
     private void jmPedidosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidosEmpActionPerformed
-//        this.getContentPane().add(jpgc);//Pedidos Empleado
-//        jpgpeli.setVisible(false);
-//        jpgea.setVisible(false);
-//        jpgee.setVisible(false);
-//        jpgca.setVisible(false);
-//        jpgproadmin.setVisible(false);
-//        jpgproemp.setVisible(false);
-//        jpgse.setVisible(false);
-//        jpgpedadmin.setVisible(false);
-//        jpgc.setVisible(true);
+        
+        //Falta comprobar
+        
+        this.getContentPane().add(jpgpedidos);//Pedidos Empleado
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(true);
+        
     }//GEN-LAST:event_jmPedidosEmpActionPerformed
 
     private void jmPeliculasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPeliculasEmpActionPerformed
         this.getContentPane().add(jpgpeli);//Peliculas Empleado
-        jpgc.setVisible(false);
+         jpgpeli.setVisible(true);
         jpgea.setVisible(false);
-        jpgee.setVisible(false);
-        jpgce.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
         jpgproadmin.setVisible(false);
         jpgproemp.setVisible(false);
         jpgse.setVisible(false);
         jpgpedadmin.setVisible(false);
-        jpgpeli.setVisible(true);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmPeliculasEmpActionPerformed
 
     private void jmPoductosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPoductosEmpActionPerformed
-//        this.getContentPane().add(jpgpeli);//Productos Empleado
-//        jpgc.setVisible(false);
-//        jpgea.setVisible(false);
-//        jpgee.setVisible(false);
-//        jpgca.setVisible(false);
-//        jpgproadmin.setVisible(false);
-//        jpgproemp.setVisible(false);
-//        jpgse.setVisible(false);
-//        jpgpedadmin.setVisible(false);
-//        jpgpeli.setVisible(true);
+        
+        //Falta comprobar
+        
+        this.getContentPane().add(jpgprouctos);//Productos Empleado
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(true);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmPoductosEmpActionPerformed
 
     private void jmProveEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveEmpActionPerformed
         this.getContentPane().add(jpgproemp);//Proveedores Empleado
-        jpgc.setVisible(false);
-        jpgea.setVisible(false);
-        jpgee.setVisible(false);
-        jpgce.setVisible(false);
-        jpgproadmin.setVisible(false);
         jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(true);
         jpgse.setVisible(false);
         jpgpedadmin.setVisible(false);
-        jpgproemp.setVisible(true);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmProveEmpActionPerformed
 
     private void jmReservasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservasEmpActionPerformed
-//        this.getContentPane().add(jpgproemp);//Proveedores Empleado
-//        jpgc.setVisible(false);
-//        jpgea.setVisible(false);
-//        jpgee.setVisible(false);
-//        jpgca.setVisible(false);
-//        jpgproadmin.setVisible(false);
-//        jpgpeli.setVisible(false);
-//        jpgse.setVisible(false);
-//        jpgpedadmin.setVisible(false);
-//        jpgproemp.setVisible(true);
+        
+        //Falta comprobar
+        
+        this.getContentPane().add(jpgreservas);//Reservas
+         jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(true);
+        jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmReservasEmpActionPerformed
+
+    private void jmCineAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCineAdminActionPerformed
+      this.getContentPane().add(jpgca);
+      jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(true);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmCineAdminActionPerformed
+
+    private void jmClienteAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmClienteAdminActionPerformed
+        this.getContentPane().add(jpgc);
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(true);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmClienteAdminActionPerformed
+
+    private void jmEmpAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEmpAdminActionPerformed
+        this.getContentPane().add(jpgea);
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(true);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmEmpAdminActionPerformed
+
+    private void jmPedidosAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidosAdminActionPerformed
+       this.getContentPane().add(jpgpedadmin);
+       jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(true);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmPedidosAdminActionPerformed
+
+    private void jmPeliculasAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPeliculasAdminActionPerformed
+       this.getContentPane().add(jpgpeli);
+       jpgpeli.setVisible(true);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmPeliculasAdminActionPerformed
+
+    private void jmPoductosAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPoductosAdminActionPerformed
+       this.getContentPane().add(jpgprouctos);
+       jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(true);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmPoductosAdminActionPerformed
+
+    private void jmProveAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveAdminActionPerformed
+        this.getContentPane().add(jpgproadmin);
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(true);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmProveAdminActionPerformed
+
+    private void jmReservasAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservasAdminActionPerformed
+       this.getContentPane().add(jpgreservas);
+       jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(false);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(true);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmReservasAdminActionPerformed
+
+    private void jmSesionEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSesionEmpActionPerformed
+        this.getContentPane().add(jpgse);
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(true);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+        
+    }//GEN-LAST:event_jmSesionEmpActionPerformed
+
+    private void jmSesionAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSesionAdminActionPerformed
+        this.getContentPane().add(jpgse);
+        jpgpeli.setVisible(false);
+        jpgea.setVisible(false);
+        jpgca.setVisible(false);
+        jpgc.setVisible(false);
+        jpgproadmin.setVisible(false);
+        jpgproemp.setVisible(false);
+        jpgse.setVisible(true);
+        jpgpedadmin.setVisible(false);
+        jpgce.setVisible(false);
+        jpgee.setVisible(false);
+        jpgprouctos.setVisible(false);
+        jpgreservas.setVisible(false);
+        jpgpedidos.setVisible(false);
+    }//GEN-LAST:event_jmSesionAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,14 +621,24 @@ public class JFInterfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmCineAdmin;
     private javax.swing.JMenuItem jmCineEmp;
+    private javax.swing.JMenuItem jmClienteAdmin;
     private javax.swing.JMenuItem jmClienteEmp;
+    private javax.swing.JMenuItem jmEmpAdmin;
     private javax.swing.JMenuItem jmEmpEmp;
     private javax.swing.JMenu jmEmpleados;
+    private javax.swing.JMenuItem jmPedidosAdmin;
     private javax.swing.JMenuItem jmPedidosEmp;
+    private javax.swing.JMenuItem jmPeliculasAdmin;
     private javax.swing.JMenuItem jmPeliculasEmp;
+    private javax.swing.JMenuItem jmPoductosAdmin;
     private javax.swing.JMenuItem jmPoductosEmp;
+    private javax.swing.JMenuItem jmProveAdmin;
     private javax.swing.JMenuItem jmProveEmp;
+    private javax.swing.JMenuItem jmReservasAdmin;
     private javax.swing.JMenuItem jmReservasEmp;
+    private javax.swing.JMenuItem jmSesionAdmin;
+    private javax.swing.JMenuItem jmSesionEmp;
     // End of variables declaration//GEN-END:variables
 }

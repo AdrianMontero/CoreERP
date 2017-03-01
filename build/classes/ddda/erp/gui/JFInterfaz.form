@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jmEmpleados">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Paneles"/>
+            <Property name="text" type="java.lang.String" value="Paneles E"/>
           </Properties>
           <Events>
             <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jmEmpleadosComponentAdded"/>
@@ -14,7 +14,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmCineEmp">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cines Empleados"/>
+                <Property name="text" type="java.lang.String" value="Cines Emple"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCineEmpActionPerformed"/>
@@ -30,7 +30,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmEmpEmp">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Empleados empleado"/>
+                <Property name="text" type="java.lang.String" value="Empleados Emple"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEmpEmpActionPerformed"/>
@@ -38,7 +38,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmPedidosEmp">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pedidos Empleados"/>
+                <Property name="text" type="java.lang.String" value="Pedidos Emple"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmPedidosEmpActionPerformed"/>
@@ -62,7 +62,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmProveEmp">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Proveedores Empleados"/>
+                <Property name="text" type="java.lang.String" value="Proveedores Emple"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmProveEmpActionPerformed"/>
@@ -76,12 +76,94 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmReservasEmpActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmSesionEmp">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sesion"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmSesionEmpActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="text" type="java.lang.String" value="Paneles A"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmCineAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cines Admin"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCineAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmClienteAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clientes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmClienteAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmEmpAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Empleados Admin"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmEmpAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmPedidosAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pedidos Admin"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmPedidosAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmPeliculasAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Peliculas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmPeliculasAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmPoductosAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Productos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmPoductosAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmProveAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Proveedores Admin"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmProveAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmReservasAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Reservas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmReservasAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmSesionAdmin">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sesion"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmSesionAdminActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
