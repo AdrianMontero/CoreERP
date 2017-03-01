@@ -5,6 +5,7 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Empleado;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -18,6 +19,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class JFInterfaz extends javax.swing.JFrame {
 
+    JPInicio inicio = new JPInicio();//Inicio
+    Empleado emp = new Empleado();
+    
     JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
     JPGPeliculas jpgpeli = new JPGPeliculas();//Peliculas
     JPGCinesEmp jpgce = new JPGCinesEmp(); //Cines Empleado
@@ -32,6 +36,8 @@ public class JFInterfaz extends javax.swing.JFrame {
     JPGReservas jpgreservas = new JPGReservas();//Reservas********************************************
     JPGProductos jpgprouctos = new JPGProductos();//Productos****************************************
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    public static String cargo = "No Registrado";
+    
     
 
     /**
@@ -39,6 +45,7 @@ public class JFInterfaz extends javax.swing.JFrame {
      */
     public JFInterfaz() {
         initComponents();
+        //this.getContentPane().add(inicio);
 //        this.getContentPane().add(jpgpedadmin);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgpeli);//Peliculas
@@ -52,8 +59,24 @@ public class JFInterfaz extends javax.swing.JFrame {
 //        this.getContentPane().add(jpgpedidos);
 //        this.getContentPane().add(jpgprouctos);//Productos
 //        this.getContentPane().add(jpgreservas);//Reservas.
+            jmAdministrador.setVisible(false);
+            jmEmpleados.setVisible(false);
+
+        if(cargo.equals("Administrador")){
+            jmAdministrador.setVisible(true);
+            jmEmpleados.setVisible(false);
+        }else if(cargo.equals("Empleado")){
+            jmEmpleados.setVisible(true);
+            jmAdministrador.setVisible(false);
+        }else{
+            jmEmpleados.setVisible(false);
+            jmAdministrador.setVisible(false);
+        }
+
+
         this.setVisible(true);
-        this.setBounds(0, 0, screenSize.width, screenSize.height);
+//      this.setBounds(0, 0, screenSize.width, screenSize.height);
+        this.setBounds(0, 0, 700, 600);
         this.setResizable(false);
 
     }
@@ -67,6 +90,14 @@ public class JFInterfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jtfId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtfPass = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jcbCargo = new javax.swing.JComboBox<>();
+        jbEntrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmEmpleados = new javax.swing.JMenu();
         jmCineEmp = new javax.swing.JMenuItem();
@@ -78,7 +109,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jmProveEmp = new javax.swing.JMenuItem();
         jmReservasEmp = new javax.swing.JMenuItem();
         jmSesionEmp = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jmAdministrador = new javax.swing.JMenu();
         jmCineAdmin = new javax.swing.JMenuItem();
         jmClienteAdmin = new javax.swing.JMenuItem();
         jmEmpAdmin = new javax.swing.JMenuItem();
@@ -90,6 +121,66 @@ public class JFInterfaz extends javax.swing.JFrame {
         jmSesionAdmin = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("ID:");
+
+        jLabel2.setText("Cargo:");
+        jLabel2.setToolTipText("");
+
+        jLabel3.setText("Contraseña:");
+
+        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Empleado" }));
+
+        jbEntrar.setText("Entrar");
+        jbEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEntrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfId)
+                            .addComponent(jtfPass)
+                            .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jbEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(36, 36, 36)
+                .addComponent(jbEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jmEmpleados.setText("Paneles E");
         jmEmpleados.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -172,7 +263,7 @@ public class JFInterfaz extends javax.swing.JFrame {
 
         jMenuBar1.add(jmEmpleados);
 
-        jMenu2.setText("Paneles A");
+        jmAdministrador.setText("Paneles A");
 
         jmCineAdmin.setText("Cines Admin");
         jmCineAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +271,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmCineAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmCineAdmin);
+        jmAdministrador.add(jmCineAdmin);
 
         jmClienteAdmin.setText("Clientes");
         jmClienteAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +279,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmClienteAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmClienteAdmin);
+        jmAdministrador.add(jmClienteAdmin);
 
         jmEmpAdmin.setText("Empleados Admin");
         jmEmpAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +287,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmEmpAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmEmpAdmin);
+        jmAdministrador.add(jmEmpAdmin);
 
         jmPedidosAdmin.setText("Pedidos Admin");
         jmPedidosAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +295,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmPedidosAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmPedidosAdmin);
+        jmAdministrador.add(jmPedidosAdmin);
 
         jmPeliculasAdmin.setText("Peliculas");
         jmPeliculasAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +303,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmPeliculasAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmPeliculasAdmin);
+        jmAdministrador.add(jmPeliculasAdmin);
 
         jmPoductosAdmin.setText("Productos");
         jmPoductosAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +311,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmPoductosAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmPoductosAdmin);
+        jmAdministrador.add(jmPoductosAdmin);
 
         jmProveAdmin.setText("Proveedores Admin");
         jmProveAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +319,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmProveAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmProveAdmin);
+        jmAdministrador.add(jmProveAdmin);
 
         jmReservasAdmin.setText("Reservas");
         jmReservasAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +327,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmReservasAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmReservasAdmin);
+        jmAdministrador.add(jmReservasAdmin);
 
         jmSesionAdmin.setText("Sesion");
         jmSesionAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -244,9 +335,9 @@ public class JFInterfaz extends javax.swing.JFrame {
                 jmSesionAdminActionPerformed(evt);
             }
         });
-        jMenu2.add(jmSesionAdmin);
+        jmAdministrador.add(jmSesionAdmin);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jmAdministrador);
 
         setJMenuBar(jMenuBar1);
 
@@ -574,6 +665,14 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgpedidos.setVisible(false);
     }//GEN-LAST:event_jmSesionAdminActionPerformed
 
+    private void jbEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrarActionPerformed
+        String idEmple = jtfId.getText().toString();
+        String contrasenia = jtfPass.getText().toString();
+
+        JFInterfaz.cargo = emp.iniciarSesionEmple(idEmple, contrasenia);
+
+    }//GEN-LAST:event_jbEntrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -619,8 +718,14 @@ public class JFInterfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbEntrar;
+    private javax.swing.JComboBox<String> jcbCargo;
+    private javax.swing.JMenu jmAdministrador;
     private javax.swing.JMenuItem jmCineAdmin;
     private javax.swing.JMenuItem jmCineEmp;
     private javax.swing.JMenuItem jmClienteAdmin;
@@ -640,5 +745,7 @@ public class JFInterfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmReservasEmp;
     private javax.swing.JMenuItem jmSesionAdmin;
     private javax.swing.JMenuItem jmSesionEmp;
+    private javax.swing.JTextField jtfId;
+    private javax.swing.JTextField jtfPass;
     // End of variables declaration//GEN-END:variables
 }
