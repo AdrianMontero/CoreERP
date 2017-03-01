@@ -35,7 +35,7 @@ public class JFInterfaz extends javax.swing.JFrame {
      */
     public JFInterfaz() {
         initComponents();
-        this.getContentPane().add(jpgce);//Cines Empleado
+        this.getContentPane().add(jpgpedadmin);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgpeli);//Peliculas
 //        this.getContentPane().add(jpgea);//Empleado Administrador

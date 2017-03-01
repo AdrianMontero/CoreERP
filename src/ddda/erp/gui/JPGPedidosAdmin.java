@@ -19,11 +19,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Daniel
  */
 public class JPGPedidosAdmin extends javax.swing.JPanel {
+
     CuerpoPedido cp;
     Producto pro;
     Proveedor prov;
     ArrayList<Producto> misPro = new ArrayList();
     ArrayList<Proveedor> misProv = new ArrayList();
+    ArrayList<CuerpoPedido> alCp = new ArrayList();
     DefaultTableModel model;
 
     /**
@@ -35,15 +37,14 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         model.setRowCount(0);
         String stringId;
         int idProv;
-        int idProd;
+        int idCuerpoPed;
         try {
             Producto.mostrarProducto(misPro);
             for (int i = 0; i < misPro.size(); i++) {
                 pro = (Producto) misPro.get(i);
-                idProd = pro.getIdProducto();
                 stringId = pro.getNombre_prod();
                 System.out.println(stringId);
-                jcbAddPedido.addItem(String.valueOf(idProd));
+                jcbAddPedido.addItem(stringId);
                 jcbBajaIdPedido.addItem(stringId);
                 jcbConsIdPedido.addItem(stringId);
             }
@@ -53,6 +54,13 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                 idProv = prov.getIdProveedor();
                 jcbProvPedidos.addItem(String.valueOf(idProv));
             }
+            CuerpoPedido.mostrarCuerpoPedido(alCp);
+            for (int i = 0; i < alCp.size(); i++) {
+                cp = (CuerpoPedido) alCp.get(i);
+                idCuerpoPed = cp.getIdPedido();
+                jcbModIdCabPedido.addItem(String.valueOf(idCuerpoPed));
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,7 +97,9 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         jspModPedido = new javax.swing.JSpinner();
         jcbModPedido = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jcbModIdPedido = new javax.swing.JComboBox<>();
+        jcbModIdCabPedido = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jtfModDescPed = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
@@ -113,7 +123,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Producto:");
+        jLabel1.setText("ID de Producto:");
 
         jLabel3.setText("Cantidad:");
 
@@ -173,56 +183,77 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jcbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(32, 32, 32)
-                        .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbProvPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jbAddProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(jbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jbAddProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(60, 60, 60)
+                            .addComponent(jbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jcbProvPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(29, 29, 29)
+                            .addComponent(jLabel3))))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jcbAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(jLabel1)
+                    .addComponent(jsAddPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jcbProvPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAddProducto)
                     .addComponent(jbAddPedido))
-                .addGap(30, 30, 30)
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
+                .addGap(61, 61, 61))
         );
 
         jTabbedPane1.addTab("Alta Pedido", jPanel2);
 
-        jLabel4.setText("Producto:");
+        jLabel4.setText("Id Cuerpo Pedido:");
 
         jLabel6.setText("Cantidad:");
 
         jbModificar.setText("Modificar Pedido");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("ID Pedido:");
+        jcbModPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModPedidoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("ID Cabecera Pedido:");
+
+        jcbModIdCabPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModIdCabPedidoActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Descripcion:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -233,33 +264,39 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel9))
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbModPedido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbModIdPedido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(191, Short.MAX_VALUE))
+                    .addComponent(jcbModIdCabPedido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfModDescPed))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jcbModIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jcbModIdCabPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jcbModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jtfModDescPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jbModificar)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modificar Pedido", jPanel1);
@@ -366,13 +403,20 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
 
     private void jbAddProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddProductoActionPerformed
         // TODO add your handling code here:
-        String idProd = jcbAddPedido.getSelectedItem().toString();
+        String nombre = jcbAddPedido.getSelectedItem().toString();
         int cantidad = (int) jsAddPedido.getValue();
-        int precio;
+        int precio = 0;
         String idProv = jcbProvPedidos.getSelectedItem().toString();
-        precio = pro.getPrecio_prod() * cantidad;
-        String desc = pro.getDescripcion_prod();
-        model.addRow(new Object[]{(String) idProd,(String) idProv, (int) cantidad, (int) precio, (String) desc});
+        String desc = null;
+        for (int i = 0; i < misPro.size(); i++) {
+            pro = misPro.get(i);
+            if (pro.getNombre_prod().equals(nombre) == true) {
+                precio = pro.getPrecio_prod() * cantidad;
+                desc = pro.getDescripcion_prod();
+            }
+        }
+
+        model.addRow(new Object[]{(String) nombre, (String) idProv, (int) cantidad, (int) precio, (String) desc});
     }//GEN-LAST:event_jbAddProductoActionPerformed
 
     private void jcbAddPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAddPedidoActionPerformed
@@ -384,15 +428,16 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         int cols = jtAddPedido.getColumnCount();
         int fils = jtAddPedido.getRowCount();
         String nombre;
-        int idProd;
+        String nomProd;
         int cantidad;
         int precio = 0;
         String idProv = null;
         int idPedido = 0;
+        String descProd;
         CuerpoPedido cp = new CuerpoPedido();
         for (int i = 0; i < fils; i++) {
             idProv = (String) jtAddPedido.getValueAt(i, 1);
-            precio = precio + (int) jtAddPedido.getValueAt(i, 4);
+            precio = precio + (int) jtAddPedido.getValueAt(i, 3);
             for (int j = 0; j < cols; j++) {
             }
         }
@@ -403,10 +448,17 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (int i = 0; i < fils; i++) {
-            idProd = (int) jtAddPedido.getValueAt(i, 0);
+            nomProd = (String) jtAddPedido.getValueAt(i, 0);
+            int idProducto = 0;
+            for (int k = 0; k < misPro.size(); k++) {
+                pro = misPro.get(i);
+                if (pro.getNombre_prod().equals(nomProd) == true) {
+                    idProducto = pro.getIdProducto();
+                }
+            }
             cantidad = (int) jtAddPedido.getValueAt(i, 2);
-            nombre = (String) jtAddPedido.getValueAt(i, 4);
-            cp = new CuerpoPedido(idProd,nombre,cantidad);
+            descProd = (String) jtAddPedido.getValueAt(i, 4);
+            cp = new CuerpoPedido(idProducto, descProd, cantidad);
             try {
                 cp.crearCuerpoPedido(idPedido);
             } catch (SQLException ex) {
@@ -414,7 +466,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             }
             for (int j = 0; j < cols; j++) {
             }
-            
+
         }
     }//GEN-LAST:event_jbAddPedidoActionPerformed
 
@@ -426,6 +478,52 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbProvPedidosActionPerformed
 
+    private void jcbModIdCabPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModIdCabPedidoActionPerformed
+        // TODO add your handling code here:
+        CuerpoPedido miCp;
+        ArrayList<CuerpoPedido> misCp = new ArrayList();
+        int idCab = 0;
+        
+        int idPed = Integer.parseInt(jcbModIdCabPedido.getSelectedItem().toString());
+        try {
+            misCp = CuerpoPedido.mostrarCuerpoPedidoID(idPed);
+            for(int i = 0; i < misCp.size(); i++){
+                 miCp = (CuerpoPedido) misCp.get(i);
+                idCab = miCp.getIdProducto();
+                jcbModPedido.addItem(String.valueOf(idCab));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbModIdCabPedidoActionPerformed
+
+    private void jcbModPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModPedidoActionPerformed
+        // TODO add your handling code here:
+        CuerpoPedido miCp;
+        ArrayList<CuerpoPedido> misCp = new ArrayList();
+        int idProd = Integer.parseInt(jcbModPedido.getSelectedItem().toString());
+        int idPed = Integer.parseInt(jcbModIdCabPedido.getSelectedItem().toString());
+        String desc = null;
+        int cantidad = 0;
+        try {
+            misCp = CuerpoPedido.mostrarCuerpoPedidoIDProd(idProd,idPed);
+            for(int i = 0; i < misCp.size(); i++){
+                 miCp = (CuerpoPedido) misCp.get(i);
+                 desc = miCp.getDescripcion_cup();
+                 cantidad = miCp.getCantidad_cup();
+            }
+            jtfModDescPed.setText(desc);
+            jspModPedido.setValue(cantidad);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jcbModPedidoActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -436,6 +534,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -455,11 +554,12 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbAddPedido;
     private javax.swing.JComboBox<String> jcbBajaIdPedido;
     private javax.swing.JComboBox<String> jcbConsIdPedido;
-    private javax.swing.JComboBox<String> jcbModIdPedido;
+    private javax.swing.JComboBox<String> jcbModIdCabPedido;
     private javax.swing.JComboBox<String> jcbModPedido;
     private javax.swing.JComboBox<String> jcbProvPedidos;
     private javax.swing.JSpinner jsAddPedido;
     private javax.swing.JSpinner jspModPedido;
     private javax.swing.JTable jtAddPedido;
+    private javax.swing.JTextField jtfModDescPed;
     // End of variables declaration//GEN-END:variables
 }

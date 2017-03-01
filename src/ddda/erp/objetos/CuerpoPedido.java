@@ -131,41 +131,52 @@ public class CuerpoPedido {
     * @return Devuelve todos los pedidos.
     * @throws SQLException error al mostrar el pedido.
     */
-    public static ArrayList<CuerpoPedido> mostrarCuerpoPedido(ArrayList listaCuerpos) throws SQLException {
+    public static ArrayList<CuerpoPedido> mostrarCuerpoPedido(ArrayList<CuerpoPedido> listaCuerpos) throws SQLException {
         ResultSet res;
-        CuerpoPedido miCuerpoPedido = new CuerpoPedido();
-        res = bd.consultarTabla("Select * from cuerpo_pedido");
+        CuerpoPedido miCuerpoPedido;
+        res = bd.consultarTabla("Select * from cabecera_pedido");
         listaCuerpos.clear();
-        while (rs.next()) {
+        while(res.next()) {
             miCuerpoPedido = new CuerpoPedido();
-                miCuerpoPedido.setIdPedido(res.getInt("idPedido"));
-                miCuerpoPedido.setIdProducto(res.getInt("idProducto"));
-                miCuerpoPedido.setDescripcion_cup(res.getString("descripcion_cup"));
-                miCuerpoPedido.setCantidad_cup(res.getInt("cantidad_cup"));
+                    miCuerpoPedido.setIdPedido(res.getInt("idPedido"));
             listaCuerpos.add(miCuerpoPedido);    
-            
         }
         return listaCuerpos;
     }
 
     /**
      * 
-     * @param _idCuerpoPedido
+     * @param _idCabeceraPedido
      * @return
      * @throws SQLException 
      */
-    public CuerpoPedido mostrarCuerpoPedidoID(int _idCuerpoPedido) throws SQLException {
-        CuerpoPedido miCuerpoPedido = new CuerpoPedido();
-        rs = bd.consultarTabla("Select * from cuerpo_pedido where idPedido =" + _idCuerpoPedido);
+    public static ArrayList<CuerpoPedido> mostrarCuerpoPedidoID(int _idCabeceraPedido) throws SQLException {
+        ArrayList<CuerpoPedido> alCp = new ArrayList();
+        CuerpoPedido miCuerpoPedido;
+        rs = bd.consultarTabla("Select * from cuerpo_pedido where idPedido =" + _idCabeceraPedido);
         while (rs.next()) {
             miCuerpoPedido = new CuerpoPedido(
                    rs.getInt("idPedido"),
                    rs.getInt("idProducto"),
                    rs.getString("descripcion_cup"),
                    rs.getInt("cantidad_cup"));
+            alCp.add(miCuerpoPedido);
         }
-        return miCuerpoPedido;
-
+        return alCp;
+    }
+    public static ArrayList<CuerpoPedido> mostrarCuerpoPedidoIDProd(int _idProdPedido, int _idCuerpoPedido) throws SQLException {
+        ArrayList<CuerpoPedido> alCp = new ArrayList();
+        CuerpoPedido miCuerpoPedido;
+        rs = bd.consultarTabla("Select * from cuerpo_pedido where idProducto = " + _idProdPedido + " and idPedido = " + _idCuerpoPedido);
+        while (rs.next()) {
+            miCuerpoPedido = new CuerpoPedido(
+                   rs.getInt("idPedido"),
+                   rs.getInt("idProducto"),
+                   rs.getString("descripcion_cup"),
+                   rs.getInt("cantidad_cup"));
+            alCp.add(miCuerpoPedido);
+        }
+        return alCp;
     }
     /**
      * Borra un cuerpo de pedido en base a el id de pedido introducido.
@@ -180,7 +191,7 @@ public class CuerpoPedido {
         int idPed = 0;
         rs = bd.consultarTabla("Select idPedido from cabecera_pedido");
         while (rs.next()) {
-            rs.getInt("idPedido");
+            idPed = rs.getInt("idPedido");
         }
         return idPed;
     }
