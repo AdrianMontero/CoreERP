@@ -181,12 +181,17 @@ public class CuerpoPedido {
     /**
      * Borra un cuerpo de pedido en base a el id de pedido introducido.
      * 
-     * @param _idCuerpoPedido
+     * @param _idCabeceraPedido
      * @throws SQLException 
      */
-    public void borrarCuerpoPedidoID(int _idCuerpoPedido) throws SQLException {
-        bd.actualizarTabla("Delete from empleado where idEmpleado =" + _idCuerpoPedido);
+    public void borrarCabeceraPedidoID(int _idCabeceraPedido) throws SQLException {
+        bd.actualizarTabla("Delete from cabecera_pedido where idPedido =" + _idCabeceraPedido);
     }
+    
+    public void borrarCuerpoPedidoID(int _idCuerpoPedido,int _idProdPedido) throws SQLException {
+        bd.actualizarTabla("Delete from cuerpo_pedido where idProducto = " + _idProdPedido + " and idPedido = " + _idCuerpoPedido);
+    }
+    
     public int recuperarIdPedido() throws SQLException{
         int idPed = 0;
         rs = bd.consultarTabla("Select idPedido from cabecera_pedido");
@@ -201,12 +206,12 @@ public class CuerpoPedido {
      * 
      * @throws SQLException 
      */
-    public void modificarCuerpoPedido() throws SQLException {
+    public void modificarCuerpoPedido(int _idProdPedido, int _idCuerpoPedido) throws SQLException {
         bd.actualizarTabla("Update cuerpo_pedido set "
-                + "idPedido = '"+ idPedido 
-                + "', idProducto = '"+ idProducto + "',"
+                + "idPedido = "+ idPedido 
+                + ", idProducto = "+ idProducto + ","
                 + " descripcion_cup = '"+ descripcion_cup 
-                + "', cantidad_cup = '"+ cantidad_cup);
+                + "', cantidad_cup = "+ cantidad_cup + " where idProducto = " + _idProdPedido + " and idPedido = " + _idCuerpoPedido);
     }
     // </editor-fold>
     

@@ -42,9 +42,14 @@ public class JPInicio extends javax.swing.JPanel {
 
         jLabel3.setText("Contraseña:");
 
-        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Empleado" }));
 
         jbEntrar.setText("Entrar");
+        jbEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,6 +93,10 @@ public class JPInicio extends javax.swing.JPanel {
                 .addContainerGap(67, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbEntrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
