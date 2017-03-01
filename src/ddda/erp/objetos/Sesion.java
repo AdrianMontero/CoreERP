@@ -201,6 +201,23 @@ public class Sesion {
     public void borrarSesionID(int _idSeseion) throws SQLException {
         bd.actualizarTabla("Delete from sesion_pelicula where idSesion = " + _idSeseion);
     }
+    
+    public static void crearButacasSesion(int _idSala, int numFilas, int numButacasXFila) throws SQLException{
+        int idSesion = 0;    
+        rs = bd.consultarTabla("select idSesion from sesion_pelicula");
+            while(rs.next()){
+                idSesion = rs.getInt("idSesion");
+            }
+            for (int j = 1; j <= numFilas; j++) {//Creamos la fila.
+
+                for (int k = 1; k <= numButacasXFila; k++) {//Asignamos las butacas a la fila.
+
+                    bd.actualizarTabla("insert into butaca values(" + k +"," + idSesion + "," + _idSala + "," + j +  ",0)");
+
+                }
+            }
+    }
+    
     // </editor-fold>
 
 }

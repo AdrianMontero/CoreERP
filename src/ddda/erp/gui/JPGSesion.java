@@ -405,6 +405,13 @@ public class JPGSesion extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            //Creamos las butacas para la sesion
+            Sesion.crearButacasSesion(idSala,6 , 10);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGSesion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbCrearSesionAltaActionPerformed
 
     private void jbConsultaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultaSesionActionPerformed
