@@ -287,5 +287,19 @@ public class Empleado {
                 + "',idCine=" + getIdCine()
                 + " where idEmpleado =" + idEmpleado);
     }
+    
+    public void iniciarSesionEmple(String _nombreEmp, String _contrasena){
+       try{
+       rs = bd.consultarTabla("Select cargo_emp from empleado where Lower(nombre_emp) = Lower('" + _nombreEmp + "') and Lower(contrasena_emp) = Lower('" + _contrasena + "')");
+       if(rs.getString("cargo_emp").equals("Administrador")){
+           //Arrancar como admin
+       }else{
+           //Arrancar como empleado.
+       }
+       }catch(Exception e){
+           System.out.println("Error" +e);
+       }
+      
+    }
     // </editor-fold>
 }
