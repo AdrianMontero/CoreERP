@@ -45,7 +45,7 @@ public class JFInterfaz extends javax.swing.JFrame {
      */
     public JFInterfaz() {
         initComponents();
-        //this.getContentPane().add(inicio);
+        this.getContentPane().add(inicio);
 //        this.getContentPane().add(jpgpedadmin);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgpeli);//Peliculas
@@ -65,9 +65,11 @@ public class JFInterfaz extends javax.swing.JFrame {
         if(cargo.equals("Administrador")){
             jmAdministrador.setVisible(true);
             jmEmpleados.setVisible(false);
+            jpInicioSesion.setVisible(false);
         }else if(cargo.equals("Empleado")){
             jmEmpleados.setVisible(true);
             jmAdministrador.setVisible(false);
+            jpInicioSesion.setVisible(false);
         }else{
             jmEmpleados.setVisible(false);
             jmAdministrador.setVisible(false);
@@ -90,7 +92,7 @@ public class JFInterfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jpInicioSesion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtfId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -138,41 +140,41 @@ public class JFInterfaz extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpInicioSesionLayout = new javax.swing.GroupLayout(jpInicioSesion);
+        jpInicioSesion.setLayout(jpInicioSesionLayout);
+        jpInicioSesionLayout.setHorizontalGroup(
+            jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpInicioSesionLayout.createSequentialGroup()
+                .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpInicioSesionLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtfId)
                             .addComponent(jtfPass)
                             .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jpInicioSesionLayout.createSequentialGroup()
                         .addGap(120, 120, 120)
                         .addComponent(jbEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jpInicioSesionLayout.setVerticalGroup(
+            jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpInicioSesionLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(36, 36, 36)
@@ -180,7 +182,7 @@ public class JFInterfaz extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jpInicioSesion, java.awt.BorderLayout.CENTER);
 
         jmEmpleados.setText("Paneles E");
         jmEmpleados.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -722,7 +724,6 @@ public class JFInterfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbEntrar;
     private javax.swing.JComboBox<String> jcbCargo;
     private javax.swing.JMenu jmAdministrador;
@@ -745,6 +746,7 @@ public class JFInterfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmReservasEmp;
     private javax.swing.JMenuItem jmSesionAdmin;
     private javax.swing.JMenuItem jmSesionEmp;
+    private javax.swing.JPanel jpInicioSesion;
     private javax.swing.JTextField jtfId;
     private javax.swing.JTextField jtfPass;
     // End of variables declaration//GEN-END:variables

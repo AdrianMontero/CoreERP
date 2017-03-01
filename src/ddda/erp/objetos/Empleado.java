@@ -290,6 +290,7 @@ public class Empleado {
     
     public String iniciarSesionEmple(String _idEmp, String _contrasena){
        String cargo = "No Registrado";
+       String resultadoBusqueda = null ;
             try{
                 System.out.println("antes de sentencia");
                 System.out.println(_idEmp);
@@ -297,9 +298,13 @@ public class Empleado {
                 
                 rs = bd.consultarTabla("Select cargo_emp from empleado where idEmpleado =" + _idEmp + " and contrasena_emp = '" + _contrasena + "'");
                 
-                System.out.println("despues de sentencia "+rs.getString("cargo_emp").toString());
+                while (rs.next()) {
+                    resultadoBusqueda = rs.getString("cargo_emp");
+                }
                 
-                if(rs.getString("cargo_emp").equals("Administrador")){
+                System.out.println("despues de sentencia "+resultadoBusqueda);
+                
+                if(resultadoBusqueda.equals("Administrador")){
                     //Arrancar como admin
                     cargo = "Administrador";
                     System.out.println("Admin");
@@ -309,7 +314,7 @@ public class Empleado {
                      System.out.println("emple");
                 }
            }catch(Exception e){
-               System.out.println("Error" +e);
+               System.out.println("Error: " +e);
            }
       
        return cargo;
