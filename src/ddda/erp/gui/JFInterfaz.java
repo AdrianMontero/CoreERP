@@ -62,22 +62,10 @@ public class JFInterfaz extends javax.swing.JFrame {
             jmAdministrador.setVisible(false);
             jmEmpleados.setVisible(false);
 
-        /*if(cargo.equals("Administrador")){
-            jmAdministrador.setVisible(true);
-            jmEmpleados.setVisible(false);
-            jpInicioSesion.setVisible(false);
-        }else if(cargo.equals("Empleado")){
-            jmEmpleados.setVisible(true);
-            jmAdministrador.setVisible(false);
-            jpInicioSesion.setVisible(false);
-        }else{
-            jmEmpleados.setVisible(false);
-            jmAdministrador.setVisible(false);
-        }*/
 
 
         this.setVisible(true);
-//      this.setBounds(0, 0, screenSize.width, screenSize.height);
+//        this.setBounds(0, 0, screenSize.width, screenSize.height);
         this.setBounds(0, 0, 720, 720);
         this.setResizable(true);
 
@@ -95,10 +83,8 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpInicioSesion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtfId = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jtfPass = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jcbCargo = new javax.swing.JComboBox<>();
         jbEntrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmEmpleados = new javax.swing.JMenu();
@@ -126,12 +112,7 @@ public class JFInterfaz extends javax.swing.JFrame {
 
         jLabel1.setText("ID:");
 
-        jLabel2.setText("Cargo:");
-        jLabel2.setToolTipText("");
-
         jLabel3.setText("Contraseña:");
-
-        jcbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Empleado" }));
 
         jbEntrar.setText("Entrar");
         jbEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,18 +130,16 @@ public class JFInterfaz extends javax.swing.JFrame {
                     .addGroup(jpInicioSesionLayout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfId)
-                            .addComponent(jtfPass)
-                            .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfId, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(jtfPass)))
                     .addGroup(jpInicioSesionLayout.createSequentialGroup()
-                        .addGap(120, 120, 120)
+                        .addGap(118, 118, 118)
                         .addComponent(jbEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jpInicioSesionLayout.setVerticalGroup(
             jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,16 +149,12 @@ public class JFInterfaz extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
                 .addGroup(jpInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(36, 36, 36)
+                    .addComponent(jLabel3)
+                    .addComponent(jtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jbEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpInicioSesion, java.awt.BorderLayout.CENTER);
@@ -694,11 +669,12 @@ public class JFInterfaz extends javax.swing.JFrame {
         
         // jpInicioSesion.setVisible(false);
         if(cargo.equals("Administrador")){
-            
+            jpInicioSesion.setVisible(false);
             jmAdministrador.setVisible(true);
             jmEmpleados.setVisible(false);
             
         }else if(cargo.equals("Empleado")){
+            jpInicioSesion.setVisible(false);
             jmEmpleados.setVisible(true);
             jmAdministrador.setVisible(false);
            
@@ -755,11 +731,9 @@ public class JFInterfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton jbEntrar;
-    private javax.swing.JComboBox<String> jcbCargo;
     private javax.swing.JMenu jmAdministrador;
     private javax.swing.JMenuItem jmCineAdmin;
     private javax.swing.JMenuItem jmCineEmp;
