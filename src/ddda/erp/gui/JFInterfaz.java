@@ -19,7 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class JFInterfaz extends javax.swing.JFrame {
 
-    JPInicio inicio = new JPInicio();//Inicio
+    //JPInicio inicio = new JPInicio();//Inicio
     Empleado emp = new Empleado();
     
     JPGCinesAdmin jpgca = new JPGCinesAdmin();//Cines Administrador
@@ -45,7 +45,7 @@ public class JFInterfaz extends javax.swing.JFrame {
      */
     public JFInterfaz() {
         initComponents();
-        this.getContentPane().add(inicio);
+        //this.getContentPane().add(inicio);
 //        this.getContentPane().add(jpgpedadmin);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
 //        this.getContentPane().add(jpgpeli);//Peliculas
@@ -62,7 +62,7 @@ public class JFInterfaz extends javax.swing.JFrame {
             jmAdministrador.setVisible(false);
             jmEmpleados.setVisible(false);
 
-        if(cargo.equals("Administrador")){
+        /*if(cargo.equals("Administrador")){
             jmAdministrador.setVisible(true);
             jmEmpleados.setVisible(false);
             jpInicioSesion.setVisible(false);
@@ -73,7 +73,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         }else{
             jmEmpleados.setVisible(false);
             jmAdministrador.setVisible(false);
-        }
+        }*/
 
 
         this.setVisible(true);
@@ -672,6 +672,23 @@ public class JFInterfaz extends javax.swing.JFrame {
         String contrasenia = jtfPass.getText().toString();
 
         JFInterfaz.cargo = emp.iniciarSesionEmple(idEmple, contrasenia);
+        
+        initComponents();
+        
+        // jpInicioSesion.setVisible(false);
+        if(cargo.equals("Administrador")){
+            
+            jmAdministrador.setVisible(true);
+            jmEmpleados.setVisible(false);
+            
+        }else if(cargo.equals("Empleado")){
+            jmEmpleados.setVisible(true);
+            jmAdministrador.setVisible(false);
+           
+        }else{
+            jmEmpleados.setVisible(false);
+            jmAdministrador.setVisible(false);
+        }
 
     }//GEN-LAST:event_jbEntrarActionPerformed
 
