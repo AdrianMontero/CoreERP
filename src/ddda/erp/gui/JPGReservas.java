@@ -5,6 +5,17 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.Butaca;
+import ddda.erp.objetos.Pelicula;
+import ddda.erp.objetos.Reserva;
+import ddda.erp.objetos.Sesion;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author danif
@@ -16,6 +27,35 @@ public class JPGReservas extends javax.swing.JPanel {
      */
     public JPGReservas() {
         initComponents();
+        int idPelicula;
+        int idSesion;
+        ArrayList<Sesion> misSesiones = new ArrayList();
+        Sesion miSesion;
+        try {
+            Sesion.mostrarPeliculasSesiones(misSesiones);
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = new Sesion();
+                miSesion = misSesiones.get(i);
+                idPelicula = miSesion.getIdPelicula();
+                jcbReservaPelicula.addItem(String.valueOf(idPelicula));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        misSesiones = new ArrayList();
+        
+        try {
+            Sesion.mostrarSesiones(misSesiones);
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = new Sesion();
+                miSesion = misSesiones.get(i);
+                idSesion = miSesion.getIdSesion();
+                jcbConsultarIdPelicula.addItem(String.valueOf(idSesion));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -35,34 +75,24 @@ public class JPGReservas extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jcbReservaPelicula = new javax.swing.JComboBox<>();
         jcbReservaSesion = new javax.swing.JComboBox<>();
-        jspReservaFila = new javax.swing.JSpinner();
-        jspReservaButaca = new javax.swing.JSpinner();
         jbReservar = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jcbBajaReserva = new javax.swing.JComboBox<>();
-        jbBajaReserva = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jcbModificarIdReserva = new javax.swing.JComboBox<>();
-        jcbModificarIdPelicula = new javax.swing.JComboBox<>();
-        jcbModificarIdSesion = new javax.swing.JComboBox<>();
-        jspModificarIdFila = new javax.swing.JSpinner();
-        jspModificarIdButaca = new javax.swing.JSpinner();
-        jbModificarReserva = new javax.swing.JButton();
+        jcbFilaBut = new javax.swing.JComboBox<>();
+        jcbNumBut = new javax.swing.JComboBox<>();
+        jbNoReservar1 = new javax.swing.JButton();
+        jlEstBut = new javax.swing.JLabel();
+        jbConsultar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jcbConsultarIdPelicula = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        jcbConsultarIdSesion = new javax.swing.JComboBox<>();
         jbConsultarPelicula = new javax.swing.JButton();
-        jbConsultarSesion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaMostrarConsultaReserva = new javax.swing.JTable();
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Selecciona una pelicula:");
 
@@ -72,11 +102,58 @@ public class JPGReservas extends javax.swing.JPanel {
 
         jLabel4.setText("Numero de butaca:");
 
-        jcbReservaPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbReservaPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbReservaPeliculaActionPerformed(evt);
+            }
+        });
 
-        jcbReservaSesion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbReservaSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbReservaSesionActionPerformed(evt);
+            }
+        });
 
         jbReservar.setText("Realizar Reserva");
+        jbReservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbReservarActionPerformed(evt);
+            }
+        });
+
+        jcbFilaBut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
+        jcbFilaBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbFilaButActionPerformed(evt);
+            }
+        });
+
+        jcbNumBut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbNumButMouseClicked(evt);
+            }
+        });
+        jcbNumBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbNumButActionPerformed(evt);
+            }
+        });
+
+        jbNoReservar1.setText("Cancelar Reserva");
+        jbNoReservar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNoReservar1ActionPerformed(evt);
+            }
+        });
+
+        jlEstBut.setText("Estado Butaca");
+
+        jbConsultar.setText("Consultar Estado");
+        jbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,10 +170,17 @@ public class JPGReservas extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jcbReservaPelicula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbReservaSesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jspReservaFila, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspReservaButaca, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbReservar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                .addContainerGap(131, Short.MAX_VALUE))
+                    .addComponent(jbReservar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(jcbFilaBut, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jcbNumBut, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbNoReservar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jlEstBut, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,146 +196,45 @@ public class JPGReservas extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jspReservaFila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbFilaBut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jspReservaButaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jbReservar)
-                .addContainerGap(167, Short.MAX_VALUE))
+                    .addComponent(jcbNumBut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlEstBut))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbReservar)
+                    .addComponent(jbConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbNoReservar1)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Alta Reserva", jPanel1);
+        jTabbedPane1.addTab("Gestionar Reservas", jPanel1);
 
-        jLabel5.setText("Id Reserva:");
-
-        jcbBajaReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jbBajaReserva.setText("Baja Reserva");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbBajaReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jcbBajaReserva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(185, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jcbBajaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jbBajaReserva)
-                .addContainerGap(298, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Baja Reserva", jPanel2);
-
-        jLabel6.setText("Id Reserva:");
-
-        jLabel7.setText("Pelicula:");
-
-        jLabel8.setText("Sesion:");
-
-        jLabel9.setText("Fila butaca:");
-
-        jLabel10.setText("Numero butaca:");
-
-        jcbModificarIdReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jcbModificarIdPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jcbModificarIdSesion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jbModificarReserva.setText("Modificar Reserva");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jcbModificarIdReserva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbModificarIdPelicula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbModificarIdSesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jspModificarIdFila, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspModificarIdButaca, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbModificarReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                .addContainerGap(149, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jcbModificarIdReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jcbModificarIdPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jcbModificarIdSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jspModificarIdFila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jspModificarIdButaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(jbModificarReserva)
-                .addContainerGap(111, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Modificar Reserva", jPanel3);
-
-        jLabel11.setText("Id Reserva:");
-
-        jcbConsultarIdPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel12.setText("Id Pelicula:");
-
-        jcbConsultarIdSesion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel11.setText("Id Sesion:");
 
         jbConsultarPelicula.setText("Consultar Reserva");
-
-        jbConsultarSesion.setText("Consultar Pelicula");
+        jbConsultarPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbConsultarPeliculaActionPerformed(evt);
+            }
+        });
 
         jtaMostrarConsultaReserva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id Reserva", "Id Pelicula", "Id Sesion", "Numero Butaca", "Fila Butaca"
+                "Id Butaca", "Id Sesion", "Id Sala", "Fila Butaca"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -267,37 +250,27 @@ public class JPGReservas extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                        .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbConsultarIdPelicula, 0, 130, Short.MAX_VALUE)
-                            .addComponent(jcbConsultarIdSesion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jcbConsultarIdPelicula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbConsultarPelicula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbConsultarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(jbConsultarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jcbConsultarIdPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultarPelicula))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jcbConsultarIdSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbConsultarSesion))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jcbConsultarIdPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbConsultarPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Reserva", jPanel4);
@@ -314,43 +287,174 @@ public class JPGReservas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbNoReservar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNoReservar1ActionPerformed
+        int idPelicula = Integer.valueOf(jcbReservaPelicula.getSelectedItem().toString());
+        int idSesion = Integer.valueOf(jcbReservaSesion.getSelectedItem().toString());
+        int nButaca = Integer.valueOf(jcbNumBut.getSelectedItem().toString());
+        int nFila = Integer.valueOf(jcbFilaBut.getSelectedItem().toString());
+
+        Reserva miReserva = new Reserva(idPelicula, idSesion, nButaca, nFila);
+        try {
+            Reserva.borrarReserva(miReserva);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbNoReservar1ActionPerformed
+
+    private void jcbNumButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbNumButActionPerformed
+
+    }//GEN-LAST:event_jcbNumButActionPerformed
+
+    private void jcbFilaButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFilaButActionPerformed
+        ArrayList misIdsButacas = new ArrayList();
+        int idSesion = Integer.valueOf(jcbReservaSesion.getSelectedItem().toString());
+        int nFila = Integer.valueOf(jcbFilaBut.getSelectedItem().toString());
+        try {
+            misIdsButacas = Reserva.getidButaca(idSesion, nFila);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (jcbNumBut.getItemCount() != 0) {
+            jcbNumBut.removeAllItems();
+        }
+        for (int i = 0; i < misIdsButacas.size(); i++) {
+            System.out.println("numeros But:" + misIdsButacas.get(i).toString());
+            jcbNumBut.addItem(misIdsButacas.get(i).toString());
+        }
+    }//GEN-LAST:event_jcbFilaButActionPerformed
+
+    private void jbReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbReservarActionPerformed
+        int idPelicula = Integer.valueOf(jcbReservaPelicula.getSelectedItem().toString());
+        int idSesion = Integer.valueOf(jcbReservaSesion.getSelectedItem().toString());
+        int nButaca = Integer.valueOf(jcbNumBut.getSelectedItem().toString());
+        int nFila = Integer.valueOf(jcbFilaBut.getSelectedItem().toString());
+
+        Reserva miReserva = new Reserva(idPelicula, idSesion, nButaca, nFila);
+        try {
+            Reserva.crearReserva(miReserva);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbReservarActionPerformed
+
+    private void jcbReservaSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbReservaSesionActionPerformed
+
+    }//GEN-LAST:event_jcbReservaSesionActionPerformed
+
+    private void jcbReservaPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbReservaPeliculaActionPerformed
+        int idSesion;
+        Sesion miSesion;
+        ArrayList<Sesion> misSesiones = new ArrayList();
+        jcbReservaSesion.removeAllItems();
+        try {
+            misSesiones = Sesion.mostrarSesionIdPelicula(Integer.valueOf(jcbReservaPelicula.getSelectedItem().toString()));
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = new Sesion();
+                miSesion = misSesiones.get(i);
+                idSesion = miSesion.getIdSesion();
+                jcbReservaSesion.addItem(String.valueOf(idSesion));
+                //                jcbConsId.addItem(stringId);
+                //                jcbBajaPeliID.addItem(stringId);
+                //                jcbBajaPeliNom.addItem(nomPel);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbReservaPeliculaActionPerformed
+
+    private void jcbNumButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbNumButMouseClicked
+       
+
+    }//GEN-LAST:event_jcbNumButMouseClicked
+
+    private void jbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarActionPerformed
+      int idSesion = Integer.valueOf(jcbReservaSesion.getSelectedItem().toString());
+        int nButaca = Integer.valueOf(jcbNumBut.getSelectedItem().toString());
+        int nFila = Integer.valueOf(jcbFilaBut.getSelectedItem().toString());
+        try {
+            if (Reserva.evaluarButaca(nButaca, idSesion, nFila) == true) {
+                jlEstBut.setText("Ocupada");
+            } else {
+                jlEstBut.setText("Libre");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error trycatch");
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbConsultarActionPerformed
+
+    private void jbConsultarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConsultarPeliculaActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jtaMostrarConsultaReserva.getModel();
+        ArrayList<Butaca> misReservas = new ArrayList();
+        Butaca miReserva = new Butaca();
+        int idReserva = Integer.valueOf(jcbConsultarIdPelicula.getSelectedItem().toString());
+        try {
+            misReservas = Reserva.mostrarReservasId(idReserva);
+            model.setRowCount(0);
+            for(int i = 0; i < misReservas.size();i++){
+                miReserva = misReservas.get(i);
+                model.addRow(new Object[]{miReserva.getIdButaca(), miReserva.getIdSesion(), miReserva.getIdSala(), miReserva.getnFila()});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbConsultarPeliculaActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        int idPelicula;
+        int idSesion;
+        ArrayList<Sesion> misSesiones = new ArrayList();
+        Sesion miSesion;
+        jcbReservaPelicula.setModel(new DefaultComboBoxModel());
+        jcbConsultarIdPelicula.setModel(new DefaultComboBoxModel());
+        try {
+            Sesion.mostrarPeliculasSesiones(misSesiones);
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = new Sesion();
+                miSesion = misSesiones.get(i);
+                idPelicula = miSesion.getIdPelicula();
+                jcbReservaPelicula.addItem(String.valueOf(idPelicula));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        misSesiones = new ArrayList();
+        
+        try {
+            Sesion.mostrarSesiones(misSesiones);
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = new Sesion();
+                miSesion = misSesiones.get(i);
+                idSesion = miSesion.getIdSesion();
+                jcbConsultarIdPelicula.addItem(String.valueOf(idSesion));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGReservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JButton jbBajaReserva;
+    private javax.swing.JButton jbConsultar;
     private javax.swing.JButton jbConsultarPelicula;
-    private javax.swing.JButton jbConsultarSesion;
-    private javax.swing.JButton jbModificarReserva;
+    private javax.swing.JButton jbNoReservar1;
     private javax.swing.JButton jbReservar;
-    private javax.swing.JComboBox<String> jcbBajaReserva;
     private javax.swing.JComboBox<String> jcbConsultarIdPelicula;
-    private javax.swing.JComboBox<String> jcbConsultarIdSesion;
-    private javax.swing.JComboBox<String> jcbModificarIdPelicula;
-    private javax.swing.JComboBox<String> jcbModificarIdReserva;
-    private javax.swing.JComboBox<String> jcbModificarIdSesion;
+    private javax.swing.JComboBox<String> jcbFilaBut;
+    private javax.swing.JComboBox<String> jcbNumBut;
     private javax.swing.JComboBox<String> jcbReservaPelicula;
     private javax.swing.JComboBox<String> jcbReservaSesion;
-    private javax.swing.JSpinner jspModificarIdButaca;
-    private javax.swing.JSpinner jspModificarIdFila;
-    private javax.swing.JSpinner jspReservaButaca;
-    private javax.swing.JSpinner jspReservaFila;
+    private javax.swing.JLabel jlEstBut;
     private javax.swing.JTable jtaMostrarConsultaReserva;
     // End of variables declaration//GEN-END:variables
 }

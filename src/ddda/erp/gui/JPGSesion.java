@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -526,7 +527,46 @@ public class JPGSesion extends javax.swing.JPanel {
     }//GEN-LAST:event_jbEliminarSesionActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:
+        String stringIdSesion;
+        String stringIdSala;
+        String stringIdPelicula;
+        jcbIdSesionConsulta.setModel(new DefaultComboBoxModel());
+        jcbModificarIdSesion.setModel(new DefaultComboBoxModel());
+        jcbBajaIdSesion.setModel(new DefaultComboBoxModel());
+        jcbIdPeliculaCrearSesion.setModel(new DefaultComboBoxModel());
+        jcbIdPeliculaConsultaSesion.setModel(new DefaultComboBoxModel());
+        jcbIdPeliculaModSesion.setModel(new DefaultComboBoxModel());
+        jcbIdSalaCrearSesion.setModel(new DefaultComboBoxModel());
+        jcbIdSalaSesionAlta.setModel(new DefaultComboBoxModel());
+        jcbIdSalaModSesion.setModel(new DefaultComboBoxModel());
+        try {
+            Sesion.mostrarSesiones(misSesiones);
+            Pelicula.mostrarPeliculas(misPeliculas);
+            Csalasbutacas.mostrarSalas(misSalas);
+            for (int i = 0; i < misSesiones.size(); i++) {
+                miSesion = (Sesion) misSesiones.get(i);
+                stringIdSesion = String.valueOf(miSesion.getIdSesion());
+                jcbIdSesionConsulta.addItem(stringIdSesion);
+                jcbModificarIdSesion.addItem(stringIdSesion);
+                jcbBajaIdSesion.addItem(stringIdSesion);
+            }
+            for (int i = 0; i < misPeliculas.size(); i++) {
+                miPelicula = (Pelicula) misPeliculas.get(i);
+                stringIdPelicula = String.valueOf(miPelicula.getIdPelicula());
+                jcbIdPeliculaCrearSesion.addItem(stringIdPelicula);
+                jcbIdPeliculaConsultaSesion.addItem(stringIdPelicula);
+                jcbIdPeliculaModSesion.addItem(stringIdPelicula);
+            }
+            for (int i = 0; i < misSalas.size(); i++) {
+                miSala = (Csalasbutacas) misSalas.get(i);
+                stringIdSala = String.valueOf(miSala.getIdSala());
+                jcbIdSalaCrearSesion.addItem(stringIdSala);
+                jcbIdSalaSesionAlta.addItem(stringIdSala);
+                jcbIdSalaModSesion.addItem(stringIdSala);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
