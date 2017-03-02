@@ -11,6 +11,9 @@ package ddda.erp.gui;
  */
 public class JPInicio extends javax.swing.JPanel {
 
+    //Empleado emp = new Empleado();
+    //JFInterfaz jfInterfaz = new JFInterfaz();
+    
     /**
      * Creates new form JPInicio
      */
@@ -95,7 +98,17 @@ public class JPInicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrarActionPerformed
-        // TODO add your handling code here:
+       /* String idEmple = jtfId.getText().toString();
+        String contrasenia = jtfPass.getText().toString();
+        
+        JFInterfaz.cargo = emp.iniciarSesionEmple(idEmple, contrasenia);*/
+        
+       
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jbEntrarActionPerformed
 
 

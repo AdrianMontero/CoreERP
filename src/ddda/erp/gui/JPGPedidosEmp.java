@@ -5,17 +5,66 @@
  */
 package ddda.erp.gui;
 
+import ddda.erp.objetos.CuerpoPedido;
+import ddda.erp.objetos.Producto;
+import ddda.erp.objetos.Proveedor;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Daniel
  */
 public class JPGPedidosEmp extends javax.swing.JPanel {
 
+    CuerpoPedido cp;
+    Producto pro;
+    Proveedor prov;
+    ArrayList<Producto> misPro = new ArrayList();
+    ArrayList<Proveedor> misProv = new ArrayList();
+    ArrayList<CuerpoPedido> alCp = new ArrayList();
+    DefaultTableModel model;
+    DefaultTableModel modeloConsulta;
+
     /**
      * Creates new form JPGPedidosEmp
      */
     public JPGPedidosEmp() {
         initComponents();
+        model = (DefaultTableModel) jtAddPedidoEMp.getModel();
+        model.setRowCount(0);
+        modeloConsulta = (DefaultTableModel) jtConsultaEmp.getModel();
+        modeloConsulta.setRowCount(0);
+        String stringId;
+        int idProv;
+        int idCuerpoPed;
+        try {
+            Producto.mostrarProducto(misPro);
+            for (int i = 0; i < misPro.size(); i++) {
+                pro = (Producto) misPro.get(i);
+                stringId = pro.getNombre_prod();
+                System.out.println(stringId);
+                jcbAddPedidoEmp.addItem(stringId);
+            }
+            Proveedor.mostrarProveedor(misProv);
+            for (int i = 0; i < misProv.size(); i++) {
+                prov = (Proveedor) misProv.get(i);
+                idProv = prov.getIdProveedor();
+                jcbPedidoProveedoresEmp.addItem(String.valueOf(idProv));
+            }
+            CuerpoPedido.mostrarCuerpoPedido(alCp);
+            for (int i = 0; i < alCp.size(); i++) {
+                cp = (CuerpoPedido) alCp.get(i);
+                idCuerpoPed = cp.getIdPedido();
+                jcbModPedIdPedidoEmp.addItem(String.valueOf(idCuerpoPed));
+                jcbConsultaPedidoEmp.addItem(String.valueOf(idCuerpoPed));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosEmp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,30 +79,36 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jbDardeAlta = new javax.swing.JButton();
         jbAñadir = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
+        jcbAddPedidoEmp = new javax.swing.JComboBox<>();
+        jspAddPedidoCantidadEMp = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        jcbPedidoProveedoresEmp = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtAddPedidoEMp = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jbModificar = new javax.swing.JButton();
         jspModPedido = new javax.swing.JSpinner();
-        jcbModPedido = new javax.swing.JComboBox<>();
+        jcbModPedidoEmp = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jspModID = new javax.swing.JSpinner();
+        jcbModPedIdPedidoEmp = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jtfModDescPedidoEmp = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jbBuscar = new javax.swing.JButton();
+        jbBuscarPedidoEmp = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jSpinner2 = new javax.swing.JSpinner();
+        jtConsultaEmp = new javax.swing.JTable();
+        jcbConsultaPedidoEmp = new javax.swing.JComboBox<>();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -61,19 +116,59 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         jLabel1.setText("Producto:");
 
         jLabel3.setText("Cantidad:");
 
-        jbDardeAlta.setText("Dar de Alta");
+        jbDardeAlta.setText("Añadir Pedido");
+        jbDardeAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDardeAltaActionPerformed(evt);
+            }
+        });
 
-        jbAñadir.setText("Añadir Pedido");
+        jbAñadir.setText("Añadir Producto");
+        jbAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAñadirActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jLabel5.setText("Proveedor:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jtAddPedidoEMp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "idProveedor", "Descripcion", "Cantidad", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jtAddPedidoEMp);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -82,73 +177,108 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(26, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jbAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbDardeAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbAddPedidoEmp, 0, 100, Short.MAX_VALUE)
+                                    .addComponent(jcbPedidoProveedoresEmp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbDardeAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(119, Short.MAX_VALUE))
+                                .addComponent(jspAddPedidoCantidadEMp, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)))
+                        .addGap(106, 106, 106))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbAddPedidoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspAddPedidoCantidadEMp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jcbPedidoProveedoresEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAñadir)
                     .addComponent(jbDardeAlta))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
 
         jTabbedPane1.addTab("Alta Pedido", jPanel2);
 
-        jLabel4.setText("Producto:");
+        jLabel4.setText("ID Producto:");
 
         jLabel6.setText("Cantidad:");
 
         jbModificar.setText("Modificar Pedido");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
-        jcbModPedido.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbModPedidoEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModPedidoEmpActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("ID Pedido:");
+
+        jcbModPedIdPedidoEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbModPedIdPedidoEmpActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Descripcion:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspModID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbModPedidoEmp, 0, 150, Short.MAX_VALUE)
+                            .addComponent(jcbModPedIdPedidoEmp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtfModDescPedidoEmp)))))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,27 +286,36 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jspModID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbModPedIdPedidoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jcbModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbModPedidoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jspModPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jtfModDescPedidoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(jbModificar)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modificar Pedido", jPanel1);
 
         jLabel7.setText("ID Pedido:");
 
-        jbBuscar.setText("Buscar Pedido");
+        jbBuscarPedidoEmp.setText("Buscar Pedido");
+        jbBuscarPedidoEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarPedidoEmpActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtConsultaEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -184,18 +323,18 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre Producto", "Cantidad", "Precio Sin IVA", "Precio Con IVA"
+                "idPedido", "idProducto", "Descripcion", "Cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtConsultaEmp);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -205,12 +344,11 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(jLabel7)
-                        .addGap(28, 28, 28)
-                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jcbConsultaPedidoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jbBuscarPedidoEmp))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -220,11 +358,11 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jbBuscar)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                    .addComponent(jbBuscarPedidoEmp)
+                    .addComponent(jcbConsultaPedidoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consulta Pedido", jPanel3);
@@ -241,15 +379,161 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAñadirActionPerformed
+        // TODO add your handling code here:
+        String nombre = jcbAddPedidoEmp.getSelectedItem().toString();
+        int cantidad = (int) jspAddPedidoCantidadEMp.getValue();
+        int precio = 0;
+        String idProv = jcbPedidoProveedoresEmp.getSelectedItem().toString();
+        String desc = null;
+        for (int i = 0; i < misPro.size(); i++) {
+            pro = misPro.get(i);
+            if (pro.getNombre_prod().equals(nombre) == true) {
+                precio = pro.getPrecio_prod() * cantidad;
+                desc = pro.getDescripcion_prod();
+            }
+        }
+        model.addRow(new Object[]{(String) nombre, (String) idProv,(String) desc, (int) cantidad, (int) precio});
+    }//GEN-LAST:event_jbAñadirActionPerformed
+
+    private void jbDardeAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDardeAltaActionPerformed
+        // TODO add your handling code here:
+        int cols = jtAddPedidoEMp.getColumnCount();
+        int fils = jtAddPedidoEMp.getRowCount();
+        String nombre;
+        String nomProd;
+        int cantidad;
+        int precio = 0;
+        String idProv = null;
+        int idPedido = 0;
+        String descProd;
+        CuerpoPedido cp = new CuerpoPedido();
+        for (int i = 0; i < fils; i++) {
+            idProv = (String) jtAddPedidoEMp.getValueAt(i, 1);
+            precio = precio + (int) jtAddPedidoEMp.getValueAt(i, 4);
+            for (int j = 0; j < cols; j++) {
+            }
+        }
+        try {
+            cp.crearCabeceraPedido(precio, idProv);
+            idPedido = cp.recuperarIdPedido();
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosEmp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < fils; i++) {
+            nomProd = (String) jtAddPedidoEMp.getValueAt(i, 0);
+            int idProducto = 0;
+            for (int k = 0; k < misPro.size(); k++) {
+                pro = misPro.get(i);
+                if (pro.getNombre_prod().equals(nomProd) == true) {
+                    idProducto = pro.getIdProducto();
+                }
+            }
+            descProd = (String) jtAddPedidoEMp.getValueAt(i, 2);
+            cantidad = (int) jtAddPedidoEMp.getValueAt(i,3);
+            cp = new CuerpoPedido(idProducto, descProd, cantidad);
+            try {
+                cp.crearCuerpoPedido(idPedido);
+            } catch (SQLException ex) {
+                Logger.getLogger(JPGPedidosEmp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (int j = 0; j < cols; j++) {
+            }
+
+        }
+    }//GEN-LAST:event_jbDardeAltaActionPerformed
+
+    private void jcbModPedIdPedidoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModPedIdPedidoEmpActionPerformed
+        // TODO add your handling code here
+        CuerpoPedido miCp;
+        ArrayList<CuerpoPedido> misCp = new ArrayList();
+        int idCab = 0;
+
+        int idPed = Integer.parseInt(jcbModPedIdPedidoEmp.getSelectedItem().toString());
+        try {
+            misCp = CuerpoPedido.mostrarCuerpoPedidoID(idPed);
+            for (int i = 0; i < misCp.size(); i++) {
+                miCp = (CuerpoPedido) misCp.get(i);
+                idCab = miCp.getIdProducto();
+                jcbModPedidoEmp.addItem(String.valueOf(idCab));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbModPedIdPedidoEmpActionPerformed
+
+    private void jcbModPedidoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbModPedidoEmpActionPerformed
+        // TODO add your handling code here:
+        CuerpoPedido miCp;
+        ArrayList<CuerpoPedido> misCp = new ArrayList();
+        int idProd = Integer.parseInt(jcbModPedidoEmp.getSelectedItem().toString());
+        int idPed = Integer.parseInt(jcbModPedIdPedidoEmp.getSelectedItem().toString());
+        String desc = null;
+        int cantidad = 0;
+        try {
+            misCp = CuerpoPedido.mostrarCuerpoPedidoIDProd(idProd, idPed);
+            for (int i = 0; i < misCp.size(); i++) {
+                miCp = (CuerpoPedido) misCp.get(i);
+                desc = miCp.getDescripcion_cup();
+                cantidad = miCp.getCantidad_cup();
+            }
+            jtfModDescPedidoEmp.setText(desc);
+            jspModPedido.setValue(cantidad);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbModPedidoEmpActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+        int idProducto = Integer.parseInt(jcbModPedidoEmp.getSelectedItem().toString());
+        int idCabecera = Integer.parseInt(jcbModPedIdPedidoEmp.getSelectedItem().toString());
+        cp.setIdPedido(idCabecera);
+        cp.setIdProducto(idProducto);
+        cp.setDescripcion_cup(jtfModDescPedidoEmp.getText());
+        cp.setCantidad_cup((int) jspModPedido.getValue());
+        try {
+            cp.modificarCuerpoPedido(idProducto, idCabecera);
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbBuscarPedidoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarPedidoEmpActionPerformed
+        // TODO add your handling code here:
+        CuerpoPedido miCp;
+        ArrayList<CuerpoPedido> misCp = new ArrayList();
+        int idCab = 0;
+        int idProd = 0;
+        String descrip = null;
+        int cantidad = 0;
+
+        int idPed = Integer.parseInt(jcbConsultaPedidoEmp.getSelectedItem().toString());
+        try {
+            misCp = CuerpoPedido.mostrarCuerpoPedidoID(idPed);
+            for (int i = 0; i < misCp.size(); i++) {
+                miCp = (CuerpoPedido) misCp.get(i);
+                idCab = miCp.getIdPedido();
+                idProd = miCp.getIdProducto();
+                descrip = miCp.getDescripcion_cup();
+                cantidad = miCp.getCantidad_cup();
+                modeloConsulta.addRow(new Object[]{(int) idCab, (int) idProd, (String) descrip, (int) cantidad});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbBuscarPedidoEmpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -258,17 +542,22 @@ public class JPGPedidosEmp extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton jbAñadir;
-    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbBuscarPedidoEmp;
     private javax.swing.JButton jbDardeAlta;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JComboBox<String> jcbModPedido;
-    private javax.swing.JSpinner jspModID;
+    private javax.swing.JComboBox<String> jcbAddPedidoEmp;
+    private javax.swing.JComboBox<String> jcbConsultaPedidoEmp;
+    private javax.swing.JComboBox<String> jcbModPedIdPedidoEmp;
+    private javax.swing.JComboBox<String> jcbModPedidoEmp;
+    private javax.swing.JComboBox<String> jcbPedidoProveedoresEmp;
+    private javax.swing.JSpinner jspAddPedidoCantidadEMp;
     private javax.swing.JSpinner jspModPedido;
+    private javax.swing.JTable jtAddPedidoEMp;
+    private javax.swing.JTable jtConsultaEmp;
+    private javax.swing.JTextField jtfModDescPedidoEmp;
     // End of variables declaration//GEN-END:variables
 }

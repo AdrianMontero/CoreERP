@@ -288,18 +288,36 @@ public class Empleado {
                 + " where idEmpleado =" + idEmpleado);
     }
     
-    public void iniciarSesionEmple(String _nombreEmp, String _contrasena){
-       try{
-       rs = bd.consultarTabla("Select cargo_emp from empleado where Lower(nombre_emp) = Lower('" + _nombreEmp + "') and Lower(contrasena_emp) = Lower('" + _contrasena + "')");
-       if(rs.getString("cargo_emp").equals("Administrador")){
-           //Arrancar como admin
-       }else{
-           //Arrancar como empleado.
-       }
-       }catch(Exception e){
-           System.out.println("Error" +e);
-       }
+    public String iniciarSesionEmple(String _idEmp, String _contrasena){
+       String cargo = "No Registrado";
+       String resultadoBusqueda = null ;
+            try{
+                System.out.println("antes de sentencia");
+                System.out.println(_idEmp);
+                System.out.println(_contrasena);
+                
+                rs = bd.consultarTabla("Select cargo_emp from empleado where idEmpleado =" + _idEmp + " and contrasena_emp = '" + _contrasena + "'");
+                
+                while (rs.next()) {
+                    resultadoBusqueda = rs.getString("cargo_emp");
+                }
+                
+                System.out.println("despues de sentencia "+resultadoBusqueda);
+                
+                if(resultadoBusqueda.equals("Administrador")){
+                    //Arrancar como admin
+                    cargo = "Administrador";
+                    System.out.println("Admin");
+                }else{
+                    //Arrancar como empleado.
+                    cargo = "Empleado";
+                     System.out.println("emple");
+                }
+           }catch(Exception e){
+               System.out.println("Error: " +e);
+           }
       
+       return cargo;
     }
     // </editor-fold>
 }
