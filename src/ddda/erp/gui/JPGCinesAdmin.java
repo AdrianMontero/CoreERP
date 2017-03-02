@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -113,6 +114,12 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -556,6 +563,29 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbBajaSalasActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        String stringId;
+
+        jcbIdCineCrearSalas.setModel(new DefaultComboBoxModel());
+        jcbBajaCine.setModel(new DefaultComboBoxModel());
+        jcbConsultaCine.setModel(new DefaultComboBoxModel());
+        jcbModCine.setModel(new DefaultComboBoxModel());
+        try {
+            Cine.mostrarCines(misCines);
+            for (int i = 0; i < misCines.size(); i++) {
+                miCine = (Cine) misCines.get(i);
+                stringId = String.valueOf(miCine.getIdCine());
+                System.out.println(stringId);
+                jcbIdCineCrearSalas.addItem(stringId);
+                jcbBajaCine.addItem(stringId);
+                jcbConsultaCine.addItem(stringId);
+                jcbModCine.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -97,6 +98,12 @@ public class JPGClientes extends javax.swing.JPanel {
         jtfModCP = new javax.swing.JTextField();
         jspModPuntos = new javax.swing.JSpinner();
         jbModCliente = new javax.swing.JButton();
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -555,6 +562,26 @@ public class JPGClientes extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbModClienteActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        String stringId;
+        jcbBajaCli.setModel(new DefaultComboBoxModel());
+        jcbConsultaIdCli.setModel(new DefaultComboBoxModel());
+        jcbModCli.setModel(new DefaultComboBoxModel());
+        try {
+            Cliente.mostrarClientes(misClientes);
+            for (int i = 0; i < misClientes.size(); i++) {
+                miCliente = (Cliente) misClientes.get(i);
+                stringId = String.valueOf(miCliente.getIdCliente());
+                System.out.println(stringId);
+                jcbBajaCli.addItem(stringId);
+                jcbConsultaIdCli.addItem(stringId);
+                jcbModCli.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

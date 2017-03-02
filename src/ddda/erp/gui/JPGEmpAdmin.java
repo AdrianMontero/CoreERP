@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -556,7 +557,29 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
     }//GEN-LAST:event_jcbConsultaEmpActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        
+        String stringId;
+        String stringIdCine;
+        jcbIdEmpleado.setModel(new DefaultComboBoxModel());
+        jcbConsultaEmp.setModel(new DefaultComboBoxModel());
+        jcbBajaEmp.setModel(new DefaultComboBoxModel());
+        jcbIdCineAltaEmpleado.setModel(new DefaultComboBoxModel());
+        jcbModificarIdCineEmp.setModel(new DefaultComboBoxModel());
+        try {
+            Empleado.mostrarEmpleados(misEmpleados);
+            for (int i = 0; i < misEmpleados.size(); i++) {
+                miEmpleado = (Empleado) misEmpleados.get(i);
+                stringId = String.valueOf(miEmpleado.getIdEmpleado());
+                stringIdCine = String.valueOf(miEmpleado.getIdCine());
+                System.out.println(stringId);
+                jcbIdEmpleado.addItem(stringId);
+                jcbConsultaEmp.addItem(stringId);
+                jcbBajaEmp.addItem(stringId);
+                jcbIdCineAltaEmpleado.addItem(stringIdCine);
+                jcbModificarIdCineEmp.addItem(stringIdCine);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 

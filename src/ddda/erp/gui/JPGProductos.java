@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -87,6 +88,12 @@ public class JPGProductos extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jtfPrecioCons = new javax.swing.JTextField();
         jbConsPrecioPro = new javax.swing.JButton();
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre Producto:");
 
@@ -236,9 +243,8 @@ public class JPGProductos extends javax.swing.JPanel {
                     .addComponent(jbModificarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbModificarIdProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfModificarNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jsModificarPrecioProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                        .addComponent(jsModificarCantidad, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jsModificarPrecioProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jsModificarCantidad)
                     .addComponent(jtfModProd))
                 .addContainerGap(133, Short.MAX_VALUE))
         );
@@ -499,6 +505,25 @@ public class JPGProductos extends javax.swing.JPanel {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jcbBajaIdProdcutoActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        String id;
+        jcbConsultaIdProducto.setModel(new DefaultComboBoxModel());
+        jcbBajaIdProdcuto.setModel(new DefaultComboBoxModel());
+        jcbModificarIdProducto.setModel(new DefaultComboBoxModel());
+        try {
+            Producto.mostrarProducto(misPro);
+            for (int i = 0; i < misPro.size(); i++) {
+                miPro = (Producto) misPro.get(i);
+                id = String.valueOf(miPro.getIdProducto());
+                jcbConsultaIdProducto.addItem(id);
+                jcbBajaIdProdcuto.addItem(id);
+                jcbModificarIdProducto.addItem(id);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -89,6 +90,12 @@ public class JPGPeliculas extends javax.swing.JPanel {
         jcbBajaPeliNom = new javax.swing.JComboBox<>();
         jbBajaID = new javax.swing.JButton();
         jbBajaNombre = new javax.swing.JButton();
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -459,6 +466,31 @@ public class JPGPeliculas extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbBajaNombreActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        String stringId;
+        String nomPel;
+        jcbModIdPeli.setModel(new DefaultComboBoxModel());
+        jcbConsId.setModel(new DefaultComboBoxModel());
+        jcbBajaPeliID.setModel(new DefaultComboBoxModel());
+        jcbBajaPeliNom.setModel(new DefaultComboBoxModel());
+        try {
+            
+            Pelicula.mostrarPeliculas(misPeliculas);
+            for (int i = 0; i < misPeliculas.size(); i++) {
+                miPelicula = (Pelicula) misPeliculas.get(i);
+                stringId = String.valueOf(miPelicula.getIdPelicula());
+                nomPel = String.valueOf(miPelicula.getNombre());
+                System.out.println(stringId);
+                jcbModIdPeli.addItem(stringId);
+                jcbConsId.addItem(stringId);
+                jcbBajaPeliID.addItem(stringId);
+                jcbBajaPeliNom.addItem(nomPel);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

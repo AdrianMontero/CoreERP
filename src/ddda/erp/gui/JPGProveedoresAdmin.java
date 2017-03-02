@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -89,6 +90,12 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jcbBajaProAdmin = new javax.swing.JComboBox<>();
         jbEliminarProAdmin = new javax.swing.JButton();
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -465,6 +472,26 @@ public class JPGProveedoresAdmin extends javax.swing.JPanel {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbEliminarProAdminActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        String stringId;
+        jcbModIdProAdmin.setModel(new DefaultComboBoxModel());
+        jcbConsultaProAdmin.setModel(new DefaultComboBoxModel());
+        jcbBajaProAdmin.setModel(new DefaultComboBoxModel());
+        try {
+            Proveedor.mostrarProveedor(misProveedores);
+            for (int i = 0; i < misProveedores.size(); i++) {
+                miProveedor = (Proveedor) misProveedores.get(i);
+                stringId = String.valueOf(miProveedor.getIdProveedor());
+                System.out.println(stringId);
+                jcbModIdProAdmin.addItem(stringId);
+                jcbConsultaProAdmin.addItem(stringId);
+                jcbBajaProAdmin.addItem(stringId);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

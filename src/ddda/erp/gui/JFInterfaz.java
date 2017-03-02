@@ -35,7 +35,7 @@ public class JFInterfaz extends javax.swing.JFrame {
     JPGPedidosEmp jpgpedidos = new JPGPedidosEmp();//Pedidos empleado*******************
     JPGReservas jpgreservas = new JPGReservas();//Reservas********************************************
     JPGProductos jpgprouctos = new JPGProductos();//Productos****************************************
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static String cargo = "No Registrado";
     
     
@@ -78,8 +78,8 @@ public class JFInterfaz extends javax.swing.JFrame {
 
         this.setVisible(true);
 //      this.setBounds(0, 0, screenSize.width, screenSize.height);
-        this.setBounds(0, 0, 700, 600);
-        this.setResizable(false);
+        this.setBounds(0, 0, 720, 720);
+        this.setResizable(true);
 
     }
 
@@ -365,6 +365,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmEmpEmpActionPerformed
 
     private void jmCineEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCineEmpActionPerformed
@@ -382,6 +383,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmCineEmpActionPerformed
 
     private void jmClienteEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmClienteEmpActionPerformed
@@ -399,6 +401,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmClienteEmpActionPerformed
 
     private void jmPedidosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidosEmpActionPerformed
@@ -419,6 +422,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(true);
+        jpInicioSesion.setVisible(false);
         
     }//GEN-LAST:event_jmPedidosEmpActionPerformed
 
@@ -437,6 +441,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmPeliculasEmpActionPerformed
 
     private void jmPoductosEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPoductosEmpActionPerformed
@@ -457,6 +462,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(true);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmPoductosEmpActionPerformed
 
     private void jmProveEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveEmpActionPerformed
@@ -474,6 +480,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmProveEmpActionPerformed
 
     private void jmReservasEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservasEmpActionPerformed
@@ -494,6 +501,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(true);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmReservasEmpActionPerformed
 
     private void jmCineAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCineAdminActionPerformed
@@ -511,6 +519,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmCineAdminActionPerformed
 
     private void jmClienteAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmClienteAdminActionPerformed
@@ -528,6 +537,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmClienteAdminActionPerformed
 
     private void jmEmpAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEmpAdminActionPerformed
@@ -545,6 +555,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmEmpAdminActionPerformed
 
     private void jmPedidosAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPedidosAdminActionPerformed
@@ -562,6 +573,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmPedidosAdminActionPerformed
 
     private void jmPeliculasAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPeliculasAdminActionPerformed
@@ -579,6 +591,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmPeliculasAdminActionPerformed
 
     private void jmPoductosAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPoductosAdminActionPerformed
@@ -596,6 +609,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(true);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmPoductosAdminActionPerformed
 
     private void jmProveAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmProveAdminActionPerformed
@@ -613,6 +627,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmProveAdminActionPerformed
 
     private void jmReservasAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmReservasAdminActionPerformed
@@ -630,6 +645,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(true);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmReservasAdminActionPerformed
 
     private void jmSesionEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSesionEmpActionPerformed
@@ -647,6 +663,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
         
     }//GEN-LAST:event_jmSesionEmpActionPerformed
 
@@ -665,6 +682,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         jpgprouctos.setVisible(false);
         jpgreservas.setVisible(false);
         jpgpedidos.setVisible(false);
+        jpInicioSesion.setVisible(false);
     }//GEN-LAST:event_jmSesionAdminActionPerformed
 
     private void jbEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEntrarActionPerformed
@@ -673,7 +691,6 @@ public class JFInterfaz extends javax.swing.JFrame {
 
         JFInterfaz.cargo = emp.iniciarSesionEmple(idEmple, contrasenia);
         
-        initComponents();
         
         // jpInicioSesion.setVisible(false);
         if(cargo.equals("Administrador")){
