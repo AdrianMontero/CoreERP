@@ -25,6 +25,7 @@ public class Reserva {
     private int idPelicula;
     private int idSesion;
     private int idButaca;
+    private int nFila;
 
     // <editor-fold defaultstate="collapsed" desc="Getters">
     public int getIdReserva() {
@@ -42,6 +43,16 @@ public class Reserva {
     public int getIdButaca() {
         return idButaca;
     }
+
+    public int getnFila() {
+        return nFila;
+    }
+
+    public void setnFila(int nFila) {
+        this.nFila = nFila;
+    }
+
+    
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Setter">
@@ -79,11 +90,12 @@ public class Reserva {
      * @param idSesion
      * @param idButaca
      */
-    public Reserva(int idReserva, int idPelicula, int idSesion, int idButaca) {
+    public Reserva(int idReserva, int idPelicula, int idSesion, int idButaca, int nFila) {
         this.idReserva = idReserva;
         this.idPelicula = idPelicula;
         this.idSesion = idSesion;
         this.idButaca = idButaca;
+        this.nFila = nFila;
     }
 
     /**
@@ -94,10 +106,11 @@ public class Reserva {
      * @param idSesion
      * @param idButaca
      */
-    public Reserva(int idPelicula, int idSesion, int idButaca) {
+    public Reserva(int idPelicula, int idSesion, int idButaca, int nFila) {
         this.idPelicula = idPelicula;
         this.idSesion = idSesion;
         this.idButaca = idButaca;
+        this.nFila = nFila;
     }
 
     // </editor-fold>
@@ -111,11 +124,14 @@ public class Reserva {
      * @param idButaca
      * @throws SQLException
      */
-    public void crearReserva(int _idPelicula, int _idSesion, int _idButaca) throws SQLException {
-        bd.actualizarTabla("insert into reserva values(null, "
-                + idPelicula + ", "
-                + idSesion + ", "
-                + idButaca + ")");
+    public static void crearReserva(Reserva miReserva) throws SQLException {
+                bd.actualizarTabla("Update butaca set "
+                + "ocupada_but = 1 where idButaca = " + 
+                miReserva.getIdButaca() + " and idSesion = " +
+                miReserva.getIdSesion() + " and nFila_but = " +
+                miReserva.getnFila());
+                //Update butaca set ocupada_but = 1 where
+                //idButaca = 1 and idSesion = 1 and nFila = 1
     }
 
     /**
@@ -125,17 +141,20 @@ public class Reserva {
      * @return
      * @throws SQLException
      */
-    public Reserva mostrarReservaId(int _idReserva) throws SQLException {
-        Reserva miReserva = new Reserva();
-        rs = bd.consultarTabla("select * from  cine where idCine = " + _idReserva);
+    public static ArrayList<Butaca> mostrarReservasId(int _idSesion) throws SQLException {
+        ArrayList<Butaca> misReservas = new ArrayList();
+        Butaca miReserva;
+        rs = bd.consultarTabla("select * from  butaca where idSesion = " + _idSesion + " and ocupada_but = 1");
         while (rs.next()) {
-            miReserva.setIdReserva(rs.getInt("idReserva"));
-            miReserva.setIdPelicula(rs.getInt("idPelicula"));
-            miReserva.setIdSesion(rs.getInt("idSesion"));
+            miReserva = new Butaca();
             miReserva.setIdButaca(rs.getInt("idButaca"));
-
+            miReserva.setIdSesion(rs.getInt("idSesion"));
+            miReserva.setIdSala(rs.getInt("idSala"));
+            miReserva.setnFila(rs.getInt("nFila_but"));
+            miReserva.setOcupada(rs.getInt("ocupada_but"));
+            misReservas.add(miReserva);
         }
-        return miReserva;
+        return misReservas;
     }
 
     /**
@@ -183,8 +202,35 @@ public class Reserva {
      * @param _idReserva
      * @throws SQLException
      */
-    public void borrarReservaID(int _idReserva) throws SQLException {
-        bd.actualizarTabla("Delete from reserva where idReserva = " + _idReserva);
+        public static void borrarReserva(Reserva miReserva) throws SQLException {
+                bd.actualizarTabla("Update butaca set "
+                + "ocupada_but = 0 where idButaca = " + 
+                miReserva.getIdButaca() + " and idSesion = " +
+                miReserva.getIdSesion() + " and nFila_but = " +
+                miReserva.getnFila());
+                //Update butaca set ocupada_but = 1 where
+                //idButaca = 1 and idSesion = 1 and nFila = 1
+    }
+    
+    public static ArrayList getidButaca(int _idSesion, int _nFila) throws SQLException{
+        ArrayList misIdButacas = new ArrayList();
+        rs = bd.consultarTabla("Select * from butaca where idSesion = " + _idSesion + " and nFila_but = " +_nFila);
+        rs.next();
+        do{
+           int idBut = rs.getInt("idButaca");
+           misIdButacas.add(idBut);
+       }while(rs.next());
+       return misIdButacas;
+    }
+    
+    public static Boolean evaluarButaca(int _idButaca, int _idSesion, int _nFila) throws SQLException{
+        rs = bd.consultarTabla("select * from butaca where idButaca = " + _idButaca + " and  idSesion = " + _idSesion + " and nFila_but = " +_nFila);
+        rs.next();
+        if(rs.getBoolean("ocupada_but") == true){
+            return true;
+        }else{
+            return false;
+        }
     }
     // </editor-fold>
 

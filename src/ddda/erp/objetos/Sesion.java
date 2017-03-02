@@ -85,10 +85,11 @@ public class Sesion {
         this.hora_ses = hora_ses;
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Metodos">
     /**
      * Crear una Sesion.
+     *
      * @throws SQLException
      */
     public void crearSesion() throws SQLException {
@@ -99,26 +100,8 @@ public class Sesion {
     }
 
     /**
-     * Muestra las sesiones para un idPelicula
-     * @param _idPelicula
-     * @return
-     * @throws SQLException
-     */
-    public Sesion mostrarSesionIdPelicula(int _idPelicula) throws SQLException {
-        Sesion miSesion = new Sesion();
-        rs = bd.consultarTabla("select * from sesion_pelicula where idSesion = " + _idPelicula);
-        while (rs.next()) {
-            miSesion.setIdSesion(rs.getInt("idSesion"));
-            miSesion.setIdPelicula(rs.getInt("idPelicula"));
-            miSesion.setIdSala(rs.getInt("idSala"));
-            miSesion.setHora_ses(rs.getString("hora_ses"));
-
-        }
-        return miSesion;
-    }
-
-    /**
      * Muestra las sesiones para un idSesion
+     *
      * @param _idSesion
      * @return
      * @throws SQLException
@@ -138,6 +121,7 @@ public class Sesion {
 
     /**
      * Muestra las sesiones para un idSala
+     *
      * @param _idSala
      * @return
      * @throws SQLException
@@ -157,11 +141,12 @@ public class Sesion {
 
     /**
      * Muestra todas las sesiones.
+     *
      * @param listaSesiones
      * @return
      * @throws SQLException
      */
-    public static ArrayList<Sesion> mostrarSesiones(ArrayList listaSesiones) throws SQLException {
+    public static ArrayList<Sesion> mostrarSesiones(ArrayList<Sesion> listaSesiones) throws SQLException {
         ResultSet res;
         Sesion miSesion = new Sesion();
         res = bd.consultarTabla("select * from sesion_pelicula");
@@ -201,23 +186,64 @@ public class Sesion {
     public void borrarSesionID(int _idSeseion) throws SQLException {
         bd.actualizarTabla("Delete from sesion_pelicula where idSesion = " + _idSeseion);
     }
-    
-    public static void crearButacasSesion(int _idSala, int numFilas, int numButacasXFila) throws SQLException{
-        int idSesion = 0;    
+
+    public static void crearButacasSesion(int _idSala, int numFilas, int numButacasXFila) throws SQLException {
+        int idSesion = 0;
         rs = bd.consultarTabla("select idSesion from sesion_pelicula");
-            while(rs.next()){
-                idSesion = rs.getInt("idSesion");
+        while (rs.next()) {
+            idSesion = rs.getInt("idSesion");
+        }
+        for (int j = 1; j <= numFilas; j++) {//Creamos la fila.
+
+            for (int k = 1; k <= numButacasXFila; k++) {//Asignamos las butacas a la fila.
+
+                bd.actualizarTabla("insert into butaca values(" + k + "," + idSesion + "," + _idSala + "," + j + ",0)");
+
             }
-            for (int j = 1; j <= numFilas; j++) {//Creamos la fila.
+        }
+    }
 
-                for (int k = 1; k <= numButacasXFila; k++) {//Asignamos las butacas a la fila.
+    //Metodos de la clase reserva
+    public static ArrayList<Sesion> mostrarPeliculasSesiones(ArrayList<Sesion> listaSesiones) throws SQLException {
+        ResultSet res;
+        Sesion miSesion = new Sesion();
+        res = bd.consultarTabla("select * from sesion_pelicula group by idPelicula");
+        listaSesiones.clear();
+        while (res.next()) {
+            miSesion = new Sesion();
+            miSesion.setIdSesion(res.getInt("idSesion"));
+            miSesion.setIdPelicula(res.getInt("idPelicula"));
+            miSesion.setIdSala(res.getInt("idSala"));
+            miSesion.setHora_ses(res.getString("hora_ses"));
 
-                    bd.actualizarTabla("insert into butaca values(" + k +"," + idSesion + "," + _idSala + "," + j +  ",0)");
+            listaSesiones.add(miSesion);
+        }
 
-                }
-            }
+        return listaSesiones;
+    }
+
+    /**
+     * Muestra las sesiones para un idPelicula
+     *
+     * @param _idPelicula
+     * @return
+     * @throws SQLException
+     */
+    public static ArrayList<Sesion> mostrarSesionIdPelicula(int _idPelicula) throws SQLException {
+        ArrayList<Sesion> misSesiones = new ArrayList();
+        Sesion miSesion;
+        rs = bd.consultarTabla("select * from sesion_pelicula where idPelicula = " + _idPelicula);
+        while (rs.next()) {
+            miSesion = new Sesion();
+            miSesion.setIdSesion(rs.getInt("idSesion"));
+            miSesion.setIdPelicula(rs.getInt("idPelicula"));
+            miSesion.setIdSala(rs.getInt("idSala"));
+            miSesion.setHora_ses(rs.getString("hora_ses"));
+            misSesiones.add(miSesion);
+        }
+        return misSesiones;
     }
     
-    // </editor-fold>
 
+    // </editor-fold>
 }
