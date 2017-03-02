@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -240,13 +241,13 @@ public class JPGProductos extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbModificarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbModificarIdProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfModificarNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(jsModificarPrecioProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(jsModificarCantidad)
-                    .addComponent(jtfModProd))
-                .addContainerGap(133, Short.MAX_VALUE))
+                    .addComponent(jtfModProd)
+                    .addComponent(jbModificarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,6 +398,7 @@ public class JPGProductos extends javax.swing.JPanel {
         Producto pro = new Producto(descripcion, precio, nombre, cantidad);
         try {
             pro.crearProducto();
+            JOptionPane.showMessageDialog(null, "Producto creado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -410,6 +412,7 @@ public class JPGProductos extends javax.swing.JPanel {
         idPro = Integer.parseInt(comodin);
         try {
             miPro.borrarProductoID(idPro);
+            JOptionPane.showMessageDialog(null, "Producto eliminado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -424,6 +427,7 @@ public class JPGProductos extends javax.swing.JPanel {
         String idProducto = jcbModificarIdProducto.getSelectedItem().toString();
         try {
             miPro.modificarProducto(idProducto);
+            JOptionPane.showMessageDialog(null, "Producto modificado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGProductos.class.getName()).log(Level.SEVERE, null, ex);
         }

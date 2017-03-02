@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -449,6 +450,7 @@ public class JPGClientes extends javax.swing.JPanel {
         Cliente elCliente = new Cliente(dni, nombre, apellido, cp, puntos, usuario, contrasena);
         try {
             elCliente.crearCliente();
+            JOptionPane.showMessageDialog(null, "Cliente creado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -461,6 +463,7 @@ public class JPGClientes extends javax.swing.JPanel {
         idCliente = Integer.parseInt(comodin);
         try {
             miCliente.borrarClienteID(idCliente);
+            JOptionPane.showMessageDialog(null, "Cliente borrado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -558,6 +561,7 @@ public class JPGClientes extends javax.swing.JPanel {
         miCliente.setPuntos((int) jspModPuntos.getValue());
         try {
             miCliente.modificarCliente();
+            JOptionPane.showMessageDialog(null, "Cliente modificado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }

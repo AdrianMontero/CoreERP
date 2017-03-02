@@ -54,23 +54,27 @@
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jcbReservaPelicula" max="32767" attributes="0"/>
-                          <Component id="jcbReservaSesion" max="32767" attributes="0"/>
-                          <Component id="jbReservar" alignment="0" pref="130" max="32767" attributes="0"/>
-                          <Component id="jcbFilaBut" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jcbNumBut" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jbNoReservar1" alignment="1" pref="130" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jbConsultar" min="-2" pref="124" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="jlEstBut" min="-2" pref="79" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jcbReservaSesion" max="32767" attributes="0"/>
+                                  <Component id="jcbFilaBut" alignment="0" pref="146" max="32767" attributes="0"/>
+                                  <Component id="jcbNumBut" max="32767" attributes="0"/>
+                                  <Component id="jcbReservaPelicula" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jlEstBut" min="-2" pref="119" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jbReservar" max="32767" attributes="0"/>
+                                  <Component id="jbNoReservar1" pref="146" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jbConsultar" min="-2" pref="153" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

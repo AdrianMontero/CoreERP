@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -45,6 +46,7 @@ public class JFInterfaz extends javax.swing.JFrame {
      */
     public JFInterfaz() {
         initComponents();
+        this.setTitle("CoreERP");
         //this.getContentPane().add(inicio);
 //        this.getContentPane().add(jpgpedadmin);//Cines Empleado
 //        this.getContentPane().add(jpgca);//Cines Administrador
@@ -681,6 +683,7 @@ public class JFInterfaz extends javax.swing.JFrame {
         }else{
             jmEmpleados.setVisible(false);
             jmAdministrador.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Usuario o contrasenia erroneas","Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jbEntrarActionPerformed

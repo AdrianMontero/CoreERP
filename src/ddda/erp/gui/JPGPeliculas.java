@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -188,9 +189,9 @@ public class JPGPeliculas extends javax.swing.JPanel {
                     .addComponent(jcbModIdPeli, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfModNomPeli)
                     .addComponent(jtfModDuracionPeli)
-                    .addComponent(jspModEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbModPeli, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addContainerGap(168, Short.MAX_VALUE))
+                    .addComponent(jspModEdad)
+                    .addComponent(jbModPeli, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,6 +384,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
         Pelicula miPelicula = new Pelicula(nombre, duracion, edad);
         try {
             miPelicula.crearPelicula(miPelicula);
+            JOptionPane.showMessageDialog(null, "Pelicula creada","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -404,6 +406,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
         miPelicula.setEdad((int) jspModEdad.getValue());
         try {
             miPelicula.modificarPelicula();
+            JOptionPane.showMessageDialog(null, "Pelicula modificada","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -452,6 +455,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
         idPelicula = Integer.parseInt(comodin);
         try {
             miPelicula.borrarPeliculaID(idPelicula);
+            JOptionPane.showMessageDialog(null, "Pelicula eliminada","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -462,6 +466,7 @@ public class JPGPeliculas extends javax.swing.JPanel {
         nombrePelicula = (String) jcbBajaPeliNom.getSelectedItem();
         try {
             miPelicula.borrarPeliculaNombre(nombrePelicula);
+            JOptionPane.showMessageDialog(null, "Pelicula eliminada","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }

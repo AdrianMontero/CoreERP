@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -457,6 +458,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         Cine elCine = new Cine(nombre, cif, direccion, poblacion, cp);
         try {
             elCine.crearCine();
+            JOptionPane.showMessageDialog(null, "Cines creados","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -470,6 +472,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         idCine = Integer.parseInt(comodin);
         try {
             miCine.borrarCineID(idCine);
+            JOptionPane.showMessageDialog(null, "Cine borrado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -500,6 +503,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         miCine.setCp(Integer.parseInt(jtfModCPCine.getText()));
         try {
             miCine.modificarCine();
+            JOptionPane.showMessageDialog(null, "Cine modificado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -546,6 +550,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         idCine = Integer.parseInt(comodin);
         try {
             csb.crearSalasButacas(idCine);
+            JOptionPane.showMessageDialog(null, "Salas creadas","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -559,6 +564,7 @@ public class JPGCinesAdmin extends javax.swing.JPanel {
         idCine = Integer.parseInt(comodin);
         try {
             csb.borrarSalasButacas(idCine);
+            JOptionPane.showMessageDialog(null, "Sala borrada","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }

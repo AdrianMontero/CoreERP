@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -430,11 +431,11 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jLabel16)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jcbEliminarEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(jcbEliminarEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(jcbBajaEmp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,9 +444,9 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jcbBajaEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(41, 41, 41)
                 .addComponent(jcbEliminarEmp)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Baja Empleado", jPanel4);
@@ -475,6 +476,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         Empleado elEmpleado = new Empleado(dni, nombre, apellido, fechaInicio, cargo, usuario, contrasena, idCine);
         try {
             elEmpleado.crearEmpleado();
+            JOptionPane.showMessageDialog(null, "Empleado creado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -489,6 +491,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         miEmpleado.setIdCine(Integer.parseInt((String) jcbModificarIdCineEmp.getSelectedItem()));
         try {
             miEmpleado.modificarEmpleado();
+            JOptionPane.showMessageDialog(null, "Empleado modificado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -514,6 +517,7 @@ public class JPGEmpAdmin extends javax.swing.JPanel {
         idEmpleado = Integer.parseInt(comodin);
         try {
             miEmpleado.borrarEmpleadoID(idEmpleado);
+            JOptionPane.showMessageDialog(null, "Empleado borrado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGCinesAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }

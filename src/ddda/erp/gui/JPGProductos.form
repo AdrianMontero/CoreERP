@@ -237,14 +237,14 @@
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jbModificarProducto" min="-2" pref="100" max="-2" attributes="0"/>
                           <Component id="jcbModificarIdProducto" alignment="0" max="32767" attributes="0"/>
                           <Component id="jtfModificarNombreProducto" alignment="0" pref="149" max="32767" attributes="0"/>
                           <Component id="jsModificarPrecioProducto" alignment="0" pref="50" max="32767" attributes="0"/>
                           <Component id="jsModificarCantidad" alignment="0" max="32767" attributes="0"/>
                           <Component id="jtfModProd" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jbModificarProducto" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="133" max="32767" attributes="0"/>
+                      <EmptySpace pref="154" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

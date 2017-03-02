@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -513,6 +514,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
             cp = new CuerpoPedido(idProducto, descProd, cantidad);
             try {
                 cp.crearCuerpoPedido(idPedido);
+                JOptionPane.showMessageDialog(null, "Pedido creado","Informacion", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
                 Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -615,6 +617,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         cp.setCantidad_cup((int) jspModPedido.getValue());
         try {
             cp.modificarCuerpoPedido(idProducto, idCabecera);
+            JOptionPane.showMessageDialog(null, "Pedido modificado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -673,6 +676,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         idCabeceraPedido = Integer.parseInt(jcbBajaIdPedido.getSelectedItem().toString());
         try {
             cp.borrarCabeceraPedidoID(idCabeceraPedido);
+            JOptionPane.showMessageDialog(null, "Cabecera de pedido eliminada","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -686,6 +690,7 @@ public class JPGPedidosAdmin extends javax.swing.JPanel {
         idProductoPedido = Integer.parseInt(jcbBajaIdCuerpoPed.getSelectedItem().toString());
         try {
             cp.borrarCuerpoPedidoID(idCabeceraPedido, idProductoPedido);
+            JOptionPane.showMessageDialog(null, "Cuerpo de pedido eliminado","Informacion", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
             Logger.getLogger(JPGPedidosAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
